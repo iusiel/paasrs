@@ -28,6 +28,9 @@ class Handler extends ExceptionHandler
     ];
 
     /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     *
+     *
      * Register the exception handling callbacks for the application.
      *
      * @return void
