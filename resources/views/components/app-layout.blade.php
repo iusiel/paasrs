@@ -7,7 +7,7 @@
     <title>@yield('title') @hasSection('title') | @endif PAASRS</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}" >
 </head>
-<body>
+<body class="{{ $activeLink }}">
     <div class="container">
         <x-navbar :activeLink="$activeLink"/>
         <main class="my-4">
