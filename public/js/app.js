@@ -2062,8 +2062,8 @@ module.exports = {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-__webpack_require__.e(/*! import() */ "resources_plugins_bootstrap-5_1_3-dist_js_bootstrap_bundle_min_js").then(__webpack_require__.t.bind(__webpack_require__, /*! ./../plugins/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js */ "./resources/plugins/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js", 23));
-__webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(__webpack_require__.t.bind(__webpack_require__, /*! ./../plugins/prism/prism.js */ "./resources/plugins/prism/prism.js", 23)); // import { createApp } from 'vue';
+__webpack_require__.e(/*! import() */ "resources_plugins_bootstrap-5_1_3-dist_js_bootstrap_bundle_min_js").then(__webpack_require__.t.bind(__webpack_require__, /*! ../plugins/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js */ "./resources/plugins/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js", 23));
+__webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(__webpack_require__.t.bind(__webpack_require__, /*! ../plugins/prism/prism.js */ "./resources/plugins/prism/prism.js", 23)); // import { createApp } from 'vue';
 // import Test from './components/Test.vue';
 // createApp({
 //     data() {

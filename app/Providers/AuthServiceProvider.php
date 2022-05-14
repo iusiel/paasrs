@@ -13,6 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
+        // phpcs:ignore
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
     ];
 
