@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateDeckRequest;
 use App\Models\Deck;
+use App\Services\DefaultDeckSettings;
 use Illuminate\Http\Request;
 
 class DeckController extends Controller
@@ -36,9 +37,9 @@ class DeckController extends Controller
      */
     public function store(CreateDeckRequest $request)
     {
-        $deck = new Deck();
-        $deck->name = $request->name;
-        $deck->save();
+        $deckDetails = DefaultDeckSettings::get();
+        $deckDetails['name'] = $request->name;
+        Deck::create($deckDetails);
 
         if ($request->ajax()) {
             return response()->json([
