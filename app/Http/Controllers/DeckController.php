@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateDeckRequest;
+use App\Models\Deck;
 use Illuminate\Http\Request;
 
 class DeckController extends Controller
@@ -32,9 +34,19 @@ class DeckController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateDeckRequest $request)
     {
-        dd($request);
+        $deck = new Deck();
+        $deck->name = $request->name;
+        $deck->save();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'message' => 'Deck created successfully.',
+            ]);
+        }
+
+        return redirect(route('decks.index'));
     }
 
     /**

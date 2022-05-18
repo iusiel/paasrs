@@ -1,14 +1,58 @@
 <script>
+import Swal from 'sweetalert2';
+
 export default {
   data() {
     return {
       deckName: '',
+      deckNameError: '',
+      formMethod: 'POST',
+      formAction: `${document.querySelector('meta[name="base_url"]').content}/decks`,
+      csrfToken: document.querySelector('meta[name="csrf-token"]').content,
     };
   },
 
   methods: {
     submitForm(event) {
       event.preventDefault();
+
+      const myForm = document.getElementById('createDeckForm');
+      const formData = new FormData(myForm);
+
+      fetch(this.formAction, {
+        headers: {
+          'X-CSRF-TOKEN': this.csrfToken,
+          'X-Requested-With': 'XMLHttpRequest',
+        },
+        method: this.formMethod,
+        body: formData,
+      })
+        .then((response) => {
+          if (response.ok === false) {
+            throw (response);
+          }
+          return response.json();
+        })
+        .then((result) => { //eslint-disable-line
+          if (result.message === 'Deck created successfully.') {
+            Swal.fire(
+              'Deck has been created.',
+              '',
+              'success',
+            ).then((value) => {
+              if (value.isConfirmed) {
+                window.location.reload();
+              }
+            });
+          }
+        })
+        .catch((error) => {
+          error.json().then((result) => {
+            if (result.errors.name[0] !== undefined) {
+              this.deckNameError = result.errors.name[0]; //eslint-disable-line
+            }
+          });
+        });
     },
   },
 };
@@ -16,10 +60,12 @@ export default {
 
 <template>
     <div >
-        <form @submit="submitForm">
+        <form @submit="submitForm" v-bind:action="formAction" v-bind:method="formMethod" id="createDeckForm">
+            <input name="_token" type="hidden" v-bind:value="csrfToken" >
             <div class="row">
                 <div class="col col-8">
-                    <input v-model="deckName" type="text" class="form-control" >
+                    <input v-model="deckName" type="text" class="form-control" name="name">
+                    <div class="form__error-message">{{ deckNameError }}</div>
                 </div>
 
                 <div class="col col-4">
