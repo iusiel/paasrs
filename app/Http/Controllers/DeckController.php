@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateDeckRequest;
 use App\Models\Deck;
+use App\Services\DefaultDeckSettings;
 use Illuminate\Http\Request;
 
 class DeckController extends Controller
@@ -15,7 +16,11 @@ class DeckController extends Controller
      */
     public function index()
     {
-        return view('decks/index');
+        $decks = Deck::get();
+        $data = [
+            'decks' => $decks
+        ];
+        return view('decks/index', $data);
     }
 
     /**
@@ -36,9 +41,9 @@ class DeckController extends Controller
      */
     public function store(CreateDeckRequest $request)
     {
-        $deck = new Deck();
-        $deck->name = $request->name;
-        $deck->save();
+        $deckDetails = DefaultDeckSettings::get();
+        $deckDetails['name'] = $request->name;
+        Deck::create($deckDetails);
 
         if ($request->ajax()) {
             return response()->json([
@@ -55,9 +60,9 @@ class DeckController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Deck $deck)
     {
-        dd($id);
+        dd($deck);
     }
 
     /**
@@ -93,5 +98,17 @@ class DeckController extends Controller
     public function destroy($id)
     {
         dd($id);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showOptions(Deck $deck)
+    {
+        echo "Options screen";
+        dd($deck);
     }
 }

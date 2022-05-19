@@ -10,4 +10,14 @@ class Deck extends Model
     use HasFactory;
 
     protected $table = "decks";
+
+    protected $fillable = [
+        'name',
+        'number_of_cards_per_review',
+        'number_of_new_cards_per_review',
+        'hard_interval',
+        'good_interval',
+        'easy_interval',
+        'interval_hard_limit',
+    ];
 }
