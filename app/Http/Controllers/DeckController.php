@@ -16,7 +16,11 @@ class DeckController extends Controller
      */
     public function index()
     {
-        return view('decks/index');
+        $decks = Deck::get();
+        $data = [
+            'decks' => $decks
+        ];
+        return view('decks/index', $data);
     }
 
     /**
@@ -56,9 +60,9 @@ class DeckController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Deck $deck)
     {
-        dd($id);
+        dd($deck);
     }
 
     /**
@@ -94,5 +98,17 @@ class DeckController extends Controller
     public function destroy($id)
     {
         dd($id);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showOptions(Deck $deck)
+    {
+        echo "Options screen";
+        dd($deck);
     }
 }
