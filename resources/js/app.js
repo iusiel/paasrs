@@ -6,3 +6,7 @@ import('../plugins/prism/prism.js');
 if (document.querySelector('.decks')) {
   import('./controllers/DeckController.js');
 }
+
+if (document.querySelector('.cards')) {
+  import('./controllers/CardController.js');
+}
