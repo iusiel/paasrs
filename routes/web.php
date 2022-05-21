@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeckController;
+use App\Http\Controllers\CardsController;
 use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,4 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'index']);
 Route::resource('decks', DeckController::class);
 Route::get('/decks/options/{deck}', [DeckController::class, 'showOptions'])->name('decks.options');
+Route::resource('cards', CardsController::class);

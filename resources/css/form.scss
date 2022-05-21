@@ -1,0 +1,14 @@
+textarea {
+    resize: none;
+}
+
+.form-label__required:after {
+    content: '*';
+    display: inline-block;
+    padding-left: 5px;
+    color: #ff0000;
+}
+
+.form__error-message {
+    color: #ff0000;
+}
