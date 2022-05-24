@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CardRequest;
+use App\Http\Requests\CardUpdateAppearOnRequest;
 use App\Models\Card;
 use App\Models\Deck;
 use Illuminate\Http\Request;
@@ -110,5 +111,29 @@ class CardsController extends Controller
     public function destroy(Card $card)
     {
         dd($card);
+    }
+
+    public function updateAppearOn(Card $card, CardUpdateAppearOnRequest $request)
+    {
+        if ($request->interval === "easy") {
+            $interval = "+ " . $card->deck->easy_interval . " days";
+        }
+        if ($request->interval === "good") {
+            $interval = "+ " . $card->deck->good_interval . " days";
+        }
+        if ($request->interval === "hard") {
+            $interval = "+ " . $card->deck->hard_interval . " days";
+        }
+
+        $card->appear_on = date("Y-m-d H:i:s", strtotime($interval));
+        $card->save();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'message' => 'Card successfully updated.',
+            ]);
+        }
+
+        return redirect(route('decks.index'));
     }
 }

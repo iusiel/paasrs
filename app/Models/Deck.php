@@ -20,4 +20,9 @@ class Deck extends Model
         'easy_interval',
         'interval_hard_limit',
     ];
+
+    public function cards()
+    {
+        return $this->hasMany(Card::class, 'deck_id', 'id');
+    }
 }

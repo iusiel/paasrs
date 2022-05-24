@@ -1,5 +1,6 @@
 import { createApp } from 'vue';
 import CreateDeckForm from '../components/CreateDeckForm.vue';
+import DeckStudy from '../components/DeckStudy.vue';
 
 createApp({
   data() {
@@ -9,5 +10,6 @@ createApp({
   },
   components: {
     CreateDeckForm,
+    DeckStudy,
   },
 }).mount('#app');

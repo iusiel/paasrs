@@ -7,10 +7,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link @if($activeLink === 'decks') active @endif" aria-current="page" href="#">Decks</a>
+          <a class="nav-link @if($activeLink === 'decks') active @endif" aria-current="page" href="{{ url(route('decks.index')) }}">Decks</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link @if($activeLink === 'cards') active @endif" href="#">Cards</a>
+          <a class="nav-link @if($activeLink === 'cards') active @endif" href="{{ url(route('cards.index')) }}">Cards</a>
         </li>
         <li class="nav-item">
           <a class="nav-link @if($activeLink === 'import-export') active @endif" href="#">Import / Export</a>
