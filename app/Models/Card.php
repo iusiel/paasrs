@@ -10,4 +10,9 @@ class Card extends Model
     use HasFactory;
 
     protected $table = "cards";
+
+    public function deck()
+    {
+        return $this->belongsTo(Deck::class, 'deck_id', 'id');
+    }
 }

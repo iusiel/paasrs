@@ -16,7 +16,10 @@ class DeckController extends Controller
      */
     public function index()
     {
-        $decks = Deck::get();
+        $decks = Deck::with(['cards' => function ($query) {
+            $query->orderBy('appear_on', 'asc');
+            $query->where('appear_on', '<=', date("Y-m-d H:i:s"));
+        }])->get();
         $data = [
             'decks' => $decks
         ];
@@ -62,7 +65,20 @@ class DeckController extends Controller
      */
     public function show(Deck $deck)
     {
-        dd($deck);
+        $deck->load(['cards' => function ($query) use ($deck) {
+            $query->orderBy('appear_on', 'asc');
+            $query->where('appear_on', '<=', date("Y-m-d H:i:s"));
+            $query->limit($deck->number_of_cards_per_review);
+        }]);
+
+        if ($deck->cards->count() === 0) {
+            return redirect(route('decks.index'));
+        }
+
+        $data = [
+            'deck' => $deck,
+        ];
+        return view('decks/study', $data);
     }
 
     /**

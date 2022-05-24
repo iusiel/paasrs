@@ -1,5 +1,6 @@
 <script>
 import Swal from 'sweetalert2';
+import JSONFetchClient from '../modules/JSONFetchClient.js';
 
 export default {
   data() {
@@ -19,20 +20,7 @@ export default {
       const myForm = document.getElementById('createDeckForm');
       const formData = new FormData(myForm);
 
-      fetch(this.formAction, {
-        headers: {
-          'X-CSRF-TOKEN': this.csrfToken,
-          'X-Requested-With': 'XMLHttpRequest',
-        },
-        method: this.formMethod,
-        body: formData,
-      })
-        .then((response) => {
-          if (response.ok === false) {
-            throw (response);
-          }
-          return response.json();
-        })
+      JSONFetchClient(this.formAction, formData, this.formMethod)
         .then((result) => { //eslint-disable-line
           if (result.message === 'Deck created successfully.') {
             Swal.fire(

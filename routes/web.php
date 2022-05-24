@@ -15,7 +15,8 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::resource('decks', DeckController::class);
 Route::get('/decks/options/{deck}', [DeckController::class, 'showOptions'])->name('decks.options');
 Route::resource('cards', CardsController::class);
+Route::post('/cards/{card}/update_appear_on/', [CardsController::class, 'updateAppearOn'])->name('cards.update_appear_on');
