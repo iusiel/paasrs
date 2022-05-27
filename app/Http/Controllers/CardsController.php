@@ -15,8 +15,22 @@ class CardsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $cards = Card::with('deck');
+        if ($request->query->get('deck')) {
+            $cards->where('deck_id', $request->deck);
+        }
+
+        $cards = $cards->get();
+        if ($cards->count() === 0) {
+            return redirect(route('decks.index'));
+        }
+
+        $data = [
+            'cards' => $cards,
+        ];
+        return view('cards/index', $data);
     }
 
     /**
@@ -86,7 +100,12 @@ class CardsController extends Controller
      */
     public function edit(Card $card)
     {
-        dd($card);
+        $decks = Deck::select('id', 'name')->get();
+        $data = [
+            'card' => $card,
+            'decks' => $decks,
+        ];
+        return view('cards/edit', $data);
     }
 
     /**
@@ -96,10 +115,22 @@ class CardsController extends Controller
      * @param  \App\Models\Card  $card
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Card $card)
+    public function update(CardRequest $request, Card $card)
     {
-        dd($request);
-        dd($card);
+        $card->deck_id = $request->deck_id;
+        $card->question = $request->question;
+        $card->answer = $request->answer;
+        $card->extra_information = $request->extra_information;
+        $card->tags = $request->tags;
+        $card->save();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'message' => 'Card updated successfully.',
+            ]);
+        }
+
+        return redirect(route('decks.index'));
     }
 
     /**

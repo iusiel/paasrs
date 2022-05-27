@@ -20,4 +20,10 @@ class DeckIndexTest extends TestCase
 
         $response->assertRedirect('/decks');
     }
+
+    public function test_decks_index()
+    {
+        $response = $this->get('/decks');
+        $response->assertStatus(200);
+    }
 }

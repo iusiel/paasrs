@@ -19,7 +19,7 @@
                     <td>
                         <a class="me-4 @if($deck->cards->count() === 0)pe-none disabled @endif" href="{{ route('decks.show', ['deck' => $deck->id]) }}" disabled><button class="btn btn-primary">Study</button></a>
                         <a class="me-4" href="{{ route('cards.create', ['deck' => $deck->id]) }}"><button class="btn btn-primary">Add Cards</button></a>
-                        <a class="me-4" href="#"><button class="btn btn-primary">Edit Cards</button></a>
+                        <a class="me-4 @if($deck->cards->count() === 0)pe-none disabled @endif" href="{{ route('cards.index', ['deck' => $deck->id]) }}"><button class="btn btn-primary">Edit Cards</button></a>
                         <a class="me-4" href="{{ route('decks.options', ['deck' => $deck->id]) }}"><button class="btn btn-primary">Options</button></a>
                     </td>
                 </tr>

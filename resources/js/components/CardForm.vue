@@ -17,8 +17,14 @@
     </div>
     <div class="mb-3">
       <label for="tags" class="form-label">Tags</label>
-      <input type="text" class="form-control" id="tags" name="tags" placeholder="Tag 1, Tag 2">
+      <input v-model="formFields.tags.value" type="text" class="form-control" id="tags" name="tags" placeholder="Tag 1, Tag 2">
       <div class="form-text">Comma separated string (e.g. tag 1,tag 2)</div>
+    </div>
+    <div v-if="editmode" class="mb-3">
+      <label for="deck" class="form-label form-label__required">Deck</label>
+      <select v-model="formFields.deckId" class="form-select">
+        <option v-for="deck in formFields.decks" v-bind:key="deck.id" v-bind:value="deck.id">{{ deck.name }}</option>
+      </select>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
@@ -30,14 +36,14 @@ import Swal from 'sweetalert2';
 export default {
   name: 'CardForm',
 
-  props: ['deck'],
+  props: ['deck', 'card', 'formAction', 'editmode', 'decks'],
 
   data() {
     return {
       formMethod: 'POST',
-      formAction: `${document.querySelector('meta[name="base_url"]').content}/cards`,
       csrfToken: document.querySelector('meta[name="csrf-token"]').content,
       formFields: {
+        decks: [],
         deckId: this.deck,
         question: {
           value: '',
@@ -63,6 +69,20 @@ export default {
     };
   },
 
+  mounted() {
+    if (typeof this.card !== 'undefined') {
+      const card = JSON.parse(atob(this.card));
+      this.formFields.question.value = card.question;
+      this.formFields.answer.value = card.answer;
+      this.formFields.extraInformation.value = card.extra_information;
+      this.formFields.tags.value = card.tags;
+    }
+
+    if (typeof this.decks !== 'undefined') {
+      this.formFields.decks = JSON.parse(atob(this.decks));
+    }
+  },
+
   methods: {
     submitForm(event) {
       event.preventDefault();
@@ -70,6 +90,9 @@ export default {
       const myForm = document.getElementById('cardForm');
       const formData = new FormData(myForm);
       formData.append('deck_id', this.formFields.deckId);
+      if (typeof this.editmode !== 'undefined') {
+        formData.append('_method', 'PUT');
+      }
 
       fetch(this.formAction, {
         headers: {
@@ -86,9 +109,9 @@ export default {
           return response.json();
         })
         .then((result) => { //eslint-disable-line
-          if (result.message === 'Card created successfully.') {
+          if (result.message) {
             Swal.fire(
-              'Card has been created.',
+              result.message,
               '',
               'success',
             ).then((value) => {
