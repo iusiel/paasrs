@@ -27,6 +27,7 @@
       </select>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="button" class="btn btn-primary ms-3" @click="goToPreviousPage">Cancel</button>
   </form>
 </template>
 
@@ -135,6 +136,10 @@ export default {
             });
           });
         });
+    },
+
+    goToPreviousPage() {
+      window.history.back();
     },
   },
 };
