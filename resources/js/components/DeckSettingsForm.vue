@@ -107,21 +107,38 @@ export default {
               const [field, message] = fieldError;
               const [errorMessage] = message;
 
-              this.setErrorMessage('number_of_cards_per_review', 'numberOfCardsPerReview', errorMessage);
-              this.setErrorMessage('hard_interval', 'hardInterval', errorMessage);
-              this.setErrorMessage('good_interval', 'goodInterval', errorMessage);
-              this.setErrorMessage('easy_interval', 'easyInterval', errorMessage);
+              const convertedFieldName = this.convertReturnFieldNameToFormFieldName(field);
 
-              if (typeof this.formFields[field] !== 'undefined') {
-                this.formFields[field].errorMessage = errorMessage;
+              if (typeof this.formFields[convertedFieldName] !== 'undefined') {
+                this.formFields[convertedFieldName].errorMessage = errorMessage;
               }
             });
           });
         });
     },
 
-    setErrorMessage(errorField, formField, message) {
-      if (typeof errorField !== 'undefined') {
+    convertReturnFieldNameToFormFieldName(fieldName) {
+      if (fieldName === 'number_of_cards_per_review') {
+        return 'numberOfCardsPerReview';
+      }
+
+      if (fieldName === 'hard_interval') {
+        return 'hardInterval';
+      }
+
+      if (fieldName === 'good_interval') {
+        return 'goodInterval';
+      }
+
+      if (fieldName === 'easy_interval') {
+        return 'easyInterval';
+      }
+
+      return fieldName;
+    },
+
+    setErrorMessage(errorField1, errorFiel2, formField, message) {
+      if (errorField1 === errorFiel2) {
         this.formFields[formField].errorMessage = message;
       }
     },

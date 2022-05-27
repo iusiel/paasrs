@@ -17454,23 +17454,36 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
             var _message = _slicedToArray(message, 1),
                 errorMessage = _message[0];
 
-            _this.setErrorMessage('number_of_cards_per_review', 'numberOfCardsPerReview', errorMessage);
+            var convertedFieldName = _this.convertReturnFieldNameToFormFieldName(field);
 
-            _this.setErrorMessage('hard_interval', 'hardInterval', errorMessage);
-
-            _this.setErrorMessage('good_interval', 'goodInterval', errorMessage);
-
-            _this.setErrorMessage('easy_interval', 'easyInterval', errorMessage);
-
-            if (typeof _this.formFields[field] !== 'undefined') {
-              _this.formFields[field].errorMessage = errorMessage;
+            if (typeof _this.formFields[convertedFieldName] !== 'undefined') {
+              _this.formFields[convertedFieldName].errorMessage = errorMessage;
             }
           });
         });
       });
     },
-    setErrorMessage: function setErrorMessage(errorField, formField, message) {
-      if (typeof errorField !== 'undefined') {
+    convertReturnFieldNameToFormFieldName: function convertReturnFieldNameToFormFieldName(fieldName) {
+      if (fieldName === 'number_of_cards_per_review') {
+        return 'numberOfCardsPerReview';
+      }
+
+      if (fieldName === 'hard_interval') {
+        return 'hardInterval';
+      }
+
+      if (fieldName === 'good_interval') {
+        return 'goodInterval';
+      }
+
+      if (fieldName === 'easy_interval') {
+        return 'easyInterval';
+      }
+
+      return fieldName;
+    },
+    setErrorMessage: function setErrorMessage(errorField1, errorFiel2, formField, message) {
+      if (errorField1 === errorFiel2) {
         this.formFields[formField].errorMessage = message;
       }
     },
