@@ -33,6 +33,7 @@
 
 <script>
 import Swal from 'sweetalert2';
+import JSONFetchClient from '../modules/JSONFetchClient.js';
 
 export default {
   name: 'CardForm',
@@ -95,21 +96,8 @@ export default {
         formData.append('_method', 'PUT');
       }
 
-      fetch(this.formAction, {
-        headers: {
-          'X-CSRF-TOKEN': this.csrfToken,
-          'X-Requested-With': 'XMLHttpRequest',
-        },
-        method: this.formMethod,
-        body: formData,
-      })
-        .then((response) => {
-          if (response.ok === false) {
-            throw (response);
-          }
-          return response.json();
-        })
-        .then((result) => { //eslint-disable-line
+      JSONFetchClient(this.formAction, formData, this.formMethod)
+      .then((result) => { //eslint-disable-line
           if (result.message) {
             Swal.fire(
               result.message,
