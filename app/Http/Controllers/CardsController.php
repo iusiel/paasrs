@@ -139,9 +139,17 @@ class CardsController extends Controller
      * @param  \App\Models\Card  $card
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Card $card)
+    public function destroy(Card $card, Request $request)
     {
-        dd($card);
+        $card->delete();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'message' => 'Card deleted successfully.',
+            ]);
+        }
+
+        return redirect(route('cards.index'));
     }
 
     public function updateAppearOn(Card $card, CardUpdateAppearOnRequest $request)
