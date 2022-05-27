@@ -34,6 +34,7 @@
 <script>
 import Swal from 'sweetalert2';
 import JSONFetchClient from '../modules/JSONFetchClient.js';
+
 export default {
   name: 'CardForm',
 
@@ -97,32 +98,32 @@ export default {
 
       JSONFetchClient(this.formAction, formData, this.formMethod)
       .then((result) => { //eslint-disable-line
-        if (result.message) {
-          Swal.fire(
-            result.message,
-            '',
-            'success',
-          ).then((value) => {
-            if (value.isConfirmed) {
-              window.location.reload();
-            }
-          });
-        }
-      })
-      .catch((error) => {
-        error.json().then((result) => {
-          const errors = Object.entries(result.errors);
-          errors.forEach((fieldError) => {
-            const [field, message] = fieldError;
-            const [errorMessage] = message;
-            if (field === 'extra_information') {
-              this.formFields.extraInformation.errorMessage = errorMessage;
-            } else if (this.formFields[field]) {
-              this.formFields[field].errorMessage = errorMessage;
-            }
+          if (result.message) {
+            Swal.fire(
+              result.message,
+              '',
+              'success',
+            ).then((value) => {
+              if (value.isConfirmed) {
+                window.location.reload();
+              }
+            });
+          }
+        })
+        .catch((error) => {
+          error.json().then((result) => {
+            const errors = Object.entries(result.errors);
+            errors.forEach((fieldError) => {
+              const [field, message] = fieldError;
+              const [errorMessage] = message;
+              if (field === 'extra_information') {
+                this.formFields.extraInformation.errorMessage = errorMessage;
+              } else if (this.formFields[field]) {
+                this.formFields[field].errorMessage = errorMessage;
+              }
+            });
           });
         });
-      });
     },
 
     goToPreviousPage() {
