@@ -17360,6 +17360,168 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/DeckSettingsForm.vue?vue&type=script&lang=js":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/DeckSettingsForm.vue?vue&type=script&lang=js ***!
+  \**********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _modules_JSONFetchClient_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modules/JSONFetchClient.js */ "./resources/js/modules/JSONFetchClient.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'DeckSettingsForm',
+  props: ['deck', 'formAction', 'deleteAction'],
+  data: function data() {
+    return {
+      formMethod: 'POST',
+      formFields: {
+        name: {
+          value: '',
+          errorMessage: ''
+        },
+        numberOfCardsPerReview: {
+          value: '',
+          errorMessage: ''
+        },
+        hardInterval: {
+          value: '',
+          errorMessage: ''
+        },
+        goodInterval: {
+          value: '',
+          errorMessage: ''
+        },
+        easyInterval: {
+          value: '',
+          errorMessage: ''
+        }
+      }
+    };
+  },
+  mounted: function mounted() {
+    if (typeof this.deck !== 'undefined') {
+      var deck = JSON.parse(atob(this.deck));
+      this.formFields.name.value = deck.name;
+      this.formFields.numberOfCardsPerReview.value = deck.number_of_cards_per_review;
+      this.formFields.hardInterval.value = deck.hard_interval;
+      this.formFields.goodInterval.value = deck.good_interval;
+      this.formFields.easyInterval.value = deck.easy_interval;
+    }
+  },
+  methods: {
+    submitForm: function submitForm(event) {
+      var _this = this;
+
+      event.preventDefault();
+      this.clearErrorMessages();
+      var myForm = document.getElementById('deckSettingsForm');
+      var formData = new FormData(myForm);
+      formData.append('_method', 'PUT');
+      (0,_modules_JSONFetchClient_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.formAction, formData, this.formMethod).then(function (result) {
+        if (result.message) {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire(result.message, '', 'success').then(function () {
+            window.location.reload();
+          });
+        }
+      })["catch"](function (error) {
+        error.json().then(function (result) {
+          var errors = Object.entries(result.errors);
+          errors.forEach(function (fieldError) {
+            var _fieldError = _slicedToArray(fieldError, 2),
+                field = _fieldError[0],
+                message = _fieldError[1];
+
+            var _message = _slicedToArray(message, 1),
+                errorMessage = _message[0];
+
+            _this.setErrorMessage('number_of_cards_per_review', 'numberOfCardsPerReview', errorMessage);
+
+            _this.setErrorMessage('hard_interval', 'hardInterval', errorMessage);
+
+            _this.setErrorMessage('good_interval', 'goodInterval', errorMessage);
+
+            _this.setErrorMessage('easy_interval', 'easyInterval', errorMessage);
+
+            if (typeof _this.formFields[field] !== 'undefined') {
+              _this.formFields[field].errorMessage = errorMessage;
+            }
+          });
+        });
+      });
+    },
+    setErrorMessage: function setErrorMessage(errorField, formField, message) {
+      if (typeof errorField !== 'undefined') {
+        this.formFields[formField].errorMessage = message;
+      }
+    },
+    clearErrorMessages: function clearErrorMessages() {
+      this.formFields.name.errorMessage = '';
+      this.formFields.numberOfCardsPerReview.errorMessage = '';
+      this.formFields.hardInterval.errorMessage = '';
+      this.formFields.goodInterval.errorMessage = '';
+      this.formFields.easyInterval.errorMessage = '';
+    },
+    goToPreviousPage: function goToPreviousPage() {
+      window.history.back();
+    },
+    deleteDeckPrompt: function deleteDeckPrompt() {
+      var _this2 = this;
+
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+        title: 'Are you sure you want to delete this deck? All the cards under this deck will also be deleted.',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          _this2.deleteDeck();
+        }
+      });
+    },
+    deleteDeck: function deleteDeck() {
+      var formData = new FormData();
+      formData.append('_method', 'DELETE');
+      (0,_modules_JSONFetchClient_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.deleteAction, formData, 'POST').then(function (result) {
+        //eslint-disable-line
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Deleted!', result.message, 'success').then(function () {
+          window.location.href = '/';
+        });
+      })["catch"](function (error) {
+        error.json().then(function () {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Warning', 'An error has been encountered. Try deleting the deck again.', 'warning').then(function () {
+            window.location.reload();
+          });
+        });
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/DeckStudy.vue?vue&type=script&lang=js":
 /*!***************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/DeckStudy.vue?vue&type=script&lang=js ***!
@@ -17534,6 +17696,182 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/DeckSettingsForm.vue?vue&type=template&id=77a88d8a":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/DeckSettingsForm.vue?vue&type=template&id=77a88d8a ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "mb-3"
+};
+
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "name",
+  "class": "form-label form-label__required"
+}, "Name", -1
+/* HOISTED */
+);
+
+var _hoisted_3 = {
+  "class": "form__error-message"
+};
+var _hoisted_4 = {
+  "class": "mb-3"
+};
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "number_of_cards_per_review",
+  "class": "form-label form-label__required"
+}, "Number of cards per review", -1
+/* HOISTED */
+);
+
+var _hoisted_6 = {
+  "class": "form__error-message"
+};
+var _hoisted_7 = {
+  "class": "mb-3"
+};
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "hard_interval",
+  "class": "form-label form-label__required"
+}, "Hard interval (in days)", -1
+/* HOISTED */
+);
+
+var _hoisted_9 = {
+  "class": "form__error-message"
+};
+var _hoisted_10 = {
+  "class": "mb-3"
+};
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "good_interval",
+  "class": "form-label form-label__required"
+}, "Good interval (in days)", -1
+/* HOISTED */
+);
+
+var _hoisted_12 = {
+  "class": "form__error-message"
+};
+var _hoisted_13 = {
+  "class": "mb-3"
+};
+
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "easy_interval",
+  "class": "form-label form-label__required"
+}, "Easy interval (in days)", -1
+/* HOISTED */
+);
+
+var _hoisted_15 = {
+  "class": "form__error-message"
+};
+
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  type: "submit",
+  "class": "btn btn-primary"
+}, "Submit", -1
+/* HOISTED */
+);
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
+    id: "deckSettingsForm",
+    onSubmit: _cache[7] || (_cache[7] = function () {
+      return $options.submitForm && $options.submitForm.apply($options, arguments);
+    })
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $data.formFields.name.value = $event;
+    }),
+    type: "text",
+    name: "name",
+    id: "name",
+    "class": "form-control"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.formFields.name.value]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.formFields.name.errorMessage), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $data.formFields.numberOfCardsPerReview.value = $event;
+    }),
+    type: "text",
+    name: "number_of_cards_per_review",
+    id: "number_of_cards_per_review",
+    "class": "form-control"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.formFields.numberOfCardsPerReview.value]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.formFields.numberOfCardsPerReview.errorMessage), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $data.formFields.hardInterval.value = $event;
+    }),
+    type: "text",
+    name: "hard_interval",
+    id: "hard_interval",
+    "class": "form-control"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.formFields.hardInterval.value]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.formFields.hardInterval.errorMessage), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return $data.formFields.goodInterval.value = $event;
+    }),
+    type: "text",
+    name: "good_interval",
+    id: "good_interval",
+    "class": "form-control"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.formFields.goodInterval.value]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.formFields.goodInterval.errorMessage), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+      return $data.formFields.easyInterval.value = $event;
+    }),
+    type: "text",
+    name: "easy_interval",
+    id: "easy_interval",
+    "class": "form-control"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.formFields.easyInterval.value]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.formFields.easyInterval.errorMessage), 1
+  /* TEXT */
+  )]), _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    "class": "btn btn-primary ms-3",
+    onClick: _cache[5] || (_cache[5] = function () {
+      return $options.goToPreviousPage && $options.goToPreviousPage.apply($options, arguments);
+    })
+  }, "Cancel"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    "class": "btn btn-primary ms-3",
+    onClick: _cache[6] || (_cache[6] = function () {
+      return $options.deleteDeckPrompt && $options.deleteDeckPrompt.apply($options, arguments);
+    })
+  }, "Delete Deck")], 32
+  /* HYDRATE_EVENTS */
+  );
+}
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/DeckStudy.vue?vue&type=template&id=1409fcc5":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/DeckStudy.vue?vue&type=template&id=1409fcc5 ***!
@@ -17626,17 +17964,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _components_CreateDeckForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/CreateDeckForm.vue */ "./resources/js/components/CreateDeckForm.vue");
 /* harmony import */ var _components_DeckStudy_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/DeckStudy.vue */ "./resources/js/components/DeckStudy.vue");
+/* harmony import */ var _components_DeckSettingsForm_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/DeckSettingsForm.vue */ "./resources/js/components/DeckSettingsForm.vue");
+
 
 
 
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({
   data: function data() {
-    return {// count: 0
+    return {
+      deck: window.deck
     };
   },
   components: {
     CreateDeckForm: _components_CreateDeckForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    DeckStudy: _components_DeckStudy_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    DeckStudy: _components_DeckStudy_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    DeckSettingsForm: _components_DeckSettingsForm_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
 }).mount('#app');
 
@@ -22504,6 +22846,34 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/components/DeckSettingsForm.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/DeckSettingsForm.vue ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _DeckSettingsForm_vue_vue_type_template_id_77a88d8a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeckSettingsForm.vue?vue&type=template&id=77a88d8a */ "./resources/js/components/DeckSettingsForm.vue?vue&type=template&id=77a88d8a");
+/* harmony import */ var _DeckSettingsForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DeckSettingsForm.vue?vue&type=script&lang=js */ "./resources/js/components/DeckSettingsForm.vue?vue&type=script&lang=js");
+/* harmony import */ var _var_www_html_paasrs_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,_var_www_html_paasrs_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_DeckSettingsForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_DeckSettingsForm_vue_vue_type_template_id_77a88d8a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/DeckSettingsForm.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/components/DeckStudy.vue":
 /*!***********************************************!*\
   !*** ./resources/js/components/DeckStudy.vue ***!
@@ -22548,6 +22918,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/DeckSettingsForm.vue?vue&type=script&lang=js":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/DeckSettingsForm.vue?vue&type=script&lang=js ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_DeckSettingsForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_DeckSettingsForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./DeckSettingsForm.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/DeckSettingsForm.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/components/DeckStudy.vue?vue&type=script&lang=js":
 /*!***********************************************************************!*\
   !*** ./resources/js/components/DeckStudy.vue?vue&type=script&lang=js ***!
@@ -22576,6 +22962,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CreateDeckForm_vue_vue_type_template_id_23db0e58__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CreateDeckForm_vue_vue_type_template_id_23db0e58__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./CreateDeckForm.vue?vue&type=template&id=23db0e58 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/CreateDeckForm.vue?vue&type=template&id=23db0e58");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/DeckSettingsForm.vue?vue&type=template&id=77a88d8a":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/DeckSettingsForm.vue?vue&type=template&id=77a88d8a ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_DeckSettingsForm_vue_vue_type_template_id_77a88d8a__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_DeckSettingsForm_vue_vue_type_template_id_77a88d8a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./DeckSettingsForm.vue?vue&type=template&id=77a88d8a */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/DeckSettingsForm.vue?vue&type=template&id=77a88d8a");
 
 
 /***/ }),

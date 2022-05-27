@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateDeckRequest;
+use App\Http\Requests\UpdateDeckRequest;
+use App\Models\Card;
 use App\Models\Deck;
 use App\Services\DefaultDeckSettings;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DeckController extends Controller
 {
@@ -87,9 +91,13 @@ class DeckController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Deck $deck)
     {
-        dd($id);
+        $data = [
+            'deck' => $deck,
+        ];
+
+        return view('decks/edit', $data);
     }
 
     /**
@@ -99,10 +107,22 @@ class DeckController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateDeckRequest $request, Deck $deck)
     {
-        dd($id);
-        dd($request);
+        $deck->name = $request->name;
+        $deck->number_of_cards_per_review = $request->number_of_cards_per_review;
+        $deck->hard_interval = $request->hard_interval;
+        $deck->good_interval = $request->good_interval;
+        $deck->easy_interval = $request->easy_interval;
+        $deck->save();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'message' => 'Deck updated successfully.',
+            ]);
+        }
+
+        return redirect(route('decks.index'));
     }
 
     /**
@@ -111,20 +131,24 @@ class DeckController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Deck $deck, Request $request)
     {
-        dd($id);
-    }
+        try {
+            DB::beginTransaction();
+            Card::where('deck_id', $deck->id)->delete();
+            $deck->delete();
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw new Exception($e);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function showOptions(Deck $deck)
-    {
-        echo "Options screen";
-        dd($deck);
+        if ($request->ajax()) {
+            return response()->json([
+                'message' => 'Deck deleted successfully.',
+            ]);
+        }
+
+        return redirect(route('decks.index'));
     }
 }
