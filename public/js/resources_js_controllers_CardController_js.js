@@ -17420,6 +17420,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
           });
         });
       });
+    },
+    goToPreviousPage: function goToPreviousPage() {
+      window.history.back();
     }
   }
 });
@@ -17522,7 +17525,7 @@ var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
     id: "cardForm",
-    onSubmit: _cache[5] || (_cache[5] = function () {
+    onSubmit: _cache[6] || (_cache[6] = function () {
       return $options.submitForm && $options.submitForm.apply($options, arguments);
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
@@ -17588,7 +17591,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   ))], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.formFields.deckId]])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_16], 32
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.formFields.deckId]])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    "class": "btn btn-primary ms-3",
+    onClick: _cache[5] || (_cache[5] = function () {
+      return $options.goToPreviousPage && $options.goToPreviousPage.apply($options, arguments);
+    })
+  }, "Cancel")], 32
   /* HYDRATE_EVENTS */
   );
 }
