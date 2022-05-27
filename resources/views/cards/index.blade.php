@@ -22,7 +22,7 @@
                     <td>{{ $card->tags }}</td>
                     <td>{{ $card->appear_on }}</td>
                     <td>
-                        <a class="btn btn-primary" href="{{ route('cards.edit', ['card' => $card->id ]) }}">Edit</a> <a class="btn btn-primary card__delete" href="#">Delete</a>
+                        <a class="btn btn-primary" href="{{ route('cards.edit', ['card' => $card->id ]) }}">Edit</a> <a class="btn btn-primary card__delete" href="{{ route('cards.destroy', ['card' => $card->id ]) }}">Delete</a>
                     </td>
                 </tr>
                 @endforeach
