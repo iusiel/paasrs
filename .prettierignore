@@ -1,0 +1,12 @@
+# for laravel
+bootstrap
+public
+githook
+linters
+node_modules
+vendor
+resources/plugins
+composer.json
+composer.lock
+package.json
+storage
