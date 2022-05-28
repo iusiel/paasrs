@@ -17334,40 +17334,40 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'CardForm',
-  props: ['deck', 'card', 'formAction', 'editmode', 'decks'],
+  name: "CardForm",
+  props: ["deck", "card", "formAction", "editmode", "decks"],
   data: function data() {
     return {
-      formMethod: 'POST',
+      formMethod: "POST",
       csrfToken: document.querySelector('meta[name="csrf-token"]').content,
       formFields: {
         decks: [],
         deckId: this.deck,
         question: {
-          value: '',
-          errorMessage: ''
+          value: "",
+          errorMessage: ""
         },
         answer: {
-          value: '',
-          errorMessage: ''
+          value: "",
+          errorMessage: ""
         },
         extraInformation: {
-          value: '',
-          errorMessage: ''
+          value: "",
+          errorMessage: ""
         },
         tags: {
-          value: '',
-          errorMessage: ''
+          value: "",
+          errorMessage: ""
         },
         appearOn: {
-          value: '',
-          errorMessage: ''
+          value: "",
+          errorMessage: ""
         }
       }
     };
   },
   mounted: function mounted() {
-    if (typeof this.card !== 'undefined') {
+    if (typeof this.card !== "undefined") {
       var card = JSON.parse(atob(this.card));
       this.formFields.question.value = card.question;
       this.formFields.answer.value = card.answer;
@@ -17375,7 +17375,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       this.formFields.tags.value = card.tags;
     }
 
-    if (typeof this.decks !== 'undefined') {
+    if (typeof this.decks !== "undefined") {
       this.formFields.decks = JSON.parse(atob(this.decks));
     }
   },
@@ -17384,18 +17384,18 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       var _this = this;
 
       event.preventDefault();
-      var myForm = document.getElementById('cardForm');
+      this.clearErrorMessages();
+      var myForm = document.getElementById("cardForm");
       var formData = new FormData(myForm);
-      formData.append('deck_id', this.formFields.deckId);
+      formData.append("deck_id", this.formFields.deckId);
 
-      if (typeof this.editmode !== 'undefined') {
-        formData.append('_method', 'PUT');
+      if (typeof this.editmode !== "undefined") {
+        formData.append("_method", "PUT");
       }
 
       (0,_modules_JSONFetchClient_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.formAction, formData, this.formMethod).then(function (result) {
-        //eslint-disable-line
         if (result.message) {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire(result.message, '', 'success').then(function (value) {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire(result.message, "", "success").then(function (value) {
             if (value.isConfirmed) {
               window.location.reload();
             }
@@ -17412,7 +17412,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
             var _message = _slicedToArray(message, 1),
                 errorMessage = _message[0];
 
-            if (field === 'extra_information') {
+            if (field === "extra_information") {
               _this.formFields.extraInformation.errorMessage = errorMessage;
             } else if (_this.formFields[field]) {
               _this.formFields[field].errorMessage = errorMessage;
@@ -17423,6 +17423,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     },
     goToPreviousPage: function goToPreviousPage() {
       window.history.back();
+    },
+    clearErrorMessages: function clearErrorMessages() {
+      this.formFields.question.errorMessage = "";
+      this.formFields.answer.errorMessage = "";
+      this.formFields.extraInformation.errorMessage = "";
+      this.formFields.tags.errorMessage = "";
     }
   }
 });
@@ -17497,7 +17503,7 @@ var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 
 var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "form-text"
-}, "Comma separated string (e.g. tag 1,tag 2)", -1
+}, " Comma separated string (e.g. tag 1,tag 2) ", -1
 /* HOISTED */
 );
 
@@ -17597,7 +17603,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[5] || (_cache[5] = function () {
       return $options.goToPreviousPage && $options.goToPreviousPage.apply($options, arguments);
     })
-  }, "Cancel")], 32
+  }, " Cancel ")], 32
   /* HYDRATE_EVENTS */
   );
 }
@@ -17624,54 +17630,54 @@ __webpack_require__.r(__webpack_exports__);
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({
   data: function data() {
     return {
-      card: typeof window.card !== 'undefined' ? window.card : '',
-      decks: typeof window.decks !== 'undefined' ? window.decks : ''
+      card: typeof window.card !== "undefined" ? window.card : "",
+      decks: typeof window.decks !== "undefined" ? window.decks : ""
     };
   },
   components: {
     CardForm: _components_CardForm_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
-}).mount('#app');
+}).mount("#app");
 
 window.onload = function loadDataTable() {
-  if (document.getElementById('cardsTable')) {
-    $('#cardsTable').DataTable();
+  if (document.getElementById("cardsTable")) {
+    $("#cardsTable").DataTable();
   }
 };
 
 function submitForm(href) {
   var formData = new FormData();
-  formData.append('_method', 'DELETE');
-  (0,_modules_JSONFetchClient_js__WEBPACK_IMPORTED_MODULE_3__["default"])(href, formData, 'POST').then(function (result) {
+  formData.append("_method", "DELETE");
+  (0,_modules_JSONFetchClient_js__WEBPACK_IMPORTED_MODULE_3__["default"])(href, formData, "POST").then(function (result) {
     //eslint-disable-line
-    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Deleted!', result.message, 'success').then(function () {
+    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire("Deleted!", result.message, "success").then(function () {
       window.location.reload();
     });
   })["catch"](function (error) {
     error.json().then(function () {
-      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Warning', 'An error has been encountered. Try deleting the card again.', 'warning').then(function () {
+      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire("Warning", "An error has been encountered. Try deleting the card again.", "warning").then(function () {
         window.location.reload();
       });
     });
   });
 }
 
-var deleteButtons = document.querySelectorAll('.card__delete');
+var deleteButtons = document.querySelectorAll(".card__delete");
 
 if (deleteButtons.length > 0) {
   deleteButtons.forEach(function (button) {
-    button.addEventListener('click', function promptDelete(event) {
+    button.addEventListener("click", function promptDelete(event) {
       var _this = this;
 
       event.preventDefault();
       sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
-        title: 'Are you sure you want to delete this card?',
+        title: "Are you sure you want to delete this card?",
         text: "You won't be able to revert this!",
-        icon: 'warning',
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
       }).then(function (result) {
         if (result.isConfirmed) {
           submitForm(_this.href);
@@ -17715,12 +17721,12 @@ function _JSONFetchClient() {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            method = _args.length > 2 && _args[2] !== undefined ? _args[2] : 'GET';
+            method = _args.length > 2 && _args[2] !== undefined ? _args[2] : "GET";
             _context.next = 3;
             return fetch(url, {
               headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                'X-Requested-With': 'XMLHttpRequest'
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content,
+                "X-Requested-With": "XMLHttpRequest"
               },
               method: method,
               body: body

@@ -19,6 +19,7 @@ export default {
     methods: {
         submitForm(event) {
             event.preventDefault();
+            this.deckNameError = "";
 
             const myForm = document.getElementById("createDeckForm");
             const formData = new FormData(myForm);

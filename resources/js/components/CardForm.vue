@@ -140,6 +140,7 @@ export default {
     methods: {
         submitForm(event) {
             event.preventDefault();
+            this.clearErrorMessages();
 
             const myForm = document.getElementById("cardForm");
             const formData = new FormData(myForm);
@@ -150,7 +151,6 @@ export default {
 
             JSONFetchClient(this.formAction, formData, this.formMethod)
                 .then((result) => {
-                    //eslint-disable-line
                     if (result.message) {
                         Swal.fire(result.message, "", "success").then(
                             (value) => {
@@ -181,6 +181,13 @@ export default {
 
         goToPreviousPage() {
             window.history.back();
+        },
+
+        clearErrorMessages() {
+            this.formFields.question.errorMessage = "";
+            this.formFields.answer.errorMessage = "";
+            this.formFields.extraInformation.errorMessage = "";
+            this.formFields.tags.errorMessage = "";
         },
     },
 };
