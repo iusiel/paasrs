@@ -17324,9 +17324,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      deckName: '',
-      deckNameError: '',
-      formMethod: 'POST',
+      deckName: "",
+      deckNameError: "",
+      formMethod: "POST",
       formAction: "".concat(document.querySelector('meta[name="base_url"]').content, "/decks"),
       csrfToken: document.querySelector('meta[name="csrf-token"]').content
     };
@@ -17336,12 +17336,13 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       event.preventDefault();
-      var myForm = document.getElementById('createDeckForm');
+      this.deckNameError = "";
+      var myForm = document.getElementById("createDeckForm");
       var formData = new FormData(myForm);
       (0,_modules_JSONFetchClient_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.formAction, formData, this.formMethod).then(function (result) {
         //eslint-disable-line
-        if (result.message === 'Deck created successfully.') {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Deck has been created.', '', 'success').then(function (value) {
+        if (result.message === "Deck created successfully.") {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire("Deck has been created.", "", "success").then(function (value) {
             if (value.isConfirmed) {
               window.location.reload();
             }
@@ -17389,37 +17390,37 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'DeckSettingsForm',
-  props: ['deck', 'formAction', 'deleteAction'],
+  name: "DeckSettingsForm",
+  props: ["deck", "formAction", "deleteAction"],
   data: function data() {
     return {
-      formMethod: 'POST',
+      formMethod: "POST",
       formFields: {
         name: {
-          value: '',
-          errorMessage: ''
+          value: "",
+          errorMessage: ""
         },
         numberOfCardsPerReview: {
-          value: '',
-          errorMessage: ''
+          value: "",
+          errorMessage: ""
         },
         hardInterval: {
-          value: '',
-          errorMessage: ''
+          value: "",
+          errorMessage: ""
         },
         goodInterval: {
-          value: '',
-          errorMessage: ''
+          value: "",
+          errorMessage: ""
         },
         easyInterval: {
-          value: '',
-          errorMessage: ''
+          value: "",
+          errorMessage: ""
         }
       }
     };
   },
   mounted: function mounted() {
-    if (typeof this.deck !== 'undefined') {
+    if (typeof this.deck !== "undefined") {
       var deck = JSON.parse(atob(this.deck));
       this.formFields.name.value = deck.name;
       this.formFields.numberOfCardsPerReview.value = deck.number_of_cards_per_review;
@@ -17434,12 +17435,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
       event.preventDefault();
       this.clearErrorMessages();
-      var myForm = document.getElementById('deckSettingsForm');
+      var myForm = document.getElementById("deckSettingsForm");
       var formData = new FormData(myForm);
-      formData.append('_method', 'PUT');
+      formData.append("_method", "PUT");
       (0,_modules_JSONFetchClient_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.formAction, formData, this.formMethod).then(function (result) {
         if (result.message) {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire(result.message, '', 'success').then(function () {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire(result.message, "", "success").then(function () {
             window.location.reload();
           });
         }
@@ -17456,7 +17457,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
             var convertedFieldName = _this.convertReturnFieldNameToFormFieldName(field);
 
-            if (typeof _this.formFields[convertedFieldName] !== 'undefined') {
+            if (typeof _this.formFields[convertedFieldName] !== "undefined") {
               _this.formFields[convertedFieldName].errorMessage = errorMessage;
             }
           });
@@ -17464,20 +17465,20 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       });
     },
     convertReturnFieldNameToFormFieldName: function convertReturnFieldNameToFormFieldName(fieldName) {
-      if (fieldName === 'number_of_cards_per_review') {
-        return 'numberOfCardsPerReview';
+      if (fieldName === "number_of_cards_per_review") {
+        return "numberOfCardsPerReview";
       }
 
-      if (fieldName === 'hard_interval') {
-        return 'hardInterval';
+      if (fieldName === "hard_interval") {
+        return "hardInterval";
       }
 
-      if (fieldName === 'good_interval') {
-        return 'goodInterval';
+      if (fieldName === "good_interval") {
+        return "goodInterval";
       }
 
-      if (fieldName === 'easy_interval') {
-        return 'easyInterval';
+      if (fieldName === "easy_interval") {
+        return "easyInterval";
       }
 
       return fieldName;
@@ -17488,11 +17489,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       }
     },
     clearErrorMessages: function clearErrorMessages() {
-      this.formFields.name.errorMessage = '';
-      this.formFields.numberOfCardsPerReview.errorMessage = '';
-      this.formFields.hardInterval.errorMessage = '';
-      this.formFields.goodInterval.errorMessage = '';
-      this.formFields.easyInterval.errorMessage = '';
+      this.formFields.name.errorMessage = "";
+      this.formFields.numberOfCardsPerReview.errorMessage = "";
+      this.formFields.hardInterval.errorMessage = "";
+      this.formFields.goodInterval.errorMessage = "";
+      this.formFields.easyInterval.errorMessage = "";
     },
     goToPreviousPage: function goToPreviousPage() {
       window.history.back();
@@ -17501,13 +17502,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       var _this2 = this;
 
       sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
-        title: 'Are you sure you want to delete this deck? All the cards under this deck will also be deleted.',
+        title: "Are you sure you want to delete this deck? All the cards under this deck will also be deleted.",
         text: "You won't be able to revert this!",
-        icon: 'warning',
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
       }).then(function (result) {
         if (result.isConfirmed) {
           _this2.deleteDeck();
@@ -17516,15 +17517,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     },
     deleteDeck: function deleteDeck() {
       var formData = new FormData();
-      formData.append('_method', 'DELETE');
-      (0,_modules_JSONFetchClient_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.deleteAction, formData, 'POST').then(function (result) {
+      formData.append("_method", "DELETE");
+      (0,_modules_JSONFetchClient_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.deleteAction, formData, "POST").then(function (result) {
         //eslint-disable-line
-        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Deleted!', result.message, 'success').then(function () {
-          window.location.href = '/';
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire("Deleted!", result.message, "success").then(function () {
+          window.location.href = "/";
         });
       })["catch"](function (error) {
         error.json().then(function () {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Warning', 'An error has been encountered. Try deleting the deck again.', 'warning').then(function () {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire("Warning", "An error has been encountered. Try deleting the deck again.", "warning").then(function () {
             window.location.reload();
           });
         });
@@ -17565,12 +17566,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(__webpack_require__.t.bind(__webpack_require__, /*! ../../plugins/prism/prism.js */ "./resources/plugins/prism/prism.js", 23));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'DeckStudy',
-  props: ['deck'],
+  name: "DeckStudy",
+  props: ["deck"],
   data: function data() {
     return {
       studyDeck: JSON.parse(atob(this.deck)),
-      formMethod: 'POST',
+      formMethod: "POST",
       csrfToken: document.querySelector('meta[name="csrf-token"]').content,
       isShowingAnswer: false
     };
@@ -17603,25 +17604,25 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
       this.isShowingAnswer = false;
     },
     easyAnswer: function easyAnswer() {
-      this.submitAnswerInterval('easy');
+      this.submitAnswerInterval("easy");
     },
     goodAnswer: function goodAnswer() {
-      this.submitAnswerInterval('good');
+      this.submitAnswerInterval("good");
     },
     hardAnswer: function hardAnswer() {
-      this.submitAnswerInterval('hard');
+      this.submitAnswerInterval("hard");
     },
     submitAnswerInterval: function submitAnswerInterval(interval) {
       var _this = this;
 
       var formData = new FormData();
-      formData.append('interval', interval);
-      (0,_modules_JSONFetchClient_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.formAction, formData, 'POST').then(function (result) {
+      formData.append("interval", interval);
+      (0,_modules_JSONFetchClient_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.formAction, formData, "POST").then(function (result) {
         //eslint-disable-line
         _this.showNextQuestion();
       })["catch"](function (error) {
         error.json().then(function () {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Warning', 'An error has been encountered. You can still continue, but your session may not be saved properly.', 'warning').then(function () {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire("Warning", "An error has been encountered. You can still continue, but your session may not be saved properly.", "warning").then(function () {
             _this.showNextQuestion();
           });
         });
@@ -17629,7 +17630,7 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
     },
     showNextQuestion: function showNextQuestion() {
       if (this.studyDeck.cards.length === 1) {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('You have finished all the questions for this session.', '', 'success').then(function () {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire("You have finished all the questions for this session.", "", "success").then(function () {
           window.location.href = "".concat(document.querySelector('meta[name="base_url"]').content, "/decks");
         });
         return;
@@ -17673,7 +17674,7 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "submit",
   "class": "btn btn-primary"
-}, "Create new deck")], -1
+}, " Create new deck ")], -1
 /* HOISTED */
 );
 
@@ -17872,13 +17873,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[5] || (_cache[5] = function () {
       return $options.goToPreviousPage && $options.goToPreviousPage.apply($options, arguments);
     })
-  }, "Cancel"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, " Cancel "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
     "class": "btn btn-primary ms-3",
     onClick: _cache[6] || (_cache[6] = function () {
       return $options.deleteDeckPrompt && $options.deleteDeckPrompt.apply($options, arguments);
     })
-  }, "Delete Deck")], 32
+  }, " Delete Deck ")], 32
   /* HYDRATE_EVENTS */
   );
 }
@@ -17939,27 +17940,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.showAnswer && $options.showAnswer.apply($options, arguments);
     }),
     "class": "btn btn-primary me-3 px-3 fs-4"
-  }, "Show answer")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.isShowingAnswer ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, " Show answer ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.isShowingAnswer ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.againAnswer && $options.againAnswer.apply($options, arguments);
     }),
     "class": "btn btn-primary me-3 px-3 fs-4"
-  }, "Again"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, " Again "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[2] || (_cache[2] = function () {
       return $options.hardAnswer && $options.hardAnswer.apply($options, arguments);
     }),
     "class": "btn btn-primary me-3 px-3 fs-4"
-  }, "Hard"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, " Hard "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[3] || (_cache[3] = function () {
       return $options.goodAnswer && $options.goodAnswer.apply($options, arguments);
     }),
     "class": "btn btn-primary me-3 px-3 fs-4"
-  }, "Good"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, " Good "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[4] || (_cache[4] = function () {
       return $options.easyAnswer && $options.easyAnswer.apply($options, arguments);
     }),
     "class": "btn btn-primary me-3 px-3 fs-4"
-  }, "Easy")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, "Remaining questions: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.studyDeck.cards.length), 1
+  }, " Easy ")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, " Remaining questions: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.studyDeck.cards.length), 1
   /* TEXT */
   )]);
 }
@@ -17993,7 +17994,7 @@ __webpack_require__.r(__webpack_exports__);
     DeckStudy: _components_DeckStudy_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     DeckSettingsForm: _components_DeckSettingsForm_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
-}).mount('#app');
+}).mount("#app");
 
 /***/ }),
 
@@ -18029,12 +18030,12 @@ function _JSONFetchClient() {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            method = _args.length > 2 && _args[2] !== undefined ? _args[2] : 'GET';
+            method = _args.length > 2 && _args[2] !== undefined ? _args[2] : "GET";
             _context.next = 3;
             return fetch(url, {
               headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                'X-Requested-With': 'XMLHttpRequest'
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content,
+                "X-Requested-With": "XMLHttpRequest"
               },
               method: method,
               body: body

@@ -2064,11 +2064,11 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__.e(/*! import() */ "resources_plugins_bootstrap-5_1_3-dist_js_bootstrap_bundle_min_js").then(__webpack_require__.t.bind(__webpack_require__, /*! ../plugins/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js */ "./resources/plugins/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js", 23));
 
-if (document.querySelector('.decks')) {
+if (document.querySelector(".decks")) {
   __webpack_require__.e(/*! import() */ "resources_js_controllers_DeckController_js").then(__webpack_require__.bind(__webpack_require__, /*! ./controllers/DeckController.js */ "./resources/js/controllers/DeckController.js"));
 }
 
-if (document.querySelector('.cards')) {
+if (document.querySelector(".cards")) {
   __webpack_require__.e(/*! import() */ "resources_js_controllers_CardController_js").then(__webpack_require__.bind(__webpack_require__, /*! ./controllers/CardController.js */ "./resources/js/controllers/CardController.js"));
 }
 
@@ -2088,7 +2088,7 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
  */
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
