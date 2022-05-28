@@ -111,8 +111,7 @@ export default {
             formData.append("interval", interval);
 
             JSONFetchClient(this.formAction, formData, "POST")
-                .then((result) => {
-                    //eslint-disable-line
+                .then(() => {
                     this.showNextQuestion();
                 })
                 .catch((error) => {

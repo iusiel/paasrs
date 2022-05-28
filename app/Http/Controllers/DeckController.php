@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CardsExport;
 use App\Http\Requests\CreateDeckRequest;
 use App\Http\Requests\UpdateDeckRequest;
 use App\Models\Card;
@@ -30,16 +31,6 @@ class DeckController extends Controller
             "decks" => $decks,
         ];
         return view("decks/index", $data);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -155,5 +146,48 @@ class DeckController extends Controller
         }
 
         return redirect(route("decks.index"));
+    }
+
+    public function import(Deck $deck, Request $request)
+    {
+        $handle = fopen($request->file("csv")->getPathname(), "r");
+
+        $dataToInsert = [];
+        while (($data = fgetcsv($handle, 0, ",")) !== false) {
+            [$question, $answer, $extraInformation, $tags] = $data;
+            $dataToInsert[] = [
+                "deck_id" => $deck->id,
+                "question" => $question,
+                "answer" => $answer,
+                "extra_information" => $extraInformation,
+                "tags" => $tags,
+                "appear_on" => date("Y-m-d H:i:s"),
+                "created_at" => date("Y-m-d H:i:s"),
+                "updated_at" => date("Y-m-d H:i:s"),
+            ];
+        }
+        fclose($handle);
+
+        try {
+            DB::beginTransaction();
+            DB::table("cards")->insert($dataToInsert);
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw new Exception($e);
+        }
+
+        if ($request->ajax()) {
+            return response()->json([
+                "message" => "Cards imported successfully.",
+            ]);
+        }
+
+        return redirect(route("decks.index"));
+    }
+
+    public function export(Deck $deck)
+    {
+        return new CardsExport($deck);
     }
 }
