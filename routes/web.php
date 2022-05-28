@@ -16,12 +16,12 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get("/", [HomeController::class, "index"])->name("home");
-Route::resource("decks", DeckController::class);
+Route::resource("decks", DeckController::class)->except(["create"]);
 Route::get("/decks/options/{deck}", [
     DeckController::class,
     "showOptions",
 ])->name("decks.options");
-Route::resource("cards", CardsController::class);
+Route::resource("cards", CardsController::class)->except(["show"]);
 Route::post("/cards/{card}/update_appear_on/", [
     CardsController::class,
     "updateAppearOn",
