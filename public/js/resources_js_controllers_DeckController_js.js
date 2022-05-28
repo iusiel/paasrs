@@ -17617,8 +17617,7 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
 
       var formData = new FormData();
       formData.append("interval", interval);
-      (0,_modules_JSONFetchClient_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.formAction, formData, "POST").then(function (result) {
-        //eslint-disable-line
+      (0,_modules_JSONFetchClient_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.formAction, formData, "POST").then(function () {
         _this.showNextQuestion();
       })["catch"](function (error) {
         error.json().then(function () {
@@ -17691,7 +17690,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       var formData = new FormData();
       formData.append("csv", filetoUpload);
       (0,_modules_JSONFetchClient_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.formAction, formData, this.formMethod).then(function (result) {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire(result.message, "", "success").then(function (value) {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire(result.message, "", "success").then(function () {
           window.location.reload();
         });
       })["catch"](function () {

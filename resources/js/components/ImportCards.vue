@@ -25,7 +25,7 @@ export default {
 
             JSONFetchClient(this.formAction, formData, this.formMethod)
                 .then((result) => {
-                    Swal.fire(result.message, "", "success").then((value) => {
+                    Swal.fire(result.message, "", "success").then(() => {
                         window.location.reload();
                     });
                 })
