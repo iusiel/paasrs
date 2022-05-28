@@ -25,16 +25,16 @@ class UpdateDeckRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('decks')->ignore($this->route('deck.id')),
+            "name" => [
+                "required",
+                "string",
+                "max:255",
+                Rule::unique("decks")->ignore($this->route("deck.id")),
             ],
-            'number_of_cards_per_review' => 'required|integer',
-            'hard_interval' => 'required|integer',
-            'good_interval' => 'required|integer',
-            'easy_interval' => 'required|integer',
+            "number_of_cards_per_review" => "required|integer",
+            "hard_interval" => "required|integer",
+            "good_interval" => "required|integer",
+            "easy_interval" => "required|integer",
         ];
     }
 }

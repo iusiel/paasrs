@@ -13,15 +13,18 @@ class CreateCardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cards', function (Blueprint $table) {
+        Schema::create("cards", function (Blueprint $table) {
             $table->id();
-            $table->integer('deck_id');
-            $table->foreign('deck_id')->references('id')->on('decks');
-            $table->text('question');
-            $table->text('answer');
-            $table->text('extra_information')->nullable();
-            $table->text('tags')->nullable();
-            $table->dateTime('appear_on');
+            $table->integer("deck_id");
+            $table
+                ->foreign("deck_id")
+                ->references("id")
+                ->on("decks");
+            $table->text("question");
+            $table->text("answer");
+            $table->text("extra_information")->nullable();
+            $table->text("tags")->nullable();
+            $table->dateTime("appear_on");
             $table->timestamps();
         });
     }
@@ -33,6 +36,6 @@ class CreateCardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cards');
+        Schema::dropIfExists("cards");
     }
 }

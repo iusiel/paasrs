@@ -12,17 +12,17 @@ class Deck extends Model
     protected $table = "decks";
 
     protected $fillable = [
-        'name',
-        'number_of_cards_per_review',
-        'number_of_new_cards_per_review',
-        'hard_interval',
-        'good_interval',
-        'easy_interval',
-        'interval_hard_limit',
+        "name",
+        "number_of_cards_per_review",
+        "number_of_new_cards_per_review",
+        "hard_interval",
+        "good_interval",
+        "easy_interval",
+        "interval_hard_limit",
     ];
 
     public function cards()
     {
-        return $this->hasMany(Card::class, 'deck_id', 'id');
+        return $this->hasMany(Card::class, "deck_id", "id");
     }
 }

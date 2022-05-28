@@ -13,6 +13,6 @@ class Card extends Model
 
     public function deck()
     {
-        return $this->belongsTo(Deck::class, 'deck_id', 'id');
+        return $this->belongsTo(Deck::class, "deck_id", "id");
     }
 }

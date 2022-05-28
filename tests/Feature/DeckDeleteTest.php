@@ -11,12 +11,15 @@ class DeckDeleteTest extends TestCase
 
     public function test_delete_card_function()
     {
-        $response = $this->withHeader('X-Requested-With', 'XMLHttpRequest')->post('/decks/1', [
-            '_method' => "DELETE"
+        $response = $this->withHeader(
+            "X-Requested-With",
+            "XMLHttpRequest"
+        )->post("/decks/1", [
+            "_method" => "DELETE",
         ]);
 
         $response->assertJson([
-            'message' => 'Deck deleted successfully.'
+            "message" => "Deck deleted successfully.",
         ]);
     }
 }

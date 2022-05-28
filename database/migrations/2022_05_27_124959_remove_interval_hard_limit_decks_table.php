@@ -13,8 +13,8 @@ class RemoveIntervalHardLimitDecksTable extends Migration
      */
     public function up()
     {
-        Schema::table('decks', function (Blueprint $table) {
-            $table->dropColumn('interval_hard_limit');
+        Schema::table("decks", function (Blueprint $table) {
+            $table->dropColumn("interval_hard_limit");
         });
     }
 
@@ -25,8 +25,8 @@ class RemoveIntervalHardLimitDecksTable extends Migration
      */
     public function down()
     {
-        Schema::table('decks', function (Blueprint $table) {
-            $table->integer('interval_hard_limit')->nullable();
+        Schema::table("decks", function (Blueprint $table) {
+            $table->integer("interval_hard_limit")->nullable();
         });
     }
 }

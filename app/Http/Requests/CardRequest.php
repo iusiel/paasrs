@@ -24,11 +24,11 @@ class CardRequest extends FormRequest
     public function rules()
     {
         return [
-            'deck_id' => 'required|integer',
-            'question' => 'required|string|max:30000',
-            'answer' => 'required|string|max:30000',
-            'extra_information' => 'nullable|string|max:30000',
-            'tags' => 'nullable|string|max:30000',
+            "deck_id" => "required|integer",
+            "question" => "required|string|max:30000",
+            "answer" => "required|string|max:30000",
+            "extra_information" => "nullable|string|max:30000",
+            "tags" => "nullable|string|max:30000",
         ];
     }
 }

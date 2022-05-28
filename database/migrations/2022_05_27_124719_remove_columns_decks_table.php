@@ -13,8 +13,8 @@ class RemoveColumnsDecksTable extends Migration
      */
     public function up()
     {
-        Schema::table('decks', function (Blueprint $table) {
-            $table->dropColumn('number_of_new_cards_per_review');
+        Schema::table("decks", function (Blueprint $table) {
+            $table->dropColumn("number_of_new_cards_per_review");
         });
     }
 
@@ -25,8 +25,8 @@ class RemoveColumnsDecksTable extends Migration
      */
     public function down()
     {
-        Schema::table('decks', function (Blueprint $table) {
-            $table->integer('number_of_new_cards_per_review')->nullable();
+        Schema::table("decks", function (Blueprint $table) {
+            $table->integer("number_of_new_cards_per_review")->nullable();
         });
     }
 }

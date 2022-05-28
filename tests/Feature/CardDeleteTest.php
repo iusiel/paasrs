@@ -11,12 +11,15 @@ class CardDeleteTest extends TestCase
 
     public function test_delete_card_function()
     {
-        $response = $this->withHeader('X-Requested-With', 'XMLHttpRequest')->post('/cards/1', [
-            '_method' => "DELETE"
+        $response = $this->withHeader(
+            "X-Requested-With",
+            "XMLHttpRequest"
+        )->post("/cards/1", [
+            "_method" => "DELETE",
         ]);
 
         $response->assertJson([
-            'message' => 'Card deleted successfully.'
+            "message" => "Card deleted successfully.",
         ]);
     }
 }
