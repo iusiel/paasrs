@@ -17,10 +17,9 @@ use App\Http\Controllers\HomeController;
 
 Route::get("/", [HomeController::class, "index"])->name("home");
 Route::resource("decks", DeckController::class)->except(["create"]);
-Route::get("/decks/options/{deck}", [
-    DeckController::class,
-    "showOptions",
-])->name("decks.options");
+Route::post("/decks/{deck}/import", [DeckController::class, "import"])->name(
+    "decks.import"
+);
 Route::resource("cards", CardsController::class)->except(["show"]);
 Route::post("/cards/{card}/update_appear_on/", [
     CardsController::class,

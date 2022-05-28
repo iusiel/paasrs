@@ -33,16 +33,6 @@ class DeckController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -151,6 +141,44 @@ class DeckController extends Controller
         if ($request->ajax()) {
             return response()->json([
                 "message" => "Deck deleted successfully.",
+            ]);
+        }
+
+        return redirect(route("decks.index"));
+    }
+
+    public function import(Deck $deck, Request $request)
+    {
+        $handle = fopen($request->file("csv")->getPathname(), "r");
+
+        $dataToInsert = [];
+        while (($data = fgetcsv($handle, 0, ",")) !== false) {
+            [$question, $answer, $extraInformation, $tags] = $data;
+            $dataToInsert[] = [
+                "deck_id" => $deck->id,
+                "question" => $question,
+                "answer" => $answer,
+                "extra_information" => $extraInformation,
+                "tags" => $tags,
+                "appear_on" => date("Y-m-d H:i:s"),
+                "created_at" => date("Y-m-d H:i:s"),
+                "updated_at" => date("Y-m-d H:i:s"),
+            ];
+        }
+        fclose($handle);
+
+        try {
+            DB::beginTransaction();
+            DB::table("cards")->insert($dataToInsert);
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw new Exception($e);
+        }
+
+        if ($request->ajax()) {
+            return response()->json([
+                "message" => "Cards imported successfully.",
             ]);
         }
 

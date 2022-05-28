@@ -21,6 +21,8 @@
                         <a class="me-4" href="{{ route('cards.create', ['deck' => $deck->id]) }}"><button class="btn btn-primary">Add Cards</button></a>
                         <a class="me-4 @if($deck->cards->count() === 0)pe-none disabled @endif" href="{{ route('cards.index', ['deck' => $deck->id]) }}"><button class="btn btn-primary">Edit Cards</button></a>
                         <a class="me-4" href="{{ route('decks.edit', ['deck' => $deck->id]) }}"><button class="btn btn-primary">Edit Deck Options</button></a>
+                        <import-cards form-action="{{ route('decks.import', ['deck' => $deck->id]) }}" />
+                        <button class="btn btn-primary">Export</button>
                     </td>
                 </tr>
                 @endforeach
