@@ -16,14 +16,14 @@ class DeckIndexTest extends TestCase
      */
     public function test_function()
     {
-        $response = $this->get('/');
+        $response = $this->get("/");
 
-        $response->assertRedirect('/decks');
+        $response->assertRedirect("/decks");
     }
 
     public function test_decks_index()
     {
-        $response = $this->get('/decks');
+        $response = $this->get("/decks");
         $response->assertStatus(200);
     }
 }

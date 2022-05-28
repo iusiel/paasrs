@@ -17,20 +17,20 @@ class CardsController extends Controller
      */
     public function index(Request $request)
     {
-        $cards = Card::with('deck');
-        if ($request->query->get('deck')) {
-            $cards->where('deck_id', $request->deck);
+        $cards = Card::with("deck");
+        if ($request->query->get("deck")) {
+            $cards->where("deck_id", $request->deck);
         }
 
         $cards = $cards->get();
         if ($cards->count() === 0) {
-            return redirect(route('decks.index'));
+            return redirect(route("decks.index"));
         }
 
         $data = [
-            'cards' => $cards,
+            "cards" => $cards,
         ];
-        return view('cards/index', $data);
+        return view("cards/index", $data);
     }
 
     /**
@@ -40,19 +40,19 @@ class CardsController extends Controller
      */
     public function create(Request $request)
     {
-        if (!$request->query->get('deck')) {
-            return redirect(route('decks.index'));
+        if (!$request->query->get("deck")) {
+            return redirect(route("decks.index"));
         }
 
-        $deck = Deck::where('id', $request->deck)->first();
+        $deck = Deck::where("id", $request->deck)->first();
         if (empty($deck)) {
-            return redirect(route('decks.index'));
+            return redirect(route("decks.index"));
         }
 
         $data = [
-            'deck' => $deck,
+            "deck" => $deck,
         ];
-        return view('cards/add', $data);
+        return view("cards/add", $data);
     }
 
     /**
@@ -74,11 +74,11 @@ class CardsController extends Controller
 
         if ($request->ajax()) {
             return response()->json([
-                'message' => 'Card created successfully.',
+                "message" => "Card created successfully.",
             ]);
         }
 
-        return redirect(route('decks.index'));
+        return redirect(route("decks.index"));
     }
 
     /**
@@ -100,12 +100,12 @@ class CardsController extends Controller
      */
     public function edit(Card $card)
     {
-        $decks = Deck::select('id', 'name')->get();
+        $decks = Deck::select("id", "name")->get();
         $data = [
-            'card' => $card,
-            'decks' => $decks,
+            "card" => $card,
+            "decks" => $decks,
         ];
-        return view('cards/edit', $data);
+        return view("cards/edit", $data);
     }
 
     /**
@@ -126,11 +126,11 @@ class CardsController extends Controller
 
         if ($request->ajax()) {
             return response()->json([
-                'message' => 'Card updated successfully.',
+                "message" => "Card updated successfully.",
             ]);
         }
 
-        return redirect(route('decks.index'));
+        return redirect(route("decks.index"));
     }
 
     /**
@@ -145,15 +145,17 @@ class CardsController extends Controller
 
         if ($request->ajax()) {
             return response()->json([
-                'message' => 'Card deleted successfully.',
+                "message" => "Card deleted successfully.",
             ]);
         }
 
-        return redirect(route('cards.index'));
+        return redirect(route("cards.index"));
     }
 
-    public function updateAppearOn(Card $card, CardUpdateAppearOnRequest $request)
-    {
+    public function updateAppearOn(
+        Card $card,
+        CardUpdateAppearOnRequest $request
+    ) {
         if ($request->interval === "easy") {
             $interval = "+ " . $card->deck->easy_interval . " days";
         }
@@ -169,10 +171,10 @@ class CardsController extends Controller
 
         if ($request->ajax()) {
             return response()->json([
-                'message' => 'Card successfully updated.',
+                "message" => "Card successfully updated.",
             ]);
         }
 
-        return redirect(route('decks.index'));
+        return redirect(route("decks.index"));
     }
 }

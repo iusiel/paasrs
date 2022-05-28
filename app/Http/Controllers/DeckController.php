@@ -20,14 +20,16 @@ class DeckController extends Controller
      */
     public function index()
     {
-        $decks = Deck::with(['cards' => function ($query) {
-            $query->orderBy('appear_on', 'asc');
-            $query->where('appear_on', '<=', date("Y-m-d H:i:s"));
-        }])->get();
+        $decks = Deck::with([
+            "cards" => function ($query) {
+                $query->orderBy("appear_on", "asc");
+                $query->where("appear_on", "<=", date("Y-m-d H:i:s"));
+            },
+        ])->get();
         $data = [
-            'decks' => $decks
+            "decks" => $decks,
         ];
-        return view('decks/index', $data);
+        return view("decks/index", $data);
     }
 
     /**
@@ -49,16 +51,16 @@ class DeckController extends Controller
     public function store(CreateDeckRequest $request)
     {
         $deckDetails = DefaultDeckSettings::get();
-        $deckDetails['name'] = $request->name;
+        $deckDetails["name"] = $request->name;
         Deck::create($deckDetails);
 
         if ($request->ajax()) {
             return response()->json([
-                'message' => 'Deck created successfully.',
+                "message" => "Deck created successfully.",
             ]);
         }
 
-        return redirect(route('decks.index'));
+        return redirect(route("decks.index"));
     }
 
     /**
@@ -69,20 +71,22 @@ class DeckController extends Controller
      */
     public function show(Deck $deck)
     {
-        $deck->load(['cards' => function ($query) use ($deck) {
-            $query->orderBy('appear_on', 'asc');
-            $query->where('appear_on', '<=', date("Y-m-d H:i:s"));
-            $query->limit($deck->number_of_cards_per_review);
-        }]);
+        $deck->load([
+            "cards" => function ($query) use ($deck) {
+                $query->orderBy("appear_on", "asc");
+                $query->where("appear_on", "<=", date("Y-m-d H:i:s"));
+                $query->limit($deck->number_of_cards_per_review);
+            },
+        ]);
 
         if ($deck->cards->count() === 0) {
-            return redirect(route('decks.index'));
+            return redirect(route("decks.index"));
         }
 
         $data = [
-            'deck' => $deck,
+            "deck" => $deck,
         ];
-        return view('decks/study', $data);
+        return view("decks/study", $data);
     }
 
     /**
@@ -94,10 +98,10 @@ class DeckController extends Controller
     public function edit(Deck $deck)
     {
         $data = [
-            'deck' => $deck,
+            "deck" => $deck,
         ];
 
-        return view('decks/edit', $data);
+        return view("decks/edit", $data);
     }
 
     /**
@@ -110,7 +114,8 @@ class DeckController extends Controller
     public function update(UpdateDeckRequest $request, Deck $deck)
     {
         $deck->name = $request->name;
-        $deck->number_of_cards_per_review = $request->number_of_cards_per_review;
+        $deck->number_of_cards_per_review =
+            $request->number_of_cards_per_review;
         $deck->hard_interval = $request->hard_interval;
         $deck->good_interval = $request->good_interval;
         $deck->easy_interval = $request->easy_interval;
@@ -118,11 +123,11 @@ class DeckController extends Controller
 
         if ($request->ajax()) {
             return response()->json([
-                'message' => 'Deck updated successfully.',
+                "message" => "Deck updated successfully.",
             ]);
         }
 
-        return redirect(route('decks.index'));
+        return redirect(route("decks.index"));
     }
 
     /**
@@ -135,7 +140,7 @@ class DeckController extends Controller
     {
         try {
             DB::beginTransaction();
-            Card::where('deck_id', $deck->id)->delete();
+            Card::where("deck_id", $deck->id)->delete();
             $deck->delete();
             DB::commit();
         } catch (Exception $e) {
@@ -145,10 +150,10 @@ class DeckController extends Controller
 
         if ($request->ajax()) {
             return response()->json([
-                'message' => 'Deck deleted successfully.',
+                "message" => "Deck deleted successfully.",
             ]);
         }
 
-        return redirect(route('decks.index'));
+        return redirect(route("decks.index"));
     }
 }

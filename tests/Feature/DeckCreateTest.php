@@ -16,12 +16,15 @@ class DeckCreateTest extends TestCase
      */
     public function test_function()
     {
-        $response = $this->withHeader('X-Requested-With', 'XMLHttpRequest')->post('/decks', [
-            'name' => Str::random(20),
+        $response = $this->withHeader(
+            "X-Requested-With",
+            "XMLHttpRequest"
+        )->post("/decks", [
+            "name" => Str::random(20),
         ]);
 
         $response->assertJson([
-            'message' => 'Deck created successfully.'
+            "message" => "Deck created successfully.",
         ]);
     }
 }

@@ -25,10 +25,10 @@ class CardUpdateAppearOnRequest extends FormRequest
     public function rules()
     {
         return [
-            'interval' => [
-                'required',
-                'string',
-                Rule::in(['easy', 'good', 'hard']),
+            "interval" => [
+                "required",
+                "string",
+                Rule::in(["easy", "good", "hard"]),
             ],
         ];
     }
