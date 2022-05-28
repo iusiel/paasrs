@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CardsExport;
 use App\Http\Requests\CreateDeckRequest;
 use App\Http\Requests\UpdateDeckRequest;
 use App\Models\Card;
@@ -183,5 +184,10 @@ class DeckController extends Controller
         }
 
         return redirect(route("decks.index"));
+    }
+
+    public function export(Deck $deck)
+    {
+        return new CardsExport($deck);
     }
 }

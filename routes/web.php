@@ -20,6 +20,9 @@ Route::resource("decks", DeckController::class)->except(["create"]);
 Route::post("/decks/{deck}/import", [DeckController::class, "import"])->name(
     "decks.import"
 );
+Route::get("/decks/{deck}/export", [DeckController::class, "export"])->name(
+    "decks.export"
+);
 Route::resource("cards", CardsController::class)->except(["show"]);
 Route::post("/cards/{card}/update_appear_on/", [
     CardsController::class,
