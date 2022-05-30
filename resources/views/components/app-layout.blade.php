@@ -10,7 +10,7 @@
     @yield('styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}" >
 </head>
-<body class="{{ $activeLink }}">
+<body class="{{ $activeLink }} pb-5">
     <div class="container">
         <x-navbar :activeLink="$activeLink"/>
         <main class="my-4">

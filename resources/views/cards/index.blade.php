@@ -45,8 +45,5 @@
 
     @section('scripts')
     <script type="text/javascript" src="{{ asset('/js/DataTables/datatables.min.js') }}"></script>
-    <script>
-
-    </script>
     @endsection
 </x-app-layout>
