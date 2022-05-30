@@ -4,8 +4,13 @@
         <div class="fs-3 mb-3">
             {{ currentCard.question }}
         </div>
-        <div v-if="isShowingAnswer">
-            <pre><code class="language-javascript">{{ currentCard.answer }}</code></pre>
+        <div
+            v-if="isShowingAnswer"
+            class="border-top border-bottom border-dark py-4"
+        >
+            <pre class="mb-0 white-space__pre-wrap">{{
+                currentCard.answer
+            }}</pre>
         </div>
         <div
             v-if="isShowingAnswer && currentCard.extra_information"
