@@ -12,9 +12,6 @@
         <li class="nav-item">
           <a class="nav-link @if($activeLink === 'cards') active @endif" href="{{ url(route('cards.index')) }}">Cards</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link @if($activeLink === 'import-export') active @endif" href="#">Import / Export</a>
-        </li>
       </ul>
     </div>
   </div>
