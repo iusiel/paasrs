@@ -15,11 +15,7 @@ class CreateCardsTable extends Migration
     {
         Schema::create("cards", function (Blueprint $table) {
             $table->id();
-            $table->integer("deck_id");
-            $table
-                ->foreign("deck_id")
-                ->references("id")
-                ->on("decks");
+            $table->foreignId("deck_id");
             $table->text("question");
             $table->text("answer");
             $table->text("extra_information")->nullable();
