@@ -11668,6 +11668,10 @@ pre[class*=language-] {
   white-space: pre-wrap;
 }
 
+pre {
+  font-family: var(--bs-body-font-family);
+}
+
 textarea {
   resize: none;
 }
