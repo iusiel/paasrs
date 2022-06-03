@@ -1,14 +1,16 @@
 <template>
     <div>
         <div class="fst-italic h6">{{ currentCard.tags }}</div>
-        <div class="fs-3 mb-3">
-            {{ currentCard.question }}
+        <div class="mb-3">
+            <pre class="mb-0 white-space__pre-wrap fs-3">{{
+                currentCard.question
+            }}</pre>
         </div>
         <div
             v-if="isShowingAnswer"
             class="border-top border-bottom border-dark py-4"
         >
-            <pre class="mb-0 white-space__pre-wrap">{{
+            <pre class="mb-0 white-space__pre-wrap fs-4">{{
                 currentCard.answer
             }}</pre>
         </div>
@@ -17,7 +19,9 @@
             class="my-3"
         >
             <div class="alert alert-info mb-0">
-                {{ currentCard.extra_information }}
+                <pre class="mb-0 white-space__pre-wrap fs-6">{{
+                    currentCard.extra_information
+                }}</pre>
             </div>
         </div>
         <button
