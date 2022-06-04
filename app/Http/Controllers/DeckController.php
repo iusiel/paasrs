@@ -26,7 +26,9 @@ class DeckController extends Controller
                 $query->orderBy("appear_on", "asc");
                 $query->where("appear_on", "<=", date("Y-m-d H:i:s"));
             },
-        ])->get();
+        ])
+            ->withCount(["cards as cardsCount"])
+            ->get();
         $data = [
             "decks" => $decks,
         ];
