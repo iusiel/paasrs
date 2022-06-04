@@ -22,7 +22,7 @@ class CardsController extends Controller
             $cards->where("deck_id", $request->deck);
         }
 
-        $cards = $cards->get();
+        $cards = $cards->orderBy("id", "DESC")->get();
         if ($cards->count() === 0) {
             return redirect(route("decks.index"));
         }
