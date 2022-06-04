@@ -3,6 +3,10 @@
 
     <h1 class="mb-5">Cards index @if(Request::get('deck')) for {{ $cards->first()->deck->name }} @endif</h1>
     <div id="app">
+
+        @if(Request::get('deck'))
+        <a class="mb-4 btn btn-primary" href="{{ route('cards.create', ['deck' => $cards->first()->deck->id ]) }}">Add Cards</a>
+        @endif
        
         <table id="cardsTable" class="table table-striped">
             <thead>
