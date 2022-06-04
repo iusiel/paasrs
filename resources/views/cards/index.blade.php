@@ -34,6 +34,7 @@
                 @endforeach
             <tfoot>
                 <tr>
+                    <th>ID</th>
                     <th>Question</th>
                     <th>Answer</th>
                     <th>Tags</th>
