@@ -6,7 +6,9 @@ use App\Http\Requests\CardRequest;
 use App\Http\Requests\CardUpdateAppearOnRequest;
 use App\Models\Card;
 use App\Models\Deck;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CardsController extends Controller
 {
@@ -72,6 +74,10 @@ class CardsController extends Controller
         $card->appear_on = date("Y-m-d H:i:s");
         $card->save();
 
+        if (!empty($request->create_reverse_card)) {
+            $this->createReverseCard($card);
+        }
+
         if ($request->ajax()) {
             return response()->json([
                 "message" => "Card created successfully.",
@@ -79,6 +85,27 @@ class CardsController extends Controller
         }
 
         return redirect(route("decks.index"));
+    }
+
+    private function createReverseCard(Card $card)
+    {
+        try {
+            $existingCard = Card::where("question", $card->answer)
+                ->where("answer", $card->question)
+                ->first();
+            if (empty($existingCard)) {
+                $reverseCard = new Card();
+                $reverseCard->deck_id = $card->deck_id;
+                $reverseCard->question = $card->answer;
+                $reverseCard->answer = $card->question;
+                $reverseCard->extra_information = $card->extra_information;
+                $reverseCard->tags = $card->tags;
+                $reverseCard->appear_on = date("Y-m-d H:i:s");
+                $reverseCard->save();
+            }
+        } catch (Exception $e) {
+            Log::warning($e);
+        }
     }
 
     /**
@@ -112,6 +139,10 @@ class CardsController extends Controller
         $card->extra_information = $request->extra_information;
         $card->tags = $request->tags;
         $card->save();
+
+        if (!empty($request->create_reverse_card)) {
+            $this->createReverseCard($card);
+        }
 
         if ($request->ajax()) {
             return response()->json([
