@@ -17,7 +17,9 @@ createApp({
 
 window.onload = function loadDataTable() {
     if (document.getElementById("cardsTable")) {
-        $("#cardsTable").DataTable();
+        $("#cardsTable").DataTable({
+            order: [[0, "desc"]],
+        });
     }
 };
 

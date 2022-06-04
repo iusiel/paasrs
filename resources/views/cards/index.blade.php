@@ -7,6 +7,7 @@
         <table id="cardsTable" class="table table-striped">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Question</th>
                     <th>Answer</th>
                     <th>Tags</th>
@@ -17,6 +18,7 @@
             <tbody>
                 @foreach ($cards as $card)
                 <tr>
+                    <td>{{ $card->id }}</td>
                     <td>{{ $card->question }}</td>
                     <td>{{ $card->answer }}</td>
                     <td>{{ $card->tags }}</td>
