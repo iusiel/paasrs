@@ -110,6 +110,8 @@ class DeckController extends Controller
         $deck->hard_interval = $request->hard_interval;
         $deck->good_interval = $request->good_interval;
         $deck->easy_interval = $request->easy_interval;
+        $deck->randomize_order_of_questions =
+            $request->randomize_order_of_questions;
         $deck->save();
 
         if ($request->ajax()) {
