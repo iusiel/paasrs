@@ -14,11 +14,10 @@ class Deck extends Model
     protected $fillable = [
         "name",
         "number_of_cards_per_review",
-        "number_of_new_cards_per_review",
         "hard_interval",
         "good_interval",
         "easy_interval",
-        "interval_hard_limit",
+        "randomize_order_of_questions",
     ];
 
     public function cards()
