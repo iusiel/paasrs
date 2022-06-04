@@ -77,6 +77,20 @@
                 {{ formFields.easyInterval.errorMessage }}
             </div>
         </div>
+        <div class="mb-3">
+            <label for="randomize_order" class="form-label form-label__required"
+                >Randomize order of questions</label
+            >
+            <select
+                v-model="formFields.randomizeOrder"
+                name="randomize_order_of_questions"
+                class="form-select"
+                id="randomize_order"
+            >
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
         <button
             type="button"
@@ -108,6 +122,7 @@ export default {
         return {
             formMethod: "POST",
             formFields: {
+                randomizeOrder: false,
                 name: {
                     value: "",
                     errorMessage: "",
@@ -141,6 +156,7 @@ export default {
             this.formFields.hardInterval.value = deck.hard_interval;
             this.formFields.goodInterval.value = deck.good_interval;
             this.formFields.easyInterval.value = deck.easy_interval;
+            this.formFields.randomizeOrder = deck.randomize_order_of_questions;
         }
     },
 

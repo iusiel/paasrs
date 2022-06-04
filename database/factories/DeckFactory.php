@@ -19,6 +19,7 @@ class DeckFactory extends Factory
             "hard_interval" => "1",
             "good_interval" => "4",
             "easy_interval" => "7",
+            "randomize_order_of_questions" => false,
         ];
     }
 }

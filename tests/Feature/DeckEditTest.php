@@ -28,6 +28,7 @@ class DeckEditTest extends TestCase
             "hard_interval" => 5,
             "good_interval" => 5,
             "easy_interval" => 5,
+            "randomize_order_of_questions" => 1,
         ]);
 
         $response->assertJson([
