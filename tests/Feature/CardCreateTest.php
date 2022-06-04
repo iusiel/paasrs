@@ -40,4 +40,23 @@ class CardCreateTest extends TestCase
             "message" => "Card created successfully.",
         ]);
     }
+
+    public function test_add_card_with_reverse()
+    {
+        $response = $this->withHeader(
+            "X-Requested-With",
+            "XMLHttpRequest"
+        )->post("/cards", [
+            "create_reverse_card" => "on",
+            "question" => Str::random(20),
+            "answer" => Str::random(20),
+            "extra_information" => Str::random(20),
+            "tags" => Str::random(20),
+            "deck_id" => 1,
+        ]);
+
+        $response->assertJson([
+            "message" => "Card created successfully.",
+        ]);
+    }
 }

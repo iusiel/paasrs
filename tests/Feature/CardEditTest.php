@@ -34,4 +34,24 @@ class CardEditTest extends TestCase
             "message" => "Card updated successfully.",
         ]);
     }
+
+    public function test_edit_card_function_with_create_reverse()
+    {
+        $response = $this->withHeader(
+            "X-Requested-With",
+            "XMLHttpRequest"
+        )->post("/cards/1", [
+            "_method" => "PUT",
+            "create_reverse_card" => "on",
+            "question" => Str::random(20),
+            "answer" => Str::random(20),
+            "extra_information" => Str::random(20),
+            "tags" => Str::random(20),
+            "deck_id" => 1,
+        ]);
+
+        $response->assertJson([
+            "message" => "Card updated successfully.",
+        ]);
+    }
 }
