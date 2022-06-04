@@ -64,9 +64,12 @@ class DeckController extends Controller
     {
         $deck->load([
             "cards" => function ($query) use ($deck) {
-                $query->orderBy("appear_on", "asc");
                 $query->where("appear_on", "<=", date("Y-m-d H:i:s"));
                 $query->limit($deck->number_of_cards_per_review);
+                // phpcs:ignore - ternary operator. if randomize setting is enabled, use inRandomOrder(), else use orderBy()
+                $deck->randomize_order_of_questions
+                    ? $query->inRandomOrder()
+                    : $query->orderBy("appear_on", "asc");
             },
         ]);
 
