@@ -1,5 +1,17 @@
 <template>
     <form id="cardForm" @submit="submitForm">
+        <div class="form-check mb-3">
+            <input
+                v-model="formFields.createReverseCard"
+                class="form-check-input"
+                type="checkbox"
+                id="createReverseCard"
+                name="create_reverse_card"
+            />
+            <label class="form-check-label" for="createReverseCard">
+                Create Reverse Card
+            </label>
+        </div>
         <div class="mb-3">
             <label for="question" class="form-label form-label__required"
                 >Question</label
@@ -99,6 +111,7 @@ export default {
             formFields: {
                 decks: [],
                 deckId: this.deck,
+                createReverseCard: false,
                 question: {
                     value: "",
                     errorMessage: "",
