@@ -44,9 +44,80 @@
             <button @click="easyAnswer" class="btn btn-primary me-3 px-3 fs-4">
                 Easy
             </button>
+            <button
+                @click="showMarkModal"
+                class="btn btn-primary me-3 px-3 fs-4"
+            >
+                Mark this card
+            </button>
         </div>
         <div class="mt-3">
             Remaining questions: {{ studyDeck.cards.length }}
+        </div>
+
+        <div v-if="isShowingMarkModal">
+            <!-- Button trigger modal -->
+            <button
+                ref="showmodalbutton"
+                type="button"
+                class="d-none"
+                data-bs-toggle="modal"
+                data-bs-target="#markCardModal"
+            >
+                Launch modal
+            </button>
+
+            <!-- Modal -->
+            <div
+                class="modal fade"
+                id="markCardModal"
+                tabindex="-1"
+                aria-labelledby="markCardModalLabel"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="markCardModalLabel">
+                                Why do you want to mark this card?
+                            </h5>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="markForm" @submit="submitMarkForm">
+                                <textarea
+                                    class="form-control"
+                                    rows="5"
+                                    name="marked_message"
+                                ></textarea>
+
+                                <div
+                                    class="d-flex align-content-end align-items-end justify-content-end py-3"
+                                >
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary me-3"
+                                        data-bs-dismiss="modal"
+                                    >
+                                        Close
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary"
+                                    >
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -68,6 +139,7 @@ export default {
             csrfToken: document.querySelector('meta[name="csrf-token"]')
                 .content,
             isShowingAnswer: false,
+            isShowingMarkModal: false,
         };
     },
 
@@ -153,6 +225,18 @@ export default {
 
             this.studyDeck.cards.shift();
             this.isShowingAnswer = false;
+        },
+
+        showMarkModal() {
+            this.isShowingMarkModal = true;
+            setTimeout(() => {
+                this.$refs.showmodalbutton.click();
+            }, 100);
+        },
+
+        submitMarkForm(event) {
+            event.preventDefault();
+            alert("Mock submit");
         },
     },
 };

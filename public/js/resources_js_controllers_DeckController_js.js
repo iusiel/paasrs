@@ -17575,7 +17575,8 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
       studyDeck: JSON.parse(atob(this.deck)),
       formMethod: "POST",
       csrfToken: document.querySelector('meta[name="csrf-token"]').content,
-      isShowingAnswer: false
+      isShowingAnswer: false,
+      isShowingMarkModal: false
     };
   },
   computed: {
@@ -17639,6 +17640,18 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
 
       this.studyDeck.cards.shift();
       this.isShowingAnswer = false;
+    },
+    showMarkModal: function showMarkModal() {
+      var _this2 = this;
+
+      this.isShowingMarkModal = true;
+      setTimeout(function () {
+        _this2.$refs.showmodalbutton.click();
+      }, 100);
+    },
+    submitMarkForm: function submitMarkForm(event) {
+      event.preventDefault();
+      alert("Mock submit");
     }
   }
 });
@@ -18025,6 +18038,70 @@ var _hoisted_9 = {
 var _hoisted_10 = {
   "class": "mt-3"
 };
+var _hoisted_11 = {
+  key: 4
+};
+var _hoisted_12 = {
+  ref: "showmodalbutton",
+  type: "button",
+  "class": "d-none",
+  "data-bs-toggle": "modal",
+  "data-bs-target": "#markCardModal"
+};
+var _hoisted_13 = {
+  "class": "modal fade",
+  id: "markCardModal",
+  tabindex: "-1",
+  "aria-labelledby": "markCardModalLabel",
+  "aria-hidden": "true"
+};
+var _hoisted_14 = {
+  "class": "modal-dialog"
+};
+var _hoisted_15 = {
+  "class": "modal-content"
+};
+
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "modal-header"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
+  "class": "modal-title",
+  id: "markCardModalLabel"
+}, " Why do you want to mark this card? "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  type: "button",
+  "class": "btn-close",
+  "data-bs-dismiss": "modal",
+  "aria-label": "Close"
+})], -1
+/* HOISTED */
+);
+
+var _hoisted_17 = {
+  "class": "modal-body"
+};
+
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+  "class": "form-control",
+  rows: "5",
+  name: "marked_message"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "d-flex align-content-end align-items-end justify-content-end py-3"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  type: "button",
+  "class": "btn btn-secondary me-3",
+  "data-bs-dismiss": "modal"
+}, " Close "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  type: "submit",
+  "class": "btn btn-primary"
+}, " Submit ")], -1
+/* HOISTED */
+);
+
+var _hoisted_20 = [_hoisted_18, _hoisted_19];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.currentCard.tags), 1
   /* TEXT */
@@ -18060,9 +18137,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.easyAnswer && $options.easyAnswer.apply($options, arguments);
     }),
     "class": "btn btn-primary me-3 px-3 fs-4"
-  }, " Easy ")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, " Remaining questions: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.studyDeck.cards.length), 1
+  }, " Easy "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[5] || (_cache[5] = function () {
+      return $options.showMarkModal && $options.showMarkModal.apply($options, arguments);
+    }),
+    "class": "btn btn-primary me-3 px-3 fs-4"
+  }, " Mark this card ")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, " Remaining questions: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.studyDeck.cards.length), 1
   /* TEXT */
-  )]);
+  ), $data.isShowingMarkModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Button trigger modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_12, " Launch modal ", 512
+  /* NEED_PATCH */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    id: "markForm",
+    onSubmit: _cache[6] || (_cache[6] = function () {
+      return $options.submitMarkForm && $options.submitMarkForm.apply($options, arguments);
+    })
+  }, _hoisted_20, 32
+  /* HYDRATE_EVENTS */
+  )])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),
