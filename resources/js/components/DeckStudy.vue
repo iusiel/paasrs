@@ -235,6 +235,7 @@ export default {
             this.isShowingMarkModal = true;
             setTimeout(() => {
                 this.$refs.showmodalbutton.click();
+                this.markedMessage = this.currentCard.marked_message;
             }, 100);
         },
 
@@ -250,6 +251,7 @@ export default {
                 .then((response) => {
                     Swal.fire("", response.message, "success").then(() => {
                         this.hideMarkModal();
+                        this.currentCard.marked_message = this.markedMessage;
                     });
                 })
                 .catch((error) => {
@@ -267,7 +269,6 @@ export default {
 
         hideMarkModal() {
             this.$refs.markModalClose.click();
-            this.markedMessage = "";
         },
     },
 };

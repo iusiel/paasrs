@@ -17648,6 +17648,8 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
       this.isShowingMarkModal = true;
       setTimeout(function () {
         _this2.$refs.showmodalbutton.click();
+
+        _this2.markedMessage = _this2.currentCard.marked_message;
       }, 100);
     },
     submitMarkForm: function submitMarkForm(event) {
@@ -17660,6 +17662,8 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
       (0,_modules_JSONFetchClient_js__WEBPACK_IMPORTED_MODULE_1__["default"])(markMessageURL, formData, "POST").then(function (response) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire("", response.message, "success").then(function () {
           _this3.hideMarkModal();
+
+          _this3.currentCard.marked_message = _this3.markedMessage;
         });
       })["catch"](function (error) {
         error.json().then(function () {
@@ -17671,7 +17675,6 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
     },
     hideMarkModal: function hideMarkModal() {
       this.$refs.markModalClose.click();
-      this.markedMessage = "";
     }
   }
 });
