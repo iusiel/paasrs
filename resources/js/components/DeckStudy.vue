@@ -86,6 +86,7 @@
                                 class="btn-close"
                                 data-bs-dismiss="modal"
                                 aria-label="Close"
+                                ref="markModalClose"
                             ></button>
                         </div>
                         <div class="modal-body">
@@ -94,6 +95,8 @@
                                     class="form-control"
                                     rows="5"
                                     name="marked_message"
+                                    v-model="markedMessage"
+                                    required
                                 ></textarea>
 
                                 <div
@@ -140,6 +143,7 @@ export default {
                 .content,
             isShowingAnswer: false,
             isShowingMarkModal: false,
+            markedMessage: "",
         };
     },
 
@@ -236,7 +240,34 @@ export default {
 
         submitMarkForm(event) {
             event.preventDefault();
-            alert("Mock submit");
+            const formData = new FormData();
+            formData.append("marked_message", this.markedMessage);
+
+            const markMessageURL = `${
+                document.querySelector('meta[name="base_url"]').content
+            }/cards/${this.currentCard.id}/mark`;
+            JSONFetchClient(markMessageURL, formData, "POST")
+                .then((response) => {
+                    Swal.fire("", response.message, "success").then(() => {
+                        this.hideMarkModal();
+                    });
+                })
+                .catch((error) => {
+                    error.json().then(() => {
+                        Swal.fire(
+                            "Error",
+                            "An error has been encountered. Please try marking this card again.",
+                            "error"
+                        ).then(() => {
+                            this.hideMarkModal();
+                        });
+                    });
+                });
+        },
+
+        hideMarkModal() {
+            this.$refs.markModalClose.click();
+            this.markedMessage = "";
         },
     },
 };

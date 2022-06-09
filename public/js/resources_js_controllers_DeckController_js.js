@@ -17576,7 +17576,8 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
       formMethod: "POST",
       csrfToken: document.querySelector('meta[name="csrf-token"]').content,
       isShowingAnswer: false,
-      isShowingMarkModal: false
+      isShowingMarkModal: false,
+      markedMessage: ""
     };
   },
   computed: {
@@ -17650,8 +17651,27 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
       }, 100);
     },
     submitMarkForm: function submitMarkForm(event) {
+      var _this3 = this;
+
       event.preventDefault();
-      alert("Mock submit");
+      var formData = new FormData();
+      formData.append("marked_message", this.markedMessage);
+      var markMessageURL = "".concat(document.querySelector('meta[name="base_url"]').content, "/cards/").concat(this.currentCard.id, "/mark");
+      (0,_modules_JSONFetchClient_js__WEBPACK_IMPORTED_MODULE_1__["default"])(markMessageURL, formData, "POST").then(function (response) {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire("", response.message, "success").then(function () {
+          _this3.hideMarkModal();
+        });
+      })["catch"](function (error) {
+        error.json().then(function () {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire("Error", "An error has been encountered. Please try marking this card again.", "error").then(function () {
+            _this3.hideMarkModal();
+          });
+        });
+      });
+    },
+    hideMarkModal: function hideMarkModal() {
+      this.$refs.markModalClose.click();
+      this.markedMessage = "";
     }
   }
 });
@@ -18061,34 +18081,29 @@ var _hoisted_14 = {
 var _hoisted_15 = {
   "class": "modal-content"
 };
-
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_16 = {
   "class": "modal-header"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
+};
+
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
   "class": "modal-title",
   id: "markCardModalLabel"
-}, " Why do you want to mark this card? "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+}, " Why do you want to mark this card? ", -1
+/* HOISTED */
+);
+
+var _hoisted_18 = {
   type: "button",
   "class": "btn-close",
   "data-bs-dismiss": "modal",
-  "aria-label": "Close"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_17 = {
+  "aria-label": "Close",
+  ref: "markModalClose"
+};
+var _hoisted_19 = {
   "class": "modal-body"
 };
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
-  "class": "form-control",
-  rows: "5",
-  name: "marked_message"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "d-flex align-content-end align-items-end justify-content-end py-3"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "button",
@@ -18101,7 +18116,6 @@ var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_20 = [_hoisted_18, _hoisted_19];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.currentCard.tags), 1
   /* TEXT */
@@ -18146,12 +18160,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   ), $data.isShowingMarkModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Button trigger modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_12, " Launch modal ", 512
   /* NEED_PATCH */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_18, null, 512
+  /* NEED_PATCH */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     id: "markForm",
-    onSubmit: _cache[6] || (_cache[6] = function () {
+    onSubmit: _cache[7] || (_cache[7] = function () {
       return $options.submitMarkForm && $options.submitMarkForm.apply($options, arguments);
     })
-  }, _hoisted_20, 32
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+    "class": "form-control",
+    rows: "5",
+    name: "marked_message",
+    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+      return $data.markedMessage = $event;
+    }),
+    required: ""
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.markedMessage]]), _hoisted_20], 32
   /* HYDRATE_EVENTS */
   )])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }

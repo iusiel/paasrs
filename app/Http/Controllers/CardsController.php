@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CardRequest;
 use App\Http\Requests\CardUpdateAppearOnRequest;
+use App\Http\Requests\MarkCardRequest;
 use App\Models\Card;
 use App\Models\Deck;
 use Exception;
@@ -196,5 +197,19 @@ class CardsController extends Controller
         }
 
         return redirect(route("decks.index"));
+    }
+
+    public function markCard(Card $card, MarkCardRequest $request)
+    {
+        $card->marked_message = $request->marked_message;
+        $card->save();
+
+        if ($request->ajax()) {
+            return response()->json([
+                "message" => "You have marked this card.",
+            ]);
+        }
+
+        return redirect(route("cards.index"));
     }
 }
