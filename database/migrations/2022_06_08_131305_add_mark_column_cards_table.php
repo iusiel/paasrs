@@ -14,7 +14,7 @@ class AddMarkColumnCardsTable extends Migration
     public function up()
     {
         Schema::table("cards", function (Blueprint $table) {
-            $table->text("marked_message");
+            $table->text("marked_message")->nullable();
         });
     }
 
