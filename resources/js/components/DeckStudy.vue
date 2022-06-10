@@ -44,9 +44,83 @@
             <button @click="easyAnswer" class="btn btn-primary me-3 px-3 fs-4">
                 Easy
             </button>
+            <button
+                @click="showMarkModal"
+                class="btn btn-primary me-3 px-3 fs-4"
+            >
+                Mark this card
+            </button>
         </div>
         <div class="mt-3">
             Remaining questions: {{ studyDeck.cards.length }}
+        </div>
+
+        <div v-if="isShowingMarkModal">
+            <!-- Button trigger modal -->
+            <button
+                ref="showmodalbutton"
+                type="button"
+                class="d-none"
+                data-bs-toggle="modal"
+                data-bs-target="#markCardModal"
+            >
+                Launch modal
+            </button>
+
+            <!-- Modal -->
+            <div
+                class="modal fade"
+                id="markCardModal"
+                tabindex="-1"
+                aria-labelledby="markCardModalLabel"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="markCardModalLabel">
+                                Why do you want to mark this card?
+                            </h5>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                                ref="markModalClose"
+                            ></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="markForm" @submit="submitMarkForm">
+                                <textarea
+                                    class="form-control"
+                                    rows="5"
+                                    name="marked_message"
+                                    v-model="markedMessage"
+                                    required
+                                ></textarea>
+
+                                <div
+                                    class="d-flex align-content-end align-items-end justify-content-end py-3"
+                                >
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary me-3"
+                                        data-bs-dismiss="modal"
+                                    >
+                                        Close
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary"
+                                    >
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -68,6 +142,8 @@ export default {
             csrfToken: document.querySelector('meta[name="csrf-token"]')
                 .content,
             isShowingAnswer: false,
+            isShowingMarkModal: false,
+            markedMessage: "",
         };
     },
 
@@ -153,6 +229,46 @@ export default {
 
             this.studyDeck.cards.shift();
             this.isShowingAnswer = false;
+        },
+
+        showMarkModal() {
+            this.isShowingMarkModal = true;
+            setTimeout(() => {
+                this.$refs.showmodalbutton.click();
+                this.markedMessage = this.currentCard.marked_message;
+            }, 100);
+        },
+
+        submitMarkForm(event) {
+            event.preventDefault();
+            const formData = new FormData();
+            formData.append("marked_message", this.markedMessage);
+
+            const markMessageURL = `${
+                document.querySelector('meta[name="base_url"]').content
+            }/cards/${this.currentCard.id}/mark`;
+            JSONFetchClient(markMessageURL, formData, "POST")
+                .then((response) => {
+                    Swal.fire("", response.message, "success").then(() => {
+                        this.hideMarkModal();
+                        this.currentCard.marked_message = this.markedMessage;
+                    });
+                })
+                .catch((error) => {
+                    error.json().then(() => {
+                        Swal.fire(
+                            "Error",
+                            "An error has been encountered. Please try marking this card again.",
+                            "error"
+                        ).then(() => {
+                            this.hideMarkModal();
+                        });
+                    });
+                });
+        },
+
+        hideMarkModal() {
+            this.$refs.markModalClose.click();
         },
     },
 };

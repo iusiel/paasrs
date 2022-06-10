@@ -1,5 +1,17 @@
 <template>
     <form id="cardForm" @submit="submitForm">
+        <div v-if="markedMessage">
+            <div class="alert alert-warning" role="alert">
+                You marked this card because of the following reason:
+                <br /><br />
+                <pre class="fs-6">{{ markedMessage }}</pre>
+            </div>
+            <div class="alert alert-danger" role="alert">
+                The marked message will be deleted after saving your changes to
+                the card. Make sure that you have applied the changes that you
+                want to apply.
+            </div>
+        </div>
         <div class="form-check mb-3">
             <input
                 v-model="formFields.createReverseCard"
@@ -108,6 +120,7 @@ export default {
             formMethod: "POST",
             csrfToken: document.querySelector('meta[name="csrf-token"]')
                 .content,
+            markedMessage: "",
             formFields: {
                 decks: [],
                 deckId: this.deck,
@@ -143,6 +156,7 @@ export default {
             this.formFields.answer.value = card.answer;
             this.formFields.extraInformation.value = card.extra_information;
             this.formFields.tags.value = card.tags;
+            this.markedMessage = card.marked_message;
         }
 
         if (typeof this.decks !== "undefined") {

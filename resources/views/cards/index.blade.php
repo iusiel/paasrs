@@ -21,9 +21,14 @@
             </thead>
             <tbody>
                 @foreach ($cards as $card)
-                <tr>
+                <tr class="@if(!empty($card->marked_message)) marked-card @endif" >
                     <td>{{ $card->id }}</td>
-                    <td>{{ $card->question }}</td>
+                    <td>
+                        {{ $card->question }}
+                        @if(!empty($card->marked_message))
+                        <span class="marked-card__icon" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $card->marked_message }}">?</span>
+                        @endif
+                    </td>
                     <td>{{ $card->answer }}</td>
                     <td>{{ $card->tags }}</td>
                     <td>{{ $card->appear_on }}</td>

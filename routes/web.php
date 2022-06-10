@@ -28,3 +28,6 @@ Route::post("/cards/{card}/update_appear_on/", [
     CardsController::class,
     "updateAppearOn",
 ])->name("cards.update_appear_on");
+Route::post("/cards/{card}/mark/", [CardsController::class, "markCard"])->name(
+    "cards.mark"
+);
