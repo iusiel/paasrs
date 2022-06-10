@@ -139,6 +139,7 @@ class CardsController extends Controller
         $card->answer = $request->answer;
         $card->extra_information = $request->extra_information;
         $card->tags = $request->tags;
+        $card->marked_message = null;
         $card->save();
 
         if (!empty($request->create_reverse_card)) {
