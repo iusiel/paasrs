@@ -2,3 +2,20 @@
 @use "../plugins/prism/prism.css";
 @use "general";
 @use "form";
+
+table.dataTable > tbody > tr.marked-card {
+    background-color: #fff3cd;
+}
+
+.marked-card__icon {
+    background: #000;
+    color: #fff;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    display: inline-block;
+    font-weight: bold;
+    margin-left: 10px;
+    cursor: pointer;
+}
