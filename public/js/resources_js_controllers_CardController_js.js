@@ -17697,7 +17697,7 @@ __webpack_require__.r(__webpack_exports__);
 window.onload = function loadDataTable() {
   if (document.getElementById("cardsTable")) {
     $("#cardsTable").DataTable({
-      order: [[0, "desc"]]
+      order: [[5, "desc"], [0, "desc"]]
     });
   }
 };
