@@ -54,6 +54,7 @@ class CardsController extends Controller
 
         $data = [
             "deck" => $deck,
+            "tags" => $this->getTagOptions(),
         ];
         return view("cards/add", $data);
     }
@@ -118,6 +119,17 @@ class CardsController extends Controller
     public function edit(Card $card)
     {
         $decks = Deck::select("id", "name")->get();
+
+        $data = [
+            "card" => $card,
+            "decks" => $decks,
+            "tags" => $this->getTagOptions(),
+        ];
+        return view("cards/edit", $data);
+    }
+
+    private function getTagOptions()
+    {
         $tags = Card::get()
             ->pluck("tags")
             ->unique()
@@ -133,13 +145,7 @@ class CardsController extends Controller
         }
 
         $tags = array_unique($tags);
-
-        $data = [
-            "card" => $card,
-            "decks" => $decks,
-            "tags" => $tags,
-        ];
-        return view("cards/edit", $data);
+        return $tags;
     }
 
     /**
