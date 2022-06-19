@@ -69,14 +69,26 @@
         </div>
         <div class="mb-3">
             <label for="tags" class="form-label">Tags</label>
-            <input
+            <select
+                multiple
+                v-model="formFields.tags.value"
+                class="form-select card-tags"
+                id="tags"
+                name="tags"
+                ref="cardtags"
+            >
+                <option v-for="tag in formFields.tagOptions" v-bind:key="tag">
+                    {{ tag }}
+                </option>
+            </select>
+            <!-- <input
                 v-model="formFields.tags.value"
                 type="text"
-                class="form-control"
+                class="form-control card-tags"
                 id="tags"
                 name="tags"
                 placeholder="Tag 1, Tag 2"
-            />
+            /> -->
             <div class="form-text">
                 Comma separated string (e.g. tag 1,tag 2)
             </div>
@@ -113,7 +125,7 @@ import JSONFetchClient from "../modules/JSONFetchClient.js";
 export default {
     name: "CardForm",
 
-    props: ["deck", "card", "formAction", "editmode", "decks"],
+    props: ["deck", "card", "formAction", "editmode", "decks", "tags"],
 
     data() {
         return {
@@ -125,6 +137,7 @@ export default {
                 decks: [],
                 deckId: this.deck,
                 createReverseCard: false,
+                tagOptions: [],
                 question: {
                     value: "",
                     errorMessage: "",
@@ -155,12 +168,16 @@ export default {
             this.formFields.question.value = card.question;
             this.formFields.answer.value = card.answer;
             this.formFields.extraInformation.value = card.extra_information;
-            this.formFields.tags.value = card.tags;
+            this.formFields.tags.value = card.tags.split(",");
             this.markedMessage = card.marked_message;
         }
 
         if (typeof this.decks !== "undefined") {
             this.formFields.decks = JSON.parse(atob(this.decks));
+        }
+
+        if (typeof this.tags !== "undefined") {
+            this.formFields.tagOptions = JSON.parse(atob(this.tags));
         }
     },
 

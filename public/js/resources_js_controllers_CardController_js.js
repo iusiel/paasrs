@@ -17335,7 +17335,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CardForm",
-  props: ["deck", "card", "formAction", "editmode", "decks"],
+  props: ["deck", "card", "formAction", "editmode", "decks", "tags"],
   data: function data() {
     return {
       formMethod: "POST",
@@ -17345,6 +17345,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         decks: [],
         deckId: this.deck,
         createReverseCard: false,
+        tagOptions: [],
         question: {
           value: "",
           errorMessage: ""
@@ -17374,12 +17375,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       this.formFields.question.value = card.question;
       this.formFields.answer.value = card.answer;
       this.formFields.extraInformation.value = card.extra_information;
-      this.formFields.tags.value = card.tags;
+      this.formFields.tags.value = card.tags.split(",");
       this.markedMessage = card.marked_message;
     }
 
     if (typeof this.decks !== "undefined") {
       this.formFields.decks = JSON.parse(atob(this.decks));
+    }
+
+    if (typeof this.tags !== "undefined") {
+      this.formFields.tagOptions = JSON.parse(atob(this.tags));
     }
   },
   methods: {
@@ -17625,18 +17630,26 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.formFields.extraInformation.value]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.formFields.extraInformation.errorMessage), 1
   /* TEXT */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    multiple: "",
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $data.formFields.tags.value = $event;
     }),
-    type: "text",
-    "class": "form-control",
+    "class": "form-select card-tags",
     id: "tags",
     name: "tags",
-    placeholder: "Tag 1, Tag 2"
-  }, null, 512
+    ref: "cardtags"
+  }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.formFields.tagOptions, function (tag) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
+      key: tag
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(tag), 1
+    /* TEXT */
+    );
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.formFields.tags.value]]), _hoisted_21]), $props.editmode ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.formFields.tags.value]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <input\n                v-model=\"formFields.tags.value\"\n                type=\"text\"\n                class=\"form-control card-tags\"\n                id=\"tags\"\n                name=\"tags\"\n                placeholder=\"Tag 1, Tag 2\"\n            /> "), _hoisted_21]), $props.editmode ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
     "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return $data.formFields.deckId = $event;
     }),
@@ -17686,7 +17699,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       card: typeof window.card !== "undefined" ? window.card : "",
-      decks: typeof window.decks !== "undefined" ? window.decks : ""
+      decks: typeof window.decks !== "undefined" ? window.decks : "",
+      tags: typeof window.tags !== "undefined" ? window.tags : ""
     };
   },
   components: {
@@ -17743,6 +17757,12 @@ if (deleteButtons.length > 0) {
     });
   });
 }
+
+$(document).ready(function () {
+  $(".card-tags").select2({
+    placeholder: "Select an option"
+  });
+});
 
 /***/ }),
 

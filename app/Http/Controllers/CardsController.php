@@ -118,9 +118,18 @@ class CardsController extends Controller
     public function edit(Card $card)
     {
         $decks = Deck::select("id", "name")->get();
+        $tags = Card::get()
+            ->pluck("tags")
+            ->unique()
+            ->values()
+            ->toArray();
+        $tags = array_filter($tags);
+        sort($tags);
+
         $data = [
             "card" => $card,
             "decks" => $decks,
+            "tags" => $tags,
         ];
         return view("cards/edit", $data);
     }
