@@ -13,3 +13,7 @@ const mix = require("laravel-mix");
 
 mix.js("resources/js/app.js", "public/js").vue();
 mix.sass("resources/css/app.scss", "public/css");
+mix.scripts(
+    "resources/plugins/select2-4.1.0-rc.0/dist/js/select2.min.js",
+    "public/js/select2.min.js"
+);

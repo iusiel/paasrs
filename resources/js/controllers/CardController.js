@@ -8,6 +8,7 @@ createApp({
         return {
             card: typeof window.card !== "undefined" ? window.card : "",
             decks: typeof window.decks !== "undefined" ? window.decks : "",
+            tags: typeof window.tags !== "undefined" ? window.tags : "",
         };
     },
     components: {
@@ -71,3 +72,12 @@ if (deleteButtons.length > 0) {
         });
     });
 }
+
+$(document).ready(() => {
+    if (document.querySelector(".card-tags")) {
+        $(".card-tags").select2({
+            placeholder: "Select an option",
+            tags: true,
+        });
+    }
+});
