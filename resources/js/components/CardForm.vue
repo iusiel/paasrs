@@ -81,17 +81,6 @@
                     {{ tag }}
                 </option>
             </select>
-            <!-- <input
-                v-model="formFields.tags.value"
-                type="text"
-                class="form-control card-tags"
-                id="tags"
-                name="tags"
-                placeholder="Tag 1, Tag 2"
-            /> -->
-            <div class="form-text">
-                Comma separated string (e.g. tag 1,tag 2)
-            </div>
         </div>
         <div v-if="editmode" class="mb-3">
             <label for="deck" class="form-label form-label__required"
@@ -168,7 +157,7 @@ export default {
             this.formFields.question.value = card.question;
             this.formFields.answer.value = card.answer;
             this.formFields.extraInformation.value = card.extra_information;
-            this.formFields.tags.value = card.tags.split(",");
+            this.formFields.tags.value = card.tags ? card.tags.split(",") : [];
             this.markedMessage = card.marked_message;
         }
 
@@ -189,6 +178,8 @@ export default {
             const myForm = document.getElementById("cardForm");
             const formData = new FormData(myForm);
             formData.append("deck_id", this.formFields.deckId);
+            formData.set("tags", $(".card-tags").val().join(","));
+
             if (typeof this.editmode !== "undefined") {
                 formData.append("_method", "PUT");
             }

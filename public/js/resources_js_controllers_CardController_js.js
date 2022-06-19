@@ -17375,7 +17375,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       this.formFields.question.value = card.question;
       this.formFields.answer.value = card.answer;
       this.formFields.extraInformation.value = card.extra_information;
-      this.formFields.tags.value = card.tags.split(",");
+      this.formFields.tags.value = card.tags ? card.tags.split(",") : [];
       this.markedMessage = card.marked_message;
     }
 
@@ -17396,6 +17396,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       var myForm = document.getElementById("cardForm");
       var formData = new FormData(myForm);
       formData.append("deck_id", this.formFields.deckId);
+      formData.set("tags", $(".card-tags").val().join(","));
 
       if (typeof this.editmode !== "undefined") {
         formData.append("_method", "PUT");
@@ -17549,27 +17550,21 @@ var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "form-text"
-}, " Comma separated string (e.g. tag 1,tag 2) ", -1
-/* HOISTED */
-);
-
-var _hoisted_22 = {
+var _hoisted_21 = {
   key: 1,
   "class": "mb-3"
 };
 
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "deck",
   "class": "form-label form-label__required"
 }, "Deck", -1
 /* HOISTED */
 );
 
-var _hoisted_24 = ["value"];
+var _hoisted_23 = ["value"];
 
-var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "submit",
   "class": "btn btn-primary"
 }, "Submit", -1
@@ -17649,7 +17644,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   ))], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.formFields.tags.value]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <input\n                v-model=\"formFields.tags.value\"\n                type=\"text\"\n                class=\"form-control card-tags\"\n                id=\"tags\"\n                name=\"tags\"\n                placeholder=\"Tag 1, Tag 2\"\n            /> "), _hoisted_21]), $props.editmode ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.formFields.tags.value]])]), $props.editmode ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_21, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
     "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return $data.formFields.deckId = $event;
     }),
@@ -17660,12 +17655,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       value: deck.id
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(deck.name), 9
     /* TEXT, PROPS */
-    , _hoisted_24);
+    , _hoisted_23);
   }), 128
   /* KEYED_FRAGMENT */
   ))], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.formFields.deckId]])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.formFields.deckId]])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
     "class": "btn btn-primary ms-3",
     onClick: _cache[6] || (_cache[6] = function () {
@@ -17760,7 +17755,8 @@ if (deleteButtons.length > 0) {
 
 $(document).ready(function () {
   $(".card-tags").select2({
-    placeholder: "Select an option"
+    placeholder: "Select an option",
+    tags: true
   });
 });
 

@@ -126,6 +126,14 @@ class CardsController extends Controller
         $tags = array_filter($tags);
         sort($tags);
 
+        $tempTags = $tags;
+        $tags = [];
+        foreach ($tempTags as $tag) {
+            $tags = array_merge($tags, explode(",", $tag));
+        }
+
+        $tags = array_unique($tags);
+
         $data = [
             "card" => $card,
             "decks" => $decks,

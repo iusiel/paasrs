@@ -76,5 +76,6 @@ if (deleteButtons.length > 0) {
 $(document).ready(() => {
     $(".card-tags").select2({
         placeholder: "Select an option",
+        tags: true,
     });
 });
