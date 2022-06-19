@@ -16,6 +16,7 @@
                     <th>Answer</th>
                     <th>Tags</th>
                     <th>Appear On</th>
+                    <th></th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -33,6 +34,13 @@
                     <td>{{ $card->tags }}</td>
                     <td>{{ $card->appear_on }}</td>
                     <td>
+                        @if($card->marked_message)
+                        <a href="{{ route('cards.edit', ['card' => $card->id ]) }}">
+                            <span class="marked-card__icon" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $card->marked_message }}">!</span>
+                        </a>
+                        @endif
+                    </td>
+                    <td>
                         <a class="btn btn-primary my-1" href="{{ route('cards.edit', ['card' => $card->id ]) }}">Edit</a> <a class="btn btn-primary card__delete my-1" href="{{ route('cards.destroy', ['card' => $card->id ]) }}">Delete</a>
                     </td>
                 </tr>
@@ -44,6 +52,7 @@
                     <th>Answer</th>
                     <th>Tags</th>
                     <th>Appear On</th>
+                    <th></th>
                     <th>Actions</th>
                 </tr>
             </tfoot>
