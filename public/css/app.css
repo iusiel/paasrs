@@ -12371,6 +12371,10 @@ textarea {
   color: #ff0000;
 }
 
+.select2-container .select2-search--inline .select2-search__field {
+  height: 26px;
+}
+
 table.dataTable > tbody > tr.marked-card {
   background-color: #fff3cd;
 }
