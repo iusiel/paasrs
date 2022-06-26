@@ -38,10 +38,18 @@
             <button @click="hardAnswer" class="btn btn-primary me-3 px-3 fs-4">
                 Hard
             </button>
-            <button @click="goodAnswer" class="btn btn-primary me-3 px-3 fs-4">
+            <button
+                @click="goodAnswer"
+                class="btn btn-primary me-3 px-3 fs-4"
+                v-if="!currentCard.retake"
+            >
                 Good
             </button>
-            <button @click="easyAnswer" class="btn btn-primary me-3 px-3 fs-4">
+            <button
+                @click="easyAnswer"
+                class="btn btn-primary me-3 px-3 fs-4"
+                v-if="!currentCard.retake"
+            >
                 Easy
             </button>
             <button
@@ -175,6 +183,7 @@ export default {
 
         againAnswer() {
             const currentCard = this.studyDeck.cards.shift();
+            currentCard.retake = true;
             this.studyDeck.cards.push(currentCard);
             this.isShowingAnswer = false;
         },

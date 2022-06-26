@@ -17604,6 +17604,7 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
     },
     againAnswer: function againAnswer() {
       var currentCard = this.studyDeck.cards.shift();
+      currentCard.retake = true;
       this.studyDeck.cards.push(currentCard);
       this.isShowingAnswer = false;
     },
@@ -18144,17 +18145,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.hardAnswer && $options.hardAnswer.apply($options, arguments);
     }),
     "class": "btn btn-primary me-3 px-3 fs-4"
-  }, " Hard "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, " Hard "), !$options.currentCard.retake ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 0,
     onClick: _cache[3] || (_cache[3] = function () {
       return $options.goodAnswer && $options.goodAnswer.apply($options, arguments);
     }),
     "class": "btn btn-primary me-3 px-3 fs-4"
-  }, " Good "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, " Good ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$options.currentCard.retake ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 1,
     onClick: _cache[4] || (_cache[4] = function () {
       return $options.easyAnswer && $options.easyAnswer.apply($options, arguments);
     }),
     "class": "btn btn-primary me-3 px-3 fs-4"
-  }, " Easy "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, " Easy ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[5] || (_cache[5] = function () {
       return $options.showMarkModal && $options.showMarkModal.apply($options, arguments);
     }),
