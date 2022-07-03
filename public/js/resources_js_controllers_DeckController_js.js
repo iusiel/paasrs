@@ -17580,7 +17580,8 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
       csrfToken: document.querySelector('meta[name="csrf-token"]').content,
       isShowingAnswer: false,
       isShowingMarkModal: false,
-      markedMessage: ""
+      markedMessage: "",
+      scratchPaper: ""
     };
   },
   computed: {
@@ -17614,11 +17615,15 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
     showAnswer: function showAnswer() {
       this.isShowingAnswer = true;
     },
+    clearScratchPaper: function clearScratchPaper() {
+      this.scratchPaper = "";
+    },
     againAnswer: function againAnswer() {
       var currentCard = this.studyDeck.cards.shift();
       currentCard.retake = true;
       this.studyDeck.cards.push(currentCard);
       this.isShowingAnswer = false;
+      this.clearScratchPaper();
     },
     easyAnswer: function easyAnswer() {
       this.submitAnswerInterval("easy");
@@ -17632,6 +17637,7 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
     submitAnswerInterval: function submitAnswerInterval(interval) {
       var _this = this;
 
+      this.clearScratchPaper();
       var formData = new FormData();
       formData.append("interval", interval);
       (0,_modules_JSONFetchClient_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.formAction, formData, "POST").then(function () {
@@ -18058,68 +18064,59 @@ var _hoisted_4 = {
   "class": "my-3"
 };
 var _hoisted_5 = ["innerHTML"];
-
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
-  "class": "form-control mb-3",
-  rows: "3",
-  placeholder: "You can use this as your scratch paper."
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_7 = {
+var _hoisted_6 = {
   key: 3,
   "class": "mt-5"
 };
-var _hoisted_8 = {
+var _hoisted_7 = {
   "class": "mt-3"
 };
-var _hoisted_9 = {
+var _hoisted_8 = {
   key: 4
 };
-var _hoisted_10 = {
+var _hoisted_9 = {
   ref: "showmodalbutton",
   type: "button",
   "class": "d-none",
   "data-bs-toggle": "modal",
   "data-bs-target": "#markCardModal"
 };
-var _hoisted_11 = {
+var _hoisted_10 = {
   "class": "modal fade",
   id: "markCardModal",
   tabindex: "-1",
   "aria-labelledby": "markCardModalLabel",
   "aria-hidden": "true"
 };
-var _hoisted_12 = {
+var _hoisted_11 = {
   "class": "modal-dialog"
 };
-var _hoisted_13 = {
+var _hoisted_12 = {
   "class": "modal-content"
 };
-var _hoisted_14 = {
+var _hoisted_13 = {
   "class": "modal-header"
 };
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
   "class": "modal-title",
   id: "markCardModalLabel"
 }, " Why do you want to mark this card? ", -1
 /* HOISTED */
 );
 
-var _hoisted_16 = {
+var _hoisted_15 = {
   type: "button",
   "class": "btn-close",
   "data-bs-dismiss": "modal",
   "aria-label": "Close",
   ref: "markModalClose"
 };
-var _hoisted_17 = {
+var _hoisted_16 = {
   "class": "modal-body"
 };
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "d-flex align-content-end align-items-end justify-content-end py-3"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "button",
@@ -18151,61 +18148,70 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "alert alert-info mb-0 fs-6"
   }, null, 8
   /* PROPS */
-  , _hoisted_5)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_6, !$data.isShowingAnswer ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+  , _hoisted_5)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $data.scratchPaper = $event;
+    }),
+    "class": "form-control mb-3",
+    rows: "3",
+    placeholder: "You can use this as your scratch paper."
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.scratchPaper]]), !$data.isShowingAnswer ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 2,
-    onClick: _cache[0] || (_cache[0] = function () {
+    onClick: _cache[1] || (_cache[1] = function () {
       return $options.showAnswer && $options.showAnswer.apply($options, arguments);
     }),
     "class": "btn btn-primary me-3 px-3 fs-4"
-  }, " Show answer ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.isShowingAnswer ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[1] || (_cache[1] = function () {
+  }, " Show answer ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.isShowingAnswer ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[2] || (_cache[2] = function () {
       return $options.againAnswer && $options.againAnswer.apply($options, arguments);
     }),
     "class": "btn btn-primary me-3 px-3 fs-4"
   }, " Again "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[2] || (_cache[2] = function () {
+    onClick: _cache[3] || (_cache[3] = function () {
       return $options.hardAnswer && $options.hardAnswer.apply($options, arguments);
     }),
     "class": "btn btn-primary me-3 px-3 fs-4"
   }, " Hard "), !$options.currentCard.retake ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 0,
-    onClick: _cache[3] || (_cache[3] = function () {
+    onClick: _cache[4] || (_cache[4] = function () {
       return $options.goodAnswer && $options.goodAnswer.apply($options, arguments);
     }),
     "class": "btn btn-primary me-3 px-3 fs-4"
   }, " Good ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$options.currentCard.retake ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 1,
-    onClick: _cache[4] || (_cache[4] = function () {
+    onClick: _cache[5] || (_cache[5] = function () {
       return $options.easyAnswer && $options.easyAnswer.apply($options, arguments);
     }),
     "class": "btn btn-primary me-3 px-3 fs-4"
   }, " Easy ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[5] || (_cache[5] = function () {
+    onClick: _cache[6] || (_cache[6] = function () {
       return $options.showMarkModal && $options.showMarkModal.apply($options, arguments);
     }),
     "class": "btn btn-primary me-3 px-3 fs-4"
-  }, " Mark this card ")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, " Remaining questions: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.studyDeck.cards.length), 1
+  }, " Mark this card ")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, " Remaining questions: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.studyDeck.cards.length), 1
   /* TEXT */
-  ), $data.isShowingMarkModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Button trigger modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_10, " Launch modal ", 512
+  ), $data.isShowingMarkModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Button trigger modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_9, " Launch modal ", 512
   /* NEED_PATCH */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_16, null, 512
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_15, null, 512
   /* NEED_PATCH */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     id: "markForm",
-    onSubmit: _cache[7] || (_cache[7] = function () {
+    onSubmit: _cache[8] || (_cache[8] = function () {
       return $options.submitMarkForm && $options.submitMarkForm.apply($options, arguments);
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
     "class": "form-control",
     rows: "5",
     name: "marked_message",
-    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
       return $data.markedMessage = $event;
     }),
     required: ""
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.markedMessage]]), _hoisted_18], 32
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.markedMessage]]), _hoisted_17], 32
   /* HYDRATE_EVENTS */
   )])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
