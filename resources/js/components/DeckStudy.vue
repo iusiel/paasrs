@@ -16,6 +16,12 @@
                 class="alert alert-info mb-0 fs-6"
             ></div>
         </div>
+        <textarea
+            v-if="!isShowingAnswer"
+            class="form-control mb-3"
+            rows="3"
+            placeholder="You can use this as your scratch paper."
+        ></textarea>
         <button
             v-if="!isShowingAnswer"
             @click="showAnswer"
@@ -128,7 +134,9 @@
 <script>
 import Swal from "sweetalert2";
 import JSONFetchClient from "../modules/JSONFetchClient.js";
+
 const MarkdownIt = require("markdown-it");
+
 import("../../plugins/prism/prism.js");
 
 export default {
