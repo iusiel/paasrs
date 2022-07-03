@@ -17370,6 +17370,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     };
   },
   mounted: function mounted() {
+    var _this = this;
+
     if (typeof this.card !== "undefined") {
       var card = JSON.parse(atob(this.card));
       this.formFields.question.value = card.question;
@@ -17385,11 +17387,33 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
     if (typeof this.tags !== "undefined") {
       this.formFields.tagOptions = JSON.parse(atob(this.tags));
-    }
+    } // hack so that MDE initialization is a bit late
+
+
+    setTimeout(function () {
+      var questionMDE = new window.SimpleMDE({
+        element: document.getElementById("question")
+      });
+      questionMDE.codemirror.on("change", function () {
+        _this.formFields.question.value = questionMDE.value();
+      });
+      var answerMDE = new window.SimpleMDE({
+        element: document.getElementById("answer")
+      });
+      answerMDE.codemirror.on("change", function () {
+        _this.formFields.answer.value = answerMDE.value();
+      });
+      var extraInfoMDE = new window.SimpleMDE({
+        element: document.getElementById("extra-info")
+      });
+      extraInfoMDE.codemirror.on("change", function () {
+        _this.formFields.extraInformation.value = extraInfoMDE.value();
+      });
+    }, 100);
   },
   methods: {
     submitForm: function submitForm(event) {
-      var _this = this;
+      var _this2 = this;
 
       event.preventDefault();
       this.clearErrorMessages();
@@ -17422,9 +17446,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
                 errorMessage = _message[0];
 
             if (field === "extra_information") {
-              _this.formFields.extraInformation.errorMessage = errorMessage;
-            } else if (_this.formFields[field]) {
-              _this.formFields[field].errorMessage = errorMessage;
+              _this2.formFields.extraInformation.errorMessage = errorMessage;
+            } else if (_this2.formFields[field]) {
+              _this2.formFields[field].errorMessage = errorMessage;
             }
           });
         });
