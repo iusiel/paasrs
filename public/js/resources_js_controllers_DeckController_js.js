@@ -18058,21 +18058,24 @@ var _hoisted_4 = {
   "class": "my-3"
 };
 var _hoisted_5 = ["innerHTML"];
-var _hoisted_6 = {
-  key: 2,
+
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
   "class": "form-control mb-3",
   rows: "3",
   placeholder: "You can use this as your scratch paper."
-};
+}, null, -1
+/* HOISTED */
+);
+
 var _hoisted_7 = {
-  key: 4,
+  key: 3,
   "class": "mt-5"
 };
 var _hoisted_8 = {
   "class": "mt-3"
 };
 var _hoisted_9 = {
-  key: 5
+  key: 4
 };
 var _hoisted_10 = {
   ref: "showmodalbutton",
@@ -18148,8 +18151,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "alert alert-info mb-0 fs-6"
   }, null, 8
   /* PROPS */
-  , _hoisted_5)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$data.isShowingAnswer ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("textarea", _hoisted_6)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$data.isShowingAnswer ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
-    key: 3,
+  , _hoisted_5)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_6, !$data.isShowingAnswer ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 2,
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.showAnswer && $options.showAnswer.apply($options, arguments);
     }),

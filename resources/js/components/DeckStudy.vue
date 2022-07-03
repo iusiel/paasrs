@@ -17,7 +17,6 @@
             ></div>
         </div>
         <textarea
-            v-if="!isShowingAnswer"
             class="form-control mb-3"
             rows="3"
             placeholder="You can use this as your scratch paper."
