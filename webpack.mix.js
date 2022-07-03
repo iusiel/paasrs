@@ -17,3 +17,8 @@ mix.scripts(
     "resources/plugins/select2-4.1.0-rc.0/dist/js/select2.min.js",
     "public/js/select2.min.js"
 );
+
+mix.scripts(
+    "node_modules/simplemde/dist/simplemde.min.js",
+    "public/js/simplemde.min.js"
+);

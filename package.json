@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "npm": "^8.11.0",
+        "simplemde": "^1.11.2",
         "sweetalert2": "^11.4.17",
         "vue": "^3.2.33"
     }
