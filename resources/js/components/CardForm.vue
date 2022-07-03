@@ -168,6 +168,30 @@ export default {
         if (typeof this.tags !== "undefined") {
             this.formFields.tagOptions = JSON.parse(atob(this.tags));
         }
+
+        // hack so that MDE initialization is a bit late
+        setTimeout(() => {
+            const questionMDE = new window.SimpleMDE({
+                element: document.getElementById("question"),
+            });
+            questionMDE.codemirror.on("change", () => {
+                this.formFields.question.value = questionMDE.value();
+            });
+
+            const answerMDE = new window.SimpleMDE({
+                element: document.getElementById("answer"),
+            });
+            answerMDE.codemirror.on("change", () => {
+                this.formFields.answer.value = answerMDE.value();
+            });
+
+            const extraInfoMDE = new window.SimpleMDE({
+                element: document.getElementById("extra-info"),
+            });
+            extraInfoMDE.codemirror.on("change", () => {
+                this.formFields.extraInformation.value = extraInfoMDE.value();
+            });
+        }, 100);
     },
 
     methods: {

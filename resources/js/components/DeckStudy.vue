@@ -1,29 +1,27 @@
 <template>
     <div>
         <div class="fst-italic h6">{{ currentCard.tags }}</div>
-        <div class="mb-3">
-            <pre class="mb-0 white-space__pre-wrap fs-3">{{
-                currentCard.question
-            }}</pre>
-        </div>
+        <div v-html="studyQuestion" class="mb-3 fs-3"></div>
         <div
             v-if="isShowingAnswer"
-            class="border-top border-bottom border-dark py-4"
-        >
-            <pre class="mb-0 white-space__pre-wrap fs-4">{{
-                currentCard.answer
-            }}</pre>
-        </div>
+            v-html="studyAnswer"
+            class="border-top border-bottom border-dark py-4 fs-4"
+        ></div>
         <div
             v-if="isShowingAnswer && currentCard.extra_information"
             class="my-3"
         >
-            <div class="alert alert-info mb-0">
-                <pre class="mb-0 white-space__pre-wrap fs-6">{{
-                    currentCard.extra_information
-                }}</pre>
-            </div>
+            <div
+                v-html="studyExtraInformation"
+                class="alert alert-info mb-0 fs-6"
+            ></div>
         </div>
+        <textarea
+            v-if="!isShowingAnswer"
+            class="form-control mb-3"
+            rows="3"
+            placeholder="You can use this as your scratch paper."
+        ></textarea>
         <button
             v-if="!isShowingAnswer"
             @click="showAnswer"
@@ -137,6 +135,8 @@
 import Swal from "sweetalert2";
 import JSONFetchClient from "../modules/JSONFetchClient.js";
 
+const MarkdownIt = require("markdown-it");
+
 import("../../plugins/prism/prism.js");
 
 export default {
@@ -165,6 +165,20 @@ export default {
             return `${
                 document.querySelector('meta[name="base_url"]').content
             }/cards/${this.currentCard.id}/update_appear_on`;
+        },
+
+        studyQuestion() {
+            return this.convertMarkdownToHTML(this.currentCard.question);
+        },
+
+        studyAnswer() {
+            return this.convertMarkdownToHTML(this.currentCard.answer);
+        },
+
+        studyExtraInformation() {
+            return this.convertMarkdownToHTML(
+                this.currentCard.extra_information
+            );
         },
     },
 
@@ -278,6 +292,14 @@ export default {
 
         hideMarkModal() {
             this.$refs.markModalClose.click();
+        },
+
+        convertMarkdownToHTML(markdown) {
+            const md = new MarkdownIt({
+                html: true,
+                linkify: true,
+            });
+            return md.render(markdown);
         },
     },
 };
