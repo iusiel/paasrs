@@ -17,7 +17,7 @@
             ></div>
         </div>
         <textarea
-            v-if="!isShowingAnswer"
+            v-model="scratchPaper"
             class="form-control mb-3"
             rows="3"
             placeholder="You can use this as your scratch paper."
@@ -152,6 +152,7 @@ export default {
             isShowingAnswer: false,
             isShowingMarkModal: false,
             markedMessage: "",
+            scratchPaper: "",
         };
     },
 
@@ -195,11 +196,16 @@ export default {
             this.isShowingAnswer = true;
         },
 
+        clearScratchPaper() {
+            this.scratchPaper = "";
+        },
+
         againAnswer() {
             const currentCard = this.studyDeck.cards.shift();
             currentCard.retake = true;
             this.studyDeck.cards.push(currentCard);
             this.isShowingAnswer = false;
+            this.clearScratchPaper();
         },
 
         easyAnswer() {
@@ -215,6 +221,8 @@ export default {
         },
 
         submitAnswerInterval(interval) {
+            this.clearScratchPaper();
+
             const formData = new FormData();
             formData.append("interval", interval);
 
