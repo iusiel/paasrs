@@ -306,6 +306,7 @@ export default {
             const md = new MarkdownIt({
                 html: true,
                 linkify: true,
+                breaks: true,
             });
             return md.render(markdown);
         },

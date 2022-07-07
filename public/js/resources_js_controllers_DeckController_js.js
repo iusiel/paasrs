@@ -17698,7 +17698,8 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
     convertMarkdownToHTML: function convertMarkdownToHTML(markdown) {
       var md = new MarkdownIt({
         html: true,
-        linkify: true
+        linkify: true,
+        breaks: true
       });
       return md.render(markdown);
     }
