@@ -42,8 +42,11 @@ export default {
 </script>
 
 <template>
-    <div class="d-inline me-4">
-        <button @click="openFileBrowser" class="btn btn-primary">
+    <div class="d-block d-md-inline-block">
+        <button
+            @click="openFileBrowser"
+            class="me-md-4 mb-2 mb-xl-0 py-2 d-block d-md-inline-block btn btn-primary decks__import-button"
+        >
             Import Cards
         </button>
         <input

@@ -8,8 +8,8 @@
         <table class="table table-striped mt-3">
             <thead>
                 <tr>
-                    <th scope="col">Deck name</th>
-                    <th scope="col">Actions</th>
+                    <th class="decks__table-header" scope="col">Deck name</th>
+                    <th class="decks__table-header" scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -17,12 +17,12 @@
                 <tr>
                     <th scope="row">{{ $deck->name }}</th>
                     <td>
-                        <a class="me-4 @if($deck->cards->count() === 0)pe-none disabled @endif" href="{{ route('decks.show', ['deck' => $deck->id]) }}" disabled><button class="btn btn-primary">Study</button></a>
-                        <a class="me-4" href="{{ route('cards.create', ['deck' => $deck->id]) }}"><button class="btn btn-primary">Add Cards</button></a>
-                        <a class="me-4 @if($deck->cardsCount === 0)pe-none disabled @endif" href="{{ route('cards.index', ['deck' => $deck->id]) }}"><button class="btn btn-primary">Edit Cards</button></a>
-                        <a class="me-4" href="{{ route('decks.edit', ['deck' => $deck->id]) }}"><button class="btn btn-primary">Edit Deck Options</button></a>
+                        <a class="me-md-4 mb-2 mb-xl-0 py-2 d-block d-md-inline-block btn btn-primary @if($deck->cards->count() === 0)pe-none disabled @endif" href="{{ route('decks.show', ['deck' => $deck->id]) }}" disabled>Study</a>
+                        <a class="me-md-4 mb-2 mb-xl-0 py-2 d-block d-md-inline-block btn btn-primary" href="{{ route('cards.create', ['deck' => $deck->id]) }}">Add Cards</a>
+                        <a class="me-md-4 mb-2 mb-xl-0 py-2 d-block d-md-inline-block btn btn-primary @if($deck->cardsCount === 0)pe-none disabled @endif" href="{{ route('cards.index', ['deck' => $deck->id]) }}">Edit Cards</a>
+                        <a class="me-md-4 mb-2 mb-xl-0 py-2 d-block d-md-inline-block btn btn-primary" href="{{ route('decks.edit', ['deck' => $deck->id]) }}">Edit Deck Options</a>
                         <import-cards form-action="{{ route('decks.import', ['deck' => $deck->id]) }}"></import-cards>
-                        <a href="{{ route('decks.export', ['deck' => $deck->id]) }}" class="btn btn-primary">Export Cards</a>
+                        <a href="{{ route('decks.export', ['deck' => $deck->id]) }}" class="d-block d-md-inline-block mb-2 mb-xl-0 py-2 btn btn-primary">Export Cards</a>
                     </td>
                 </tr>
                 @endforeach

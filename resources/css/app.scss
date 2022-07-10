@@ -21,3 +21,20 @@ table.dataTable > tbody > tr.marked-card {
     margin-left: 10px;
     cursor: pointer;
 }
+
+.decks__table-header {
+    width: 50%;
+}
+
+.decks__import-button {
+    width: 100%;
+}
+@media screen and (min-width: 767px) {
+    .decks__table-header {
+        width: auto;
+    }
+
+    .decks__import-button {
+        width: auto;
+    }
+}
