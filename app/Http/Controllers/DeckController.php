@@ -28,6 +28,7 @@ class DeckController extends Controller
             },
         ])
             ->withCount(["cards as cardsCount"])
+            ->orderBy("name", "ASC")
             ->get();
         $data = [
             "decks" => $decks,
