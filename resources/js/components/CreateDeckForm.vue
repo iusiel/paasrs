@@ -59,7 +59,7 @@ export default {
         >
             <input name="_token" type="hidden" v-bind:value="csrfToken" />
             <div class="row">
-                <div class="col col-8">
+                <div class="col col-6 col-lg-8">
                     <input
                         v-model="deckName"
                         type="text"
@@ -69,7 +69,7 @@ export default {
                     <div class="form__error-message">{{ deckNameError }}</div>
                 </div>
 
-                <div class="col col-4">
+                <div class="col col-6 col-lg-4">
                     <button type="submit" class="btn btn-primary">
                         Create new deck
                     </button>
