@@ -13129,6 +13129,10 @@ table.dataTable > tbody > tr.marked-card {
   width: 100%;
 }
 
+.study__buttons-container {
+  display: grid;
+}
+
 @media screen and (min-width: 767px) {
   .decks__table-header {
     width: auto;
@@ -13136,5 +13140,10 @@ table.dataTable > tbody > tr.marked-card {
 
   .decks__import-button {
     width: auto;
+  }
+
+  .study__buttons-container {
+    grid-template-columns: repeat(5, -webkit-max-content);
+    grid-template-columns: repeat(5, max-content);
   }
 }

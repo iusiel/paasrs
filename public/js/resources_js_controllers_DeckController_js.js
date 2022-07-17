@@ -18067,7 +18067,7 @@ var _hoisted_4 = {
 var _hoisted_5 = ["innerHTML"];
 var _hoisted_6 = {
   key: 3,
-  "class": "mt-5"
+  "class": "mt-5 study__buttons-container"
 };
 var _hoisted_7 = {
   "class": "mt-3"
@@ -18146,7 +18146,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , _hoisted_3)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.isShowingAnswer && $options.currentCard.extra_information ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     innerHTML: $options.studyExtraInformation,
-    "class": "alert alert-info mb-0 fs-6"
+    "class": "alert alert-info mb-0 fs-6 text-break"
   }, null, 8
   /* PROPS */
   , _hoisted_5)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
@@ -18168,29 +18168,29 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[2] || (_cache[2] = function () {
       return $options.againAnswer && $options.againAnswer.apply($options, arguments);
     }),
-    "class": "btn btn-primary me-3 px-3 fs-4"
+    "class": "btn btn-primary me-3 mb-3 mb-md-0 px-3 fs-4"
   }, " Again "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[3] || (_cache[3] = function () {
       return $options.hardAnswer && $options.hardAnswer.apply($options, arguments);
     }),
-    "class": "btn btn-primary me-3 px-3 fs-4"
+    "class": "btn btn-primary me-3 mb-3 mb-md-0 px-3 fs-4"
   }, " Hard "), !$options.currentCard.retake ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 0,
     onClick: _cache[4] || (_cache[4] = function () {
       return $options.goodAnswer && $options.goodAnswer.apply($options, arguments);
     }),
-    "class": "btn btn-primary me-3 px-3 fs-4"
+    "class": "btn btn-primary me-3 mb-3 mb-md-0 px-3 fs-4"
   }, " Good ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$options.currentCard.retake ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 1,
     onClick: _cache[5] || (_cache[5] = function () {
       return $options.easyAnswer && $options.easyAnswer.apply($options, arguments);
     }),
-    "class": "btn btn-primary me-3 px-3 fs-4"
+    "class": "btn btn-primary me-3 mb-3 mb-md-0 px-3 fs-4"
   }, " Easy ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[6] || (_cache[6] = function () {
       return $options.showMarkModal && $options.showMarkModal.apply($options, arguments);
     }),
-    "class": "btn btn-primary me-3 px-3 fs-4"
+    "class": "btn btn-primary me-3 mb-3 mb-md-0 px-3 fs-4"
   }, " Mark this card ")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, " Remaining questions: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.studyDeck.cards.length), 1
   /* TEXT */
   ), $data.isShowingMarkModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Button trigger modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_9, " Launch modal ", 512

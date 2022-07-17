@@ -13,7 +13,7 @@
         >
             <div
                 v-html="studyExtraInformation"
-                class="alert alert-info mb-0 fs-6"
+                class="alert alert-info mb-0 fs-6 text-break"
             ></div>
         </div>
         <textarea
@@ -29,30 +29,36 @@
         >
             Show answer
         </button>
-        <div class="mt-5" v-if="isShowingAnswer">
-            <button @click="againAnswer" class="btn btn-primary me-3 px-3 fs-4">
+        <div class="mt-5 study__buttons-container" v-if="isShowingAnswer">
+            <button
+                @click="againAnswer"
+                class="btn btn-primary me-3 mb-3 mb-md-0 px-3 fs-4"
+            >
                 Again
             </button>
-            <button @click="hardAnswer" class="btn btn-primary me-3 px-3 fs-4">
+            <button
+                @click="hardAnswer"
+                class="btn btn-primary me-3 mb-3 mb-md-0 px-3 fs-4"
+            >
                 Hard
             </button>
             <button
                 @click="goodAnswer"
-                class="btn btn-primary me-3 px-3 fs-4"
+                class="btn btn-primary me-3 mb-3 mb-md-0 px-3 fs-4"
                 v-if="!currentCard.retake"
             >
                 Good
             </button>
             <button
                 @click="easyAnswer"
-                class="btn btn-primary me-3 px-3 fs-4"
+                class="btn btn-primary me-3 mb-3 mb-md-0 px-3 fs-4"
                 v-if="!currentCard.retake"
             >
                 Easy
             </button>
             <button
                 @click="showMarkModal"
-                class="btn btn-primary me-3 px-3 fs-4"
+                class="btn btn-primary me-3 mb-3 mb-md-0 px-3 fs-4"
             >
                 Mark this card
             </button>
