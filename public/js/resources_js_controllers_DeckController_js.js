@@ -17767,6 +17767,40 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/StudyButton.vue?vue&type=script&lang=js":
+/*!*****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/StudyButton.vue?vue&type=script&lang=js ***!
+  \*****************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "StudyButton",
+  props: ["href", "disabled", "activateOn"],
+  data: function data() {
+    return {
+      isDisabled: false
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.isDisabled = !!this.disabled;
+    setInterval(function () {
+      if (Date.now() >= _this.activateOn * 1000) {
+        _this.isDisabled = false;
+      }
+    }, 60000);
+  },
+  methods: {}
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/CreateDeckForm.vue?vue&type=template&id=23db0e58":
 /*!************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/CreateDeckForm.vue?vue&type=template&id=23db0e58 ***!
@@ -18256,6 +18290,31 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/StudyButton.vue?vue&type=template&id=df898880":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/StudyButton.vue?vue&type=template&id=df898880 ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = ["href"];
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['me-md-4', 'mb-2', 'mb-xl-0', 'py-2', 'd-block', 'd-md-inline-block', 'btn', 'btn-primary', $data.isDisabled ? 'pe-none disabled' : '']),
+    href: $props.href
+  }, "Study", 10
+  /* CLASS, PROPS */
+  , _hoisted_1);
+}
+
+/***/ }),
+
 /***/ "./resources/js/controllers/DeckController.js":
 /*!****************************************************!*\
   !*** ./resources/js/controllers/DeckController.js ***!
@@ -18269,6 +18328,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_DeckStudy_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/DeckStudy.vue */ "./resources/js/components/DeckStudy.vue");
 /* harmony import */ var _components_DeckSettingsForm_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/DeckSettingsForm.vue */ "./resources/js/components/DeckSettingsForm.vue");
 /* harmony import */ var _components_ImportCards_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/ImportCards.vue */ "./resources/js/components/ImportCards.vue");
+/* harmony import */ var _components_StudyButton_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/StudyButton.vue */ "./resources/js/components/StudyButton.vue");
+
 
 
 
@@ -18284,7 +18345,8 @@ __webpack_require__.r(__webpack_exports__);
     CreateDeckForm: _components_CreateDeckForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     DeckStudy: _components_DeckStudy_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     DeckSettingsForm: _components_DeckSettingsForm_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    ImportCards: _components_ImportCards_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+    ImportCards: _components_ImportCards_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    StudyButton: _components_StudyButton_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   }
 }).mount("#app");
 
@@ -32272,6 +32334,34 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/components/StudyButton.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/StudyButton.vue ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _StudyButton_vue_vue_type_template_id_df898880__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StudyButton.vue?vue&type=template&id=df898880 */ "./resources/js/components/StudyButton.vue?vue&type=template&id=df898880");
+/* harmony import */ var _StudyButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StudyButton.vue?vue&type=script&lang=js */ "./resources/js/components/StudyButton.vue?vue&type=script&lang=js");
+/* harmony import */ var _var_www_html_paasrs_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,_var_www_html_paasrs_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_StudyButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_StudyButton_vue_vue_type_template_id_df898880__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/StudyButton.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/components/CreateDeckForm.vue?vue&type=script&lang=js":
 /*!****************************************************************************!*\
   !*** ./resources/js/components/CreateDeckForm.vue?vue&type=script&lang=js ***!
@@ -32336,6 +32426,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/StudyButton.vue?vue&type=script&lang=js":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/StudyButton.vue?vue&type=script&lang=js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_StudyButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_StudyButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./StudyButton.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/StudyButton.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/components/CreateDeckForm.vue?vue&type=template&id=23db0e58":
 /*!**********************************************************************************!*\
   !*** ./resources/js/components/CreateDeckForm.vue?vue&type=template&id=23db0e58 ***!
@@ -32396,6 +32502,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ImportCards_vue_vue_type_template_id_09636ea3__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ImportCards_vue_vue_type_template_id_09636ea3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./ImportCards.vue?vue&type=template&id=09636ea3 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/ImportCards.vue?vue&type=template&id=09636ea3");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/StudyButton.vue?vue&type=template&id=df898880":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/StudyButton.vue?vue&type=template&id=df898880 ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_StudyButton_vue_vue_type_template_id_df898880__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_StudyButton_vue_vue_type_template_id_df898880__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./StudyButton.vue?vue&type=template&id=df898880 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/StudyButton.vue?vue&type=template&id=df898880");
 
 
 /***/ }),
