@@ -10,6 +10,7 @@ class Deck extends Model
     use HasFactory;
 
     protected $table = "decks";
+    protected $appends = ["earliest_activation_card"];
 
     protected $fillable = [
         "name",
@@ -23,5 +24,17 @@ class Deck extends Model
     public function cards()
     {
         return $this->hasMany(Card::class, "deck_id", "id");
+    }
+
+    public function getEarliestActivationCardAttribute()
+    {
+        $card = $this->cards()
+            ->select("appear_on")
+            ->where("appear_on", ">=", date("Y-m-d H:i:s"))
+            ->first();
+
+        return !empty($card->appear_on)
+            ? strtotime($card->appear_on)
+            : strtotime("+1 year");
     }
 }
