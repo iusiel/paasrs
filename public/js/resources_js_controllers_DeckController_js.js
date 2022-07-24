@@ -17789,7 +17789,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    this.isDisabled = this.disabled ? true : false;
+    this.isDisabled = !!this.disabled;
     setInterval(function () {
       if (Date.now() >= _this.activateOn * 1000) {
         _this.isDisabled = false;

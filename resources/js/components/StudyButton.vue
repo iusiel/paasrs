@@ -29,7 +29,7 @@ export default {
     },
 
     mounted() {
-        this.isDisabled = this.disabled ? true : false;
+        this.isDisabled = !!this.disabled;
 
         setInterval(() => {
             if (Date.now() >= this.activateOn * 1000) {
