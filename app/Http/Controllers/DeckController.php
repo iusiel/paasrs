@@ -156,13 +156,18 @@ class DeckController extends Controller
         return redirect(route("decks.index"));
     }
 
+    // phpcs:ignore Generic.Metrics.CyclomaticComplexity
     public function import(Deck $deck, Request $request)
     {
         $handle = fopen($request->file("csv")->getPathname(), "r");
 
         $dataToInsert = [];
         while (($data = fgetcsv($handle, 0, ",")) !== false) {
-            [$question, $answer, $extraInformation, $tags] = $data;
+            $question = $data[0] ?? "";
+            $answer = $data[1] ?? "";
+            $extraInformation = $data[2] ?? "";
+            $tags = $data[3] ?? "";
+
             $dataToInsert[] = [
                 "deck_id" => $deck->id,
                 "question" => $question,
