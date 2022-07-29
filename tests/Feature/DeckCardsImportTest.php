@@ -27,7 +27,7 @@ class DeckCardsImportTest extends TestCase
         ]);
     }
 
-    public function test_import_failure()
+    public function test_less_than_4_fields()
     {
         $response = $this->withHeader(
             "X-Requested-With",
@@ -39,6 +39,8 @@ class DeckCardsImportTest extends TestCase
             ),
         ]);
 
-        $response->assertStatus(500);
+        $response->assertJson([
+            "message" => "Cards imported successfully.",
+        ]);
     }
 }
