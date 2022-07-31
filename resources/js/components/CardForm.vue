@@ -97,6 +97,9 @@
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-primary ms-3" @click="previewCard">
+            Preview
+        </button>
         <button
             type="button"
             class="btn btn-primary ms-3"
@@ -104,15 +107,46 @@
         >
             Cancel
         </button>
+        <div v-if="isShowingPreview" class="card-form__preview-container">
+            <div class="container mt-5">
+                <card-form-preview
+                    v-bind:tags="formFields.tags.value"
+                    v-bind:question="formFields.question.value"
+                    v-bind:answer="formFields.answer.value"
+                    v-bind:extraInformation="formFields.extraInformation.value"
+                />
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button
+                    type="button"
+                    class="btn btn-primary ms-3"
+                    @click="closePreviewCard"
+                >
+                    Close Preview
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-primary ms-3"
+                    @click="goToPreviousPage"
+                >
+                    Cancel
+                </button>
+            </div>
+        </div>
     </form>
 </template>
 
 <script>
 import Swal from "sweetalert2";
 import JSONFetchClient from "../modules/JSONFetchClient.js";
+import CardFormPreview from "./CardFormPreview.vue";
 
 export default {
     name: "CardForm",
+
+    components: {
+        CardFormPreview,
+    },
 
     props: ["deck", "card", "formAction", "editmode", "decks", "tags"],
 
@@ -148,6 +182,7 @@ export default {
                     errorMessage: "",
                 },
             },
+            isShowingPreview: false,
         };
     },
 
@@ -247,6 +282,16 @@ export default {
             this.formFields.answer.errorMessage = "";
             this.formFields.extraInformation.errorMessage = "";
             this.formFields.tags.errorMessage = "";
+        },
+
+        previewCard() {
+            this.isShowingPreview = true;
+            document.body.style.overflow = "hidden";
+        },
+
+        closePreviewCard() {
+            this.isShowingPreview = false;
+            document.body.style.overflow = null;
         },
     },
 };
