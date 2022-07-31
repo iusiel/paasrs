@@ -140,6 +140,7 @@
 import Swal from "sweetalert2";
 import JSONFetchClient from "../modules/JSONFetchClient.js";
 import CardFormPreview from "./CardFormPreview.vue";
+
 export default {
     name: "CardForm",
 
