@@ -203,4 +203,25 @@ class DeckController extends Controller
     {
         return new CardsExport($deck);
     }
+
+    public function showExamPage(Deck $deck, Request $request)
+    {
+        $deck->load([
+            "cards" => function ($query) use ($deck, $request) {
+                if (!empty($request->limit)) {
+                    $query->limit($request->limit);
+                }
+                $query->inRandomOrder();
+            },
+        ]);
+
+        if ($deck->cards->count() === 0) {
+            return redirect(route("decks.index"));
+        }
+
+        $data = [
+            "deck" => $deck,
+        ];
+        return view("decks/exam", $data);
+    }
 }

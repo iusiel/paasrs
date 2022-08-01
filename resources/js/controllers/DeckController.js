@@ -4,6 +4,7 @@ import DeckStudy from "../components/DeckStudy.vue";
 import DeckSettingsForm from "../components/DeckSettingsForm.vue";
 import ImportCards from "../components/ImportCards.vue";
 import StudyButton from "../components/StudyButton.vue";
+import DeckExam from "../components/DeckExam.vue";
 
 createApp({
     data() {
@@ -17,5 +18,6 @@ createApp({
         DeckSettingsForm,
         ImportCards,
         StudyButton,
+        DeckExam,
     },
 }).mount("#app");
