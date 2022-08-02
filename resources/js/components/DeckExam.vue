@@ -82,6 +82,23 @@
         </section>
         <section v-if="isShowingResults">
             <h1>Results page</h1>
+
+            <div>
+                <h2>Number of questions</h2>
+                <span>{{ numberOfExamQuestions }}</span>
+
+                <h2>Easy answers</h2>
+                <span>{{ easyAnswers }}</span>
+
+                <h2>Good answers</h2>
+                <span>{{ goodAnswers }}</span>
+
+                <h2>Hard answers</h2>
+                <span>{{ hardAnswers }}</span>
+
+                <h2>Time to finish the exam</h2>
+                <span>{{ timeToFinishTheExam }}</span>
+            </div>
         </section>
     </div>
 </template>
@@ -111,6 +128,10 @@ export default {
             isExamStart: true,
             numberOfExamQuestions: "",
             isShowingResults: false,
+            easyAnswers: 0,
+            goodAnswers: 0,
+            hardAnswers: 0,
+            timeToFinishTheExam: "asds",
         };
     },
 
@@ -159,15 +180,21 @@ export default {
         },
 
         easyAnswer() {
-            this.submitAnswerInterval("easy");
+            this.easyAnswers += 1;
+            this.showNextQuestion();
+            // this.submitAnswerInterval("easy");
         },
 
         goodAnswer() {
-            this.submitAnswerInterval("good");
+            this.goodAnswers += 1;
+            this.showNextQuestion();
+            // this.submitAnswerInterval("good");
         },
 
         hardAnswer() {
-            this.submitAnswerInterval("hard");
+            this.hardAnswers += 1;
+            this.showNextQuestion();
+            // this.submitAnswerInterval("hard");
         },
 
         submitAnswerInterval(interval) {
