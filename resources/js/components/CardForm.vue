@@ -107,7 +107,10 @@
         >
             Cancel
         </button>
-        <div v-if="isShowingPreview" class="card-form__preview-container">
+        <div
+            v-if="isShowingPreview"
+            class="card-form__preview-container overflow-scroll pb-5"
+        >
             <div class="container mt-5">
                 <card-form-preview
                     v-bind:tags="formFields.tags.value"
