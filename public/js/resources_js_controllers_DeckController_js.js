@@ -17387,6 +17387,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+ // eslint-disable-next-line
 
 
 
@@ -17395,7 +17396,7 @@ var MarkdownIt = __webpack_require__(/*! markdown-it */ "./node_modules/markdown
 __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(__webpack_require__.t.bind(__webpack_require__, /*! ../../plugins/prism/prism.js */ "./resources/plugins/prism/prism.js", 23));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "DeckExam",
-  props: ["deck"],
+  props: ["deck", "formAction"],
   data: function data() {
     return {
       studyDeck: JSON.parse(atob(this.deck)),
@@ -17406,7 +17407,11 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
       isShowingExam: false,
       isExamStart: true,
       numberOfExamQuestions: "",
-      isShowingResults: false
+      isShowingResults: false,
+      easyAnswers: 0,
+      goodAnswers: 0,
+      hardAnswers: 0,
+      timeToFinishTheExam: ""
     };
   },
   computed: {
@@ -17415,9 +17420,6 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
           card = _this$studyDeck$cards[0];
 
       return card;
-    },
-    formAction: function formAction() {
-      return "".concat(document.querySelector('meta[name="base_url"]').content, "/cards/").concat(this.currentCard.id, "/update_appear_on");
     },
     studyQuestion: function studyQuestion() {
       return this.convertMarkdownToHTML(this.currentCard.question);
@@ -17444,49 +17446,54 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
       this.scratchPaper = "";
     },
     easyAnswer: function easyAnswer() {
-      this.submitAnswerInterval("easy");
+      this.easyAnswers += 1;
+      this.showNextQuestion();
+      this.clearScratchPaper();
     },
     goodAnswer: function goodAnswer() {
-      this.submitAnswerInterval("good");
+      this.goodAnswers += 1;
+      this.showNextQuestion();
+      this.clearScratchPaper();
     },
     hardAnswer: function hardAnswer() {
-      this.submitAnswerInterval("hard");
-    },
-    submitAnswerInterval: function submitAnswerInterval(interval) {
+      this.hardAnswers += 1;
+      this.showNextQuestion();
       this.clearScratchPaper();
-      var formData = new FormData();
-      formData.append("interval", interval);
-      this.showNextQuestion(); // JSONFetchClient(this.formAction, formData, "POST")
-      //     .then(() => {
-      //         this.showNextQuestion();
-      //     })
-      //     .catch((error) => {
-      //         error.json().then(() => {
-      //             Swal.fire(
-      //                 "Warning",
-      //                 "An error has been encountered. You can still continue, but your session may not be saved properly.",
-      //                 "warning"
-      //             ).then(() => {
-      //                 this.showNextQuestion();
-      //             });
-      //         });
-      //     });
     },
     showNextQuestion: function showNextQuestion() {
       var _this = this;
 
       if (this.studyDeck.cards.length === 1) {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire("You have finished all the questions for this session.", "", "success").then(function () {
-          _this.isShowingResults = true;
-          _this.isShowingExam = false; // window.location.href = `${
-          //     document.querySelector('meta[name="base_url"]').content
-          // }/decks`;
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire("You have finished all the questions for this exam session.", "", "success").then(function () {
+          _this.processExam();
         });
         return;
       }
 
       this.studyDeck.cards.shift();
       this.isShowingAnswer = false;
+    },
+    processExam: function processExam() {
+      var _this2 = this;
+
+      var formData = new FormData();
+      formData.append("deck_name", this.studyDeck.id);
+      formData.append("number_of_questions", this.numberOfExamQuestions);
+      formData.append("easy_answers", this.easyAnswers);
+      formData.append("good_answers", this.goodAnswers);
+      formData.append("hard_answers", this.hardAnswers);
+      (0,_modules_JSONFetchClient_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.formAction, formData, "POST").then(function (response) {
+        _this2.timeToFinishTheExam = response.time_elapsed;
+        _this2.isShowingResults = true;
+        _this2.isShowingExam = false;
+      })["catch"](function (error) {
+        error.json().then(function () {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire("Warning", "An error has been encountered. You can still continue, but your session may not be saved properly.", "warning").then(function () {
+            _this2.isShowingResults = true;
+            _this2.isShowingExam = false;
+          });
+        });
+      });
     },
     convertMarkdownToHTML: function convertMarkdownToHTML(markdown) {
       var md = new MarkdownIt({
@@ -17500,6 +17507,9 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
       this.isShowingExam = true;
       this.isExamStart = false;
       this.studyDeck.cards = this.studyDeck.cards.slice(0, this.numberOfExamQuestions);
+    },
+    retakeExam: function retakeExam() {
+      window.location.reload();
     }
   }
 });
@@ -18076,11 +18086,59 @@ var _hoisted_14 = {
   key: 2
 };
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "Results page", -1
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
+  "class": "mb-5"
+}, "Results page", -1
 /* HOISTED */
 );
 
-var _hoisted_16 = [_hoisted_15];
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Number of questions", -1
+/* HOISTED */
+);
+
+var _hoisted_17 = {
+  "class": "mb-3 d-block"
+};
+
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Easy answers", -1
+/* HOISTED */
+);
+
+var _hoisted_19 = {
+  "class": "mb-3 d-block"
+};
+
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Good answers", -1
+/* HOISTED */
+);
+
+var _hoisted_21 = {
+  "class": "mb-3 d-block"
+};
+
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Hard answers", -1
+/* HOISTED */
+);
+
+var _hoisted_23 = {
+  "class": "mb-3 d-block"
+};
+
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Time to finish the exam", -1
+/* HOISTED */
+);
+
+var _hoisted_25 = {
+  "class": "mb-3 d-block"
+};
+
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  href: "/",
+  "class": "btn btn-primary ms-3 mt-3"
+}, "Go back to decks dashboard", -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [!$data.isShowingExam && $data.isExamStart ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     onSubmit: _cache[1] || (_cache[1] = function () {
@@ -18153,7 +18211,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "btn btn-primary me-3 mb-3 mb-md-0 px-3 fs-4"
   }, " Easy ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, " Remaining questions: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.studyDeck.cards.length), 1
   /* TEXT */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.isShowingResults ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_14, _hoisted_16)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.isShowingResults ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.numberOfExamQuestions), 1
+  /* TEXT */
+  ), _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.easyAnswers), 1
+  /* TEXT */
+  ), _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.goodAnswers), 1
+  /* TEXT */
+  ), _hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.hardAnswers), 1
+  /* TEXT */
+  ), _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.timeToFinishTheExam), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[7] || (_cache[7] = function () {
+      return $options.retakeExam && $options.retakeExam.apply($options, arguments);
+    }),
+    type: "button",
+    "class": "btn btn-primary mt-3"
+  }, " Retake exam "), _hoisted_26])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),

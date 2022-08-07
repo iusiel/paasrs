@@ -81,24 +81,35 @@
             </div>
         </section>
         <section v-if="isShowingResults">
-            <h1>Results page</h1>
+            <h1 class="mb-5">Results page</h1>
 
             <div>
                 <h2>Number of questions</h2>
-                <span>{{ numberOfExamQuestions }}</span>
+                <span class="mb-3 d-block">{{ numberOfExamQuestions }}</span>
 
                 <h2>Easy answers</h2>
-                <span>{{ easyAnswers }}</span>
+                <span class="mb-3 d-block">{{ easyAnswers }}</span>
 
                 <h2>Good answers</h2>
-                <span>{{ goodAnswers }}</span>
+                <span class="mb-3 d-block">{{ goodAnswers }}</span>
 
                 <h2>Hard answers</h2>
-                <span>{{ hardAnswers }}</span>
+                <span class="mb-3 d-block">{{ hardAnswers }}</span>
 
                 <h2>Time to finish the exam</h2>
-                <span>{{ timeToFinishTheExam }}</span>
+                <span class="mb-3 d-block">{{ timeToFinishTheExam }}</span>
             </div>
+
+            <button
+                @click="retakeExam"
+                type="button"
+                class="btn btn-primary mt-3"
+            >
+                Retake exam
+            </button>
+            <a href="/" class="btn btn-primary ms-3 mt-3"
+                >Go back to decks dashboard</a
+            >
         </section>
     </div>
 </template>
@@ -114,7 +125,7 @@ import("../../plugins/prism/prism.js");
 
 export default {
     name: "DeckExam",
-    props: ["deck"],
+    props: ["deck", "formAction"],
 
     data() {
         return {
@@ -131,7 +142,7 @@ export default {
             easyAnswers: 0,
             goodAnswers: 0,
             hardAnswers: 0,
-            timeToFinishTheExam: "asds",
+            timeToFinishTheExam: "",
         };
     },
 
@@ -139,12 +150,6 @@ export default {
         currentCard() {
             const [card] = this.studyDeck.cards;
             return card;
-        },
-
-        formAction() {
-            return `${
-                document.querySelector('meta[name="base_url"]').content
-            }/cards/${this.currentCard.id}/update_appear_on`;
         },
 
         studyQuestion() {
@@ -182,58 +187,29 @@ export default {
         easyAnswer() {
             this.easyAnswers += 1;
             this.showNextQuestion();
-            // this.submitAnswerInterval("easy");
+            this.clearScratchPaper();
         },
 
         goodAnswer() {
             this.goodAnswers += 1;
             this.showNextQuestion();
-            // this.submitAnswerInterval("good");
+            this.clearScratchPaper();
         },
 
         hardAnswer() {
             this.hardAnswers += 1;
             this.showNextQuestion();
-            // this.submitAnswerInterval("hard");
-        },
-
-        submitAnswerInterval(interval) {
             this.clearScratchPaper();
-
-            const formData = new FormData();
-            formData.append("interval", interval);
-
-            this.showNextQuestion();
-
-            // JSONFetchClient(this.formAction, formData, "POST")
-            //     .then(() => {
-            //         this.showNextQuestion();
-            //     })
-            //     .catch((error) => {
-            //         error.json().then(() => {
-            //             Swal.fire(
-            //                 "Warning",
-            //                 "An error has been encountered. You can still continue, but your session may not be saved properly.",
-            //                 "warning"
-            //             ).then(() => {
-            //                 this.showNextQuestion();
-            //             });
-            //         });
-            //     });
         },
 
         showNextQuestion() {
             if (this.studyDeck.cards.length === 1) {
                 Swal.fire(
-                    "You have finished all the questions for this session.",
+                    "You have finished all the questions for this exam session.",
                     "",
                     "success"
                 ).then(() => {
-                    this.isShowingResults = true;
-                    this.isShowingExam = false;
-                    // window.location.href = `${
-                    //     document.querySelector('meta[name="base_url"]').content
-                    // }/decks`;
+                    this.processExam();
                 });
 
                 return;
@@ -241,6 +217,34 @@ export default {
 
             this.studyDeck.cards.shift();
             this.isShowingAnswer = false;
+        },
+
+        processExam() {
+            const formData = new FormData();
+            formData.append("deck_name", this.studyDeck.id);
+            formData.append("number_of_questions", this.numberOfExamQuestions);
+            formData.append("easy_answers", this.easyAnswers);
+            formData.append("good_answers", this.goodAnswers);
+            formData.append("hard_answers", this.hardAnswers);
+
+            JSONFetchClient(this.formAction, formData, "POST")
+                .then((response) => {
+                    this.timeToFinishTheExam = response.time_elapsed;
+                    this.isShowingResults = true;
+                    this.isShowingExam = false;
+                })
+                .catch((error) => {
+                    error.json().then(() => {
+                        Swal.fire(
+                            "Warning",
+                            "An error has been encountered. You can still continue, but your session may not be saved properly.",
+                            "warning"
+                        ).then(() => {
+                            this.isShowingResults = true;
+                            this.isShowingExam = false;
+                        });
+                    });
+                });
         },
 
         convertMarkdownToHTML(markdown) {
@@ -259,6 +263,10 @@ export default {
                 0,
                 this.numberOfExamQuestions
             );
+        },
+
+        retakeExam() {
+            window.location.reload();
         },
     },
 };
