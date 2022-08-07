@@ -16,11 +16,11 @@ class CreateDeckExamTables extends Migration
         Schema::create("deck_exams", function (Blueprint $table) {
             $table->id();
             $table->string("deck_name");
-            $table->string("number_of_questions");
-            $table->string("easy_answers");
-            $table->string("good_answers");
-            $table->string("hard_answers");
-            $table->string("time_to_finish_exam");
+            $table->integer("number_of_questions");
+            $table->integer("easy_answers");
+            $table->integer("good_answers");
+            $table->integer("hard_answers");
+            $table->time("time_to_finish_exam");
             $table->timestamps();
         });
     }
