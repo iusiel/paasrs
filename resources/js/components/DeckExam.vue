@@ -22,6 +22,8 @@
                 <button type="submit" class="btn btn-primary">
                     Start Exam
                 </button>
+
+                <a href="/" class="btn btn-primary ms-3">Cancel Exam</a>
             </form>
         </section>
         <section v-if="isShowingExam">
