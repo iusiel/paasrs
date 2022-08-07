@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Exports\CardsExport;
 use App\Http\Requests\CreateDeckRequest;
+use App\Http\Requests\DeckExamRequest;
 use App\Http\Requests\UpdateDeckRequest;
 use App\Models\Card;
 use App\Models\Deck;
+use App\Models\DeckExam;
 use App\Services\DefaultDeckSettings;
 use Exception;
 use Illuminate\Http\Request;
@@ -202,5 +204,53 @@ class DeckController extends Controller
     public function export(Deck $deck)
     {
         return new CardsExport($deck);
+    }
+
+    public function showExamPage(Deck $deck, Request $request)
+    {
+        session(["examStart" => strtotime("now")]);
+
+        $deck->load([
+            "cards" => function ($query) use ($deck, $request) {
+                if (!empty($request->limit)) {
+                    $query->limit($request->limit);
+                }
+                $query->inRandomOrder();
+            },
+        ]);
+
+        if ($deck->cards->count() === 0) {
+            return redirect(route("decks.index"));
+        }
+
+        $data = [
+            "deck" => $deck,
+        ];
+        return view("decks/exam", $data);
+    }
+
+    public function storeExamResults(DeckExamRequest $request)
+    {
+        $difference = date("H:i:s", strtotime("now") - session("examStart"));
+
+        $deck = Deck::where("id", $request->deck_name)->first();
+
+        $exam = new DeckExam();
+        $exam->deck_name = $deck->name;
+        $exam->number_of_questions = $request->number_of_questions;
+        $exam->easy_answers = $request->easy_answers;
+        $exam->good_answers = $request->good_answers;
+        $exam->hard_answers = $request->hard_answers;
+        $exam->time_to_finish_exam = $difference;
+        $exam->save();
+
+        if ($request->ajax()) {
+            return response()->json([
+                "message" => "Exam results saved to database.",
+                "time_elapsed" => $difference,
+            ]);
+        }
+
+        return redirect(route("home"));
     }
 }

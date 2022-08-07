@@ -23,6 +23,13 @@ Route::post("/decks/{deck}/import", [DeckController::class, "import"])->name(
 Route::get("/decks/{deck}/export", [DeckController::class, "export"])->name(
     "decks.export"
 );
+Route::get("/decks/{deck}/exam", [DeckController::class, "showExamPage"])->name(
+    "decks.exam"
+);
+Route::post("/decks/{deck}/exam", [
+    DeckController::class,
+    "storeExamResults",
+])->name("decks.exam.process");
 Route::resource("cards", CardsController::class)->except(["show"]);
 Route::post("/cards/{card}/update_appear_on/", [
     CardsController::class,

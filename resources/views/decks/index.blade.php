@@ -18,6 +18,7 @@
                     <th scope="row">{{ $deck->name }}</th>
                     <td>
                         <study-button activate-on="{{ $deck->earliest_activation_card }}" href="{{ route('decks.show', ['deck' => $deck->id]) }}" disabled="@if($deck->cards->count() === 0) true @endif"></study-button>
+                        <a class="me-md-4 mb-2 mb-xl-0 py-2 d-block d-md-inline-block btn btn-primary" href="{{ route('decks.exam', ['deck' => $deck->id]) }}">Exam</a>
                         <a class="me-md-4 mb-2 mb-xl-0 py-2 d-block d-md-inline-block btn btn-primary" href="{{ route('cards.create', ['deck' => $deck->id]) }}">Add Cards</a>
                         <a class="me-md-4 mb-2 mb-xl-0 py-2 d-block d-md-inline-block btn btn-primary @if($deck->cardsCount === 0)pe-none disabled @endif" href="{{ route('cards.index', ['deck' => $deck->id]) }}">Edit Cards</a>
                         <a class="me-md-4 mb-2 mb-xl-0 py-2 d-block d-md-inline-block btn btn-primary" href="{{ route('decks.edit', ['deck' => $deck->id]) }}">Edit Deck Options</a>

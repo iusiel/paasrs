@@ -17666,7 +17666,7 @@ var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 
 var _hoisted_25 = {
   key: 2,
-  "class": "card-form__preview-container"
+  "class": "card-form__preview-container overflow-scroll pb-5"
 };
 var _hoisted_26 = {
   "class": "container mt-5"
