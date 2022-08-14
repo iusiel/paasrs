@@ -17364,7 +17364,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
           errorMessage: ""
         },
         tags: {
-          value: "",
+          value: [],
           errorMessage: ""
         },
         appearOn: {
@@ -17420,7 +17420,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       placeholder: "Select an option",
       tags: true
     });
-    $(".card-tags").on("change", function (e) {
+    $(".card-tags").on("change", function () {
       var value = $(".card-tags").val();
       _this.formFields.tags.value = value.toString().split(",");
     });
@@ -17510,6 +17510,9 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
   data: function data() {
     return {};
   },
+  mounted: function mounted() {
+    window.Prism.highlightAll();
+  },
   computed: {
     studyTags: function studyTags() {
       return Array.isArray(this.tags) ? this.tags.join(",") : this.tags;
@@ -17522,18 +17525,6 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
     },
     studyExtraInformation: function studyExtraInformation() {
       return this.convertMarkdownToHTML(this.extraInformation);
-    }
-  },
-  watch: {
-    studyAnswer: function studyAnswer() {
-      setTimeout(function () {
-        window.Prism.highlightAll();
-      }, 100);
-    },
-    studyQuestion: function studyQuestion() {
-      setTimeout(function () {
-        window.Prism.highlightAll();
-      }, 100);
     }
   },
   methods: {

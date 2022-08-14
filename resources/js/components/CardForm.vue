@@ -177,7 +177,7 @@ export default {
                     errorMessage: "",
                 },
                 tags: {
-                    value: "",
+                    value: [],
                     errorMessage: "",
                 },
                 appearOn: {
