@@ -17416,6 +17416,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         _this.formFields.extraInformation.value = extraInfoMDE.value();
       });
     }, 100);
+    $(".card-tags").select2({
+      placeholder: "Select an option",
+      tags: true
+    });
+    $(".card-tags").on("change", function (e) {
+      var value = $(".card-tags").val();
+      _this.formFields.tags.value = value.toString().split(",");
+    });
   },
   methods: {
     submitForm: function submitForm(event) {
@@ -17518,6 +17526,11 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
   },
   watch: {
     studyAnswer: function studyAnswer() {
+      setTimeout(function () {
+        window.Prism.highlightAll();
+      }, 100);
+    },
+    studyQuestion: function studyQuestion() {
       setTimeout(function () {
         window.Prism.highlightAll();
       }, 100);
@@ -17936,15 +17949,6 @@ if (deleteButtons.length > 0) {
     });
   });
 }
-
-$(document).ready(function () {
-  if (document.querySelector(".card-tags")) {
-    $(".card-tags").select2({
-      placeholder: "Select an option",
-      tags: true
-    });
-  }
-});
 
 /***/ }),
 

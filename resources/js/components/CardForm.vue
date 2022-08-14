@@ -230,6 +230,16 @@ export default {
                 this.formFields.extraInformation.value = extraInfoMDE.value();
             });
         }, 100);
+
+        $(".card-tags").select2({
+            placeholder: "Select an option",
+            tags: true,
+        });
+
+        $(".card-tags").on("change", () => {
+            const value = $(".card-tags").val();
+            this.formFields.tags.value = value.toString().split(",");
+        });
     },
 
     methods: {
