@@ -28,6 +28,10 @@ export default {
         return {};
     },
 
+    mounted() {
+        window.Prism.highlightAll();
+    },
+
     computed: {
         studyTags() {
             return Array.isArray(this.tags) ? this.tags.join(",") : this.tags;
@@ -43,14 +47,6 @@ export default {
 
         studyExtraInformation() {
             return this.convertMarkdownToHTML(this.extraInformation);
-        },
-    },
-
-    watch: {
-        studyAnswer() {
-            setTimeout(() => {
-                window.Prism.highlightAll();
-            }, 100);
         },
     },
 
