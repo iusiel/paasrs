@@ -17736,7 +17736,11 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
       isShowingAnswer: false,
       isShowingMarkModal: false,
       markedMessage: "",
-      scratchPaper: ""
+      scratchPaper: "",
+      easyAnswers: 0,
+      goodAnswers: 0,
+      hardAnswers: 0,
+      totalCards: 0
     };
   },
   computed: {
@@ -17757,6 +17761,15 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
     },
     studyExtraInformation: function studyExtraInformation() {
       return this.convertMarkdownToHTML(this.currentCard.extra_information);
+    },
+    easyPercentage: function easyPercentage() {
+      return (this.easyAnswers / this.totalCards).toFixed(2) * 100;
+    },
+    goodPercentage: function goodPercentage() {
+      return (this.goodAnswers / this.totalCards).toFixed(2) * 100;
+    },
+    hardPercentage: function hardPercentage() {
+      return (this.hardAnswers / this.totalCards).toFixed(2) * 100;
     }
   },
   watch: {
@@ -17765,6 +17778,10 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
         window.Prism.highlightAll();
       }, 100);
     }
+  },
+  mounted: function mounted() {
+    var totalCards = this.studyDeck.cards.length;
+    this.totalCards = totalCards;
   },
   methods: {
     showAnswer: function showAnswer() {
@@ -17781,12 +17798,15 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
       this.clearScratchPaper();
     },
     easyAnswer: function easyAnswer() {
+      this.easyAnswers += 1;
       this.submitAnswerInterval("easy");
     },
     goodAnswer: function goodAnswer() {
+      this.goodAnswers += 1;
       this.submitAnswerInterval("good");
     },
     hardAnswer: function hardAnswer() {
+      this.hardAnswers += 1;
       this.submitAnswerInterval("hard");
     },
     submitAnswerInterval: function submitAnswerInterval(interval) {
@@ -17807,7 +17827,7 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
     },
     showNextQuestion: function showNextQuestion() {
       if (this.studyDeck.cards.length === 1) {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire("You have finished all the questions for this session.", "", "success").then(function () {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire("You have finished all the questions for this session.", "\n                    Results: <br/>\n                    Easy: ".concat(this.easyAnswers, "/").concat(this.totalCards, " (<b>").concat(this.easyPercentage, "%</b>) <br/>\n                    Good: ").concat(this.goodAnswers, "/").concat(this.totalCards, " (<b>").concat(this.goodPercentage, "%</b>) <br/>\n                    Hard: ").concat(this.hardAnswers, "/").concat(this.totalCards, " (<b>").concat(this.hardPercentage, "%</b>)\n                    "), "success").then(function () {
           window.location.href = "".concat(document.querySelector('meta[name="base_url"]').content, "/decks");
         });
         return;
