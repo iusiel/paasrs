@@ -159,6 +159,10 @@ export default {
             isShowingMarkModal: false,
             markedMessage: "",
             scratchPaper: "",
+            easyAnswers: 0,
+            goodAnswers: 0,
+            hardAnswers: 0,
+            totalCards: 0,
         };
     },
 
@@ -187,6 +191,18 @@ export default {
                 this.currentCard.extra_information
             );
         },
+
+        easyPercentage() {
+            return (this.easyAnswers / this.totalCards).toFixed(2) * 100;
+        },
+
+        goodPercentage() {
+            return (this.goodAnswers / this.totalCards).toFixed(2) * 100;
+        },
+
+        hardPercentage() {
+            return (this.hardAnswers / this.totalCards).toFixed(2) * 100;
+        },
     },
 
     watch: {
@@ -195,6 +211,11 @@ export default {
                 window.Prism.highlightAll();
             }, 100);
         },
+    },
+
+    mounted() {
+        const totalCards = this.studyDeck.cards.length;
+        this.totalCards = totalCards;
     },
 
     methods: {
@@ -215,14 +236,17 @@ export default {
         },
 
         easyAnswer() {
+            this.easyAnswers += 1;
             this.submitAnswerInterval("easy");
         },
 
         goodAnswer() {
+            this.goodAnswers += 1;
             this.submitAnswerInterval("good");
         },
 
         hardAnswer() {
+            this.hardAnswers += 1;
             this.submitAnswerInterval("hard");
         },
 
@@ -253,7 +277,12 @@ export default {
             if (this.studyDeck.cards.length === 1) {
                 Swal.fire(
                     "You have finished all the questions for this session.",
-                    "",
+                    `
+                    Results: <br/>
+                    Easy: ${this.easyAnswers}/${this.totalCards} (<b>${this.easyPercentage}%</b>) <br/>
+                    Good: ${this.goodAnswers}/${this.totalCards} (<b>${this.goodPercentage}%</b>) <br/>
+                    Hard: ${this.hardAnswers}/${this.totalCards} (<b>${this.hardPercentage}%</b>)
+                    `,
                     "success"
                 ).then(() => {
                     window.location.href = `${
