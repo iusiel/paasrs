@@ -59,17 +59,25 @@ export default {
         >
             <input name="_token" type="hidden" v-bind:value="csrfToken" />
             <div class="row">
-                <div class="col col-6 col-lg-8">
-                    <input
-                        v-model="deckName"
-                        type="text"
-                        class="form-control"
-                        name="name"
-                    />
-                    <div class="form__error-message">{{ deckNameError }}</div>
+                <div class="col col-12 col-lg-8">
+                    <label class="create-deck__label">
+                        New Deck Name:
+                        <div>
+                            <input
+                                v-model="deckName"
+                                type="text"
+                                class="form-control"
+                                name="name"
+                                placeholder="Deck name"
+                            />
+                            <div class="form__error-message">
+                                {{ deckNameError }}
+                            </div>
+                        </div>
+                    </label>
                 </div>
 
-                <div class="col col-6 col-lg-4">
+                <div class="col col-12 col-lg-4 mt-3 mt-lg-0">
                     <button type="submit" class="btn btn-primary">
                         Create new deck
                     </button>

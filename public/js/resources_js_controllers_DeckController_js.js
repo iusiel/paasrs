@@ -17995,14 +17995,20 @@ var _hoisted_3 = {
   "class": "row"
 };
 var _hoisted_4 = {
-  "class": "col col-6 col-lg-8"
+  "class": "col col-12 col-lg-8"
 };
 var _hoisted_5 = {
+  "class": "create-deck__label"
+};
+
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" New Deck Name: ");
+
+var _hoisted_7 = {
   "class": "form__error-message"
 };
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "col col-6 col-lg-4"
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col col-12 col-lg-4 mt-3 mt-lg-0"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "submit",
   "class": "btn btn-primary"
@@ -18024,18 +18030,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     value: $data.csrfToken
   }, null, 8
   /* PROPS */
-  , _hoisted_2), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  , _hoisted_2), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $data.deckName = $event;
     }),
     type: "text",
     "class": "form-control",
-    name: "name"
+    name: "name",
+    placeholder: "Deck name"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.deckName]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.deckNameError), 1
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.deckName]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.deckNameError), 1
   /* TEXT */
-  )]), _hoisted_6])], 40
+  )])])]), _hoisted_8])], 40
   /* PROPS, HYDRATE_EVENTS */
   , _hoisted_1)]);
 }
@@ -18698,7 +18705,7 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = ["href"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['me-md-4', 'mb-2', 'mb-xl-0', 'py-2', 'd-block', 'd-md-inline-block', 'btn', 'btn-primary', $data.isDisabled ? 'pe-none disabled' : '']),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['me-md-4', 'mb-2', 'mb-xl-0', 'py-2', 'd-block', 'd-md-inline-block', 'btn', 'btn-primary', $data.isDisabled ? 'pe-none' : '']),
     href: $props.href
   }, "Study", 10
   /* CLASS, PROPS */

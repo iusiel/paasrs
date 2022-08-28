@@ -9,7 +9,7 @@
             'd-md-inline-block',
             'btn',
             'btn-primary',
-            isDisabled ? 'pe-none disabled' : '',
+            isDisabled ? 'pe-none' : '',
         ]"
         v-bind:href="href"
         >Study</a
