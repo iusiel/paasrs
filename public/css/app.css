@@ -13143,6 +13143,15 @@ table.dataTable > tbody > tr.marked-card {
   z-index: 1;
 }
 
+.create-deck__label {
+  display: grid;
+  grid-template-columns: 1fr;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  align-content: start;
+  align-items: start;
+}
+
 @media screen and (min-width: 767px) {
   .decks__table-header {
     width: auto;
@@ -13155,5 +13164,10 @@ table.dataTable > tbody > tr.marked-card {
   .study__buttons-container {
     grid-template-columns: repeat(5, -webkit-max-content);
     grid-template-columns: repeat(5, max-content);
+  }
+
+  .create-deck__label {
+    grid-template-columns: -webkit-max-content 1fr;
+    grid-template-columns: max-content 1fr;
   }
 }
