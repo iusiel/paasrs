@@ -18705,7 +18705,7 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = ["href"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['me-md-4', 'mb-2', 'mb-xl-0', 'py-2', 'd-block', 'd-md-inline-block', 'btn', 'btn-primary', $data.isDisabled ? 'pe-none' : '']),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['me-md-4', 'mb-2', 'mb-xl-0', 'py-2', 'd-block', 'd-md-inline-block', 'btn', 'btn-primary', $data.isDisabled ? 'pe-none disabled' : '']),
     href: $props.href
   }, "Study", 10
   /* CLASS, PROPS */
