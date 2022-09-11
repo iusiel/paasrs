@@ -12,6 +12,9 @@
         <li class="nav-item">
           <a class="nav-link @if($activeLink === 'cards') active @endif" href="{{ url(route('cards.index')) }}">Cards</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link @if($activeLink === 'exam') active @endif" href="{{ url(route('exam-statistics')) }}">Exam Statistics</a>
+        </li>
       </ul>
     </div>
   </div>

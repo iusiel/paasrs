@@ -2072,6 +2072,10 @@ if (document.querySelector(".cards")) {
   __webpack_require__.e(/*! import() */ "resources_js_controllers_CardController_js").then(__webpack_require__.bind(__webpack_require__, /*! ./controllers/CardController.js */ "./resources/js/controllers/CardController.js"));
 }
 
+if (document.querySelector(".exams")) {
+  __webpack_require__.e(/*! import() */ "resources_js_controllers_ExamStatisticsController_js").then(__webpack_require__.t.bind(__webpack_require__, /*! ./controllers/ExamStatisticsController.js */ "./resources/js/controllers/ExamStatisticsController.js", 23));
+}
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -19672,7 +19676,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_plugins_bootstrap-5_1_3-dist_js_bootstrap_bundle_min_js":1,"resources_js_controllers_DeckController_js":1,"resources_js_controllers_CardController_js":1,"resources_plugins_prism_prism_js":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_plugins_bootstrap-5_1_3-dist_js_bootstrap_bundle_min_js":1,"resources_js_controllers_DeckController_js":1,"resources_js_controllers_CardController_js":1,"resources_js_controllers_ExamStatisticsController_js":1,"resources_plugins_prism_prism_js":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

@@ -9,3 +9,7 @@ if (document.querySelector(".decks")) {
 if (document.querySelector(".cards")) {
     import("./controllers/CardController.js");
 }
+
+if (document.querySelector(".exams")) {
+    import("./controllers/ExamStatisticsController.js");
+}

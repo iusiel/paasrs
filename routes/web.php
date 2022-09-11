@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeckController;
 use App\Http\Controllers\CardsController;
+use App\Http\Controllers\ExamStatisticsController;
 use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,7 @@ Route::post("/cards/{card}/update_appear_on/", [
 Route::post("/cards/{card}/mark/", [CardsController::class, "markCard"])->name(
     "cards.mark"
 );
+Route::get("/exam-statistics", [
+    ExamStatisticsController::class,
+    "index",
+])->name("exam-statistics");
