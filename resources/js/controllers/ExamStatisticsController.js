@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import ExamStatisticsRelatedButton from "./../components/ExamStatisticsRelatedButton.vue";
+import ExamStatisticsRelatedButton from "../components/ExamStatisticsRelatedButton.vue";
 
 createApp({
     data() {

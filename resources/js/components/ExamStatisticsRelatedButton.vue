@@ -18,6 +18,7 @@
 
 <script>
 import Swal from "sweetalert2";
+
 export default {
     name: "ExamStatisticsRelatedButton",
 
@@ -31,9 +32,9 @@ export default {
 
     computed: {
         averageNumberOfQuestions() {
-            const filtered = this.examStatistics.filter((element) => {
-                return element.deck_name === this.deckName;
-            });
+            const filtered = this.examStatistics.filter(
+                (element) => element.deck_name === this.deckName
+            );
 
             let sum = 0;
             filtered.forEach((element) => {
@@ -44,9 +45,9 @@ export default {
         },
 
         averageNumberOfEasyAnswers() {
-            const filtered = this.examStatistics.filter((element) => {
-                return element.deck_name === this.deckName;
-            });
+            const filtered = this.examStatistics.filter(
+                (element) => element.deck_name === this.deckName
+            );
 
             let sum = 0;
             filtered.forEach((element) => {
@@ -65,9 +66,9 @@ export default {
         },
 
         averageNumberOfGoodAnswers() {
-            const filtered = this.examStatistics.filter((element) => {
-                return element.deck_name === this.deckName;
-            });
+            const filtered = this.examStatistics.filter(
+                (element) => element.deck_name === this.deckName
+            );
 
             let sum = 0;
             filtered.forEach((element) => {
@@ -86,9 +87,9 @@ export default {
         },
 
         averageNumberOfHardAnswers() {
-            const filtered = this.examStatistics.filter((element) => {
-                return element.deck_name === this.deckName;
-            });
+            const filtered = this.examStatistics.filter(
+                (element) => element.deck_name === this.deckName
+            );
 
             let sum = 0;
             filtered.forEach((element) => {
@@ -107,9 +108,9 @@ export default {
         },
 
         averageExamTime() {
-            const filtered = this.examStatistics.filter((element) => {
-                return element.deck_name === this.deckName;
-            });
+            const filtered = this.examStatistics.filter(
+                (element) => element.deck_name === this.deckName
+            );
 
             let sum = 0;
             filtered.forEach((element) => {
