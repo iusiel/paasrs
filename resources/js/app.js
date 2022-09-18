@@ -10,6 +10,6 @@ if (document.querySelector(".cards")) {
     import("./controllers/CardController.js");
 }
 
-if (document.querySelector(".exams")) {
+if (document.querySelector(".exam")) {
     import("./controllers/ExamStatisticsController.js");
 }
