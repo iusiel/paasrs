@@ -17433,7 +17433,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _components_ExamStatisticsRelatedButton_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/ExamStatisticsRelatedButton.vue */ "./resources/js/components/ExamStatisticsRelatedButton.vue");
+/* harmony import */ var _components_ExamStatisticsRelatedButton_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/ExamStatisticsRelatedButton.vue */ "./resources/js/components/ExamStatisticsRelatedButton.vue");
 
 
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({
