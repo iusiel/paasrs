@@ -17449,6 +17449,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
           });
         }
       })["catch"](function (error) {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire("Warning", "An error has been encountered. Please check the form for invalid values.", "warning");
         error.json().then(function (result) {
           var errors = Object.entries(result.errors);
           errors.forEach(function (fieldError) {

@@ -269,6 +269,11 @@ export default {
                     }
                 })
                 .catch((error) => {
+                    Swal.fire(
+                        "Warning",
+                        "An error has been encountered. Please check the form for invalid values.",
+                        "warning"
+                    );
                     error.json().then((result) => {
                         const errors = Object.entries(result.errors);
                         errors.forEach((fieldError) => {
