@@ -32,6 +32,7 @@ class DeckController extends Controller
             ->withCount(["cards as cardsCount"])
             ->orderBy("name", "ASC")
             ->get();
+
         $data = [
             "decks" => $decks,
         ];
@@ -71,10 +72,7 @@ class DeckController extends Controller
             "cards" => function ($query) use ($deck) {
                 $query->where("appear_on", "<=", date("Y-m-d H:i:s"));
                 $query->limit($deck->number_of_cards_per_review);
-                // phpcs:ignore - ternary operator. if randomize setting is enabled, use inRandomOrder(), else use orderBy()
-                $deck->randomize_order_of_questions
-                    ? $query->inRandomOrder()
-                    : $query->orderBy("appear_on", "asc");
+                $query->orderBy("appear_on", "asc");
             },
         ]);
 

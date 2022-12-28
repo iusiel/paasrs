@@ -17729,8 +17729,16 @@ __webpack_require__.e(/*! import() */ "resources_plugins_prism_prism_js").then(_
   name: "DeckStudy",
   props: ["deck"],
   data: function data() {
+    var deck = JSON.parse(atob(this.deck));
+
+    if (deck.randomize_order_of_questions) {
+      deck.cards.sort(function () {
+        return Math.random() - 0.5;
+      }); //randomize cards array if randomize setting is on
+    }
+
     return {
-      studyDeck: JSON.parse(atob(this.deck)),
+      studyDeck: deck,
       formMethod: "POST",
       csrfToken: document.querySelector('meta[name="csrf-token"]').content,
       isShowingAnswer: false,
