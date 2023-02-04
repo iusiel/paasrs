@@ -150,13 +150,8 @@ export default {
     props: ["deck"],
 
     data() {
-        const deck = JSON.parse(atob(this.deck));
-        if (deck.randomize_order_of_questions) {
-            deck.cards.sort(() => Math.random() - 0.5); // randomize cards array if randomize setting is on
-        }
-
         return {
-            studyDeck: deck,
+            studyDeck: JSON.parse(atob(this.deck)),
             formMethod: "POST",
             csrfToken: document.querySelector('meta[name="csrf-token"]')
                 .content,
